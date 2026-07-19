@@ -630,6 +630,83 @@ def why_slide(label, headline, bullets, story_num=1, badge_num=4, total=5, stat=
     return inner, extra_css, autofit
 
 
+def story_beat_slide(kind, label, headline, bg_src, body=None, bullets=None,
+                      stat=None, chart=None, chart_annotate=True, timeline=None,
+                      badge_num=2, total=5):
+    """A flexible, always-cinematic middle-of-carousel slide -- one per story "beat"
+    (backstory, turning point, the number, whatever the story actually calls for), each
+    with its own unique photo instead of reusing 1-2 images across every slide. Replaces
+    the old fixed backstory_slide/news_slide/why_slide trio now that beat count and
+    content shape vary per story: main content is either a prose `body` (like the old
+    backstory/news slides) or an indexed `bullets` list (like the old why slide) --
+    whichever the beat calls for, never both. At most one optional data aside
+    (timeline/chart/stat, in that priority) renders in a second column when the beat
+    genuinely has that shape; most beats have none and stay single-column. `kind` is
+    accepted for compatibility/logging (e.g. distinguishing beats in a log line) but
+    isn't rendered -- the label/headline carry the beat's identity."""
+    if timeline:
+        aside_html = timeline_html(timeline, light=True)
+        aside_class = "news-timeline"
+    elif chart:
+        aside_html = stat_compare_svg(
+            chart, width=430, height=560, bar_w=132, gap=76, annotate=chart_annotate,
+            base_color="rgba(255,255,255,0.32)", ink="rgba(255,255,255,0.92)",
+            mark_color=ORANGE_LIGHT,
+        )
+        aside_class = "news-chart"
+    elif stat:
+        value, caption = stat
+        aside_html = numeral_card_html(value, caption, bg=ORANGE, fg=WHITE)
+        aside_class = "news-stat"
+    else:
+        aside_html = None
+        aside_class = ""
+
+    if aside_html is not None:
+        aside_col = f'<div class="news-divider-light"></div><div class="news-aside {aside_class}">{aside_html}</div>'
+        grid_cols = "1.05fr 1px 1fr"
+    else:
+        aside_col = ""
+        grid_cols = "1fr"
+
+    if bullets:
+        content_html = "".join(
+            f'<div class="e-item{" e-item-first" if i == 1 else ""}">'
+            f'<div class="e-num">{i:02d}</div><p class="e-text">{b}</p></div>'
+            for i, b in enumerate(bullets, start=1)
+        )
+        content_extra_css = ".beat-text .e-item { padding: 30px 0; } .beat-text .e-text { font-size: calc(var(--scale) * 32px); }"
+    else:
+        content_html = f'<p class="body">{body or ""}</p>'
+        content_extra_css = ""
+
+    extra_css = f"""
+.beat-grid {{ position:absolute; top:150px; left:56px; right:56px; bottom:110px; z-index:5;
+  display:grid; grid-template-columns:{grid_cols}; column-gap:56px; align-items:center; }}
+.beat-text {{ --scale:1; --accent-color:{ORANGE_LIGHT}; --e-line:rgba(255,255,255,0.22); overflow:hidden; }}
+.beat-text .headline {{ font-weight:800; letter-spacing:-0.02em; color:#fff;
+  font-size: calc(var(--scale) * 78px); line-height:1.05; margin-bottom:32px; }}
+.beat-text .body {{ font-size: calc(var(--scale) * 34px); color:rgba(255,255,255,0.85);
+  font-weight:500; line-height:1.5; }}
+{content_extra_css}
+"""
+    bg = _img_src(bg_src)
+    inner = (
+        f'<img class="bg-photo" src="{bg}"><div class="scrim-full"></div><div class="grain"></div>'
+        f'{ghost_glyph_html(f"{badge_num:02d}", top=-40, left=-24, size=760, opacity=0.08, color=WHITE)}'
+        f'{storyb_mark_html("light")}'
+        f'<div class="beat-grid">'
+        f'<div class="beat-text" id="beat-text">'
+        f'<p class="headline">{_style_headline(headline)}</p>'
+        f"{content_html}"
+        f"</div>"
+        f"{aside_col}"
+        f"</div>"
+    )
+    autofit = [{"selector": "#beat-text", "max": 1.0, "min": 0.5, "step": 0.05}]
+    return inner, extra_css, autofit
+
+
 def _split_engage_headline(text):
     """Split the engage headline into a quiet, scene-setting lead sentence and the bold
     hook question that follows it. Every engage headline in practice is written as

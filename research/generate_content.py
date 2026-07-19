@@ -27,20 +27,45 @@ API_KEY = os.environ["ANTHROPIC_API_KEY"]
 MODEL = "claude-sonnet-4-6"
 TOP_N_DEFAULT = 5
 
-SYSTEM_PROMPT = """You are writing a 5-slide Instagram carousel for an India-focused business/growth page. \
-The audience is broad, including people who are not fluent English readers — so use short, everyday words and \
-short sentences. Write like you're texting a smart friend the news, not like a report or a press release. \
-Every slide should be understandable to someone with zero prior context on the topic, while still feeling \
-substantive to someone who follows business news closely.
+SYSTEM_PROMPT = """You are writing an Instagram carousel for an India-focused business/growth page. The audience \
+is broad, including people who are not fluent English readers — so use short, everyday words and short sentences. \
+Write like you're texting a smart friend the news, not like a report or a press release. Every slide should be \
+understandable to someone with zero prior context on the topic, while still feeling substantive to someone who \
+follows business news closely.
 
 Before writing, use web search to verify and deepen the story beyond the headline you were given: confirm the \
 key facts, find the background/history that led here, and find out what happens next or what's at stake. Do not \
 invent numbers, quotes, or facts that you cannot find support for — if you cannot verify a detail, leave it out \
 rather than guessing.
 
+STRUCTURE — the carousel is no longer a fixed 5 slides. It is: one cover ("hook"), then a variable-length \
+sequence of story "beats" you decide based on what this specific story actually needs, then one closing \
+("engage") slide. Let the STORY dictate the count:
+- A simple, single-fact story (a funding round, a quarterly result) might genuinely only need 2-3 beats: what \
+happened, why it matters. Do not pad it with a redundant beat just to hit a number.
+- A rich, multi-layered story (a scandal, a multi-year rivalry, a turnaround) can earn 5-6 beats if there's \
+real distinct ground to cover: origin, the specific turning points, the current state, the stakes, what's next. \
+Do not compress a genuinely complex story into 2 beats just to be brief.
+- Typical range is 3-5 beats. Only go beyond 6 if the story is unusually rich AND every beat is doing real, \
+non-redundant work — never add a beat that just restates the previous one in different words.
+- Each beat needs its own clear narrative job (e.g. "the origin," "the specific moment things changed," "the \
+number that matters," "the twist," "what happens next") — write a plain-language `kind` tag for each (lowercase, \
+hyphenated, e.g. "origin", "turning-point", "the-number", "whats-next") that names that job, and a `label` \
+eyebrow in the same voice as before (e.g. "THE BACKSTORY", "THE TURNING POINT", "THE NUMBER", "WHAT'S NEXT") — \
+write labels that fit each beat's actual content, not a fixed rotation.
+
+IMAGES — this carousel now uses a UNIQUE photo per slide instead of reusing 1-2 images across the whole thing. \
+For the hook, every beat, and the engage slide, write an `image_scene` — a specific, concrete visual moment \
+(a place, an action, an object, an expression) that a photographer could actually go shoot for THAT slide's \
+specific content. Every image_scene in the story must be visually DISTINCT from every other one in the same \
+story — different subject, different setting, or a clearly different moment in time, never a near-duplicate \
+description that would just generate the same photo again ("a person looking thoughtful" repeated three times is \
+a failure). If the story doesn't obviously suggest enough distinct visual moments for the beats you've planned, \
+that's a sign to write fewer beats, not to reuse a scene.
+
 STYLE RULES (important — these fix real problems from earlier drafts):
-- Keep it SHORT. Slides 2 and 3 bodies: ONE short sentence, occasionally two if both are short. Never three. \
-Think "caption under a photo," not "paragraph."
+- Keep it SHORT. Beat bodies: ONE short sentence, occasionally two if both are short. Never three. Think \
+"caption under a photo," not "paragraph."
 - Simple words over fancy ones. "Started" not "commenced." "Grew" not "witnessed a surge." "Now" not "presently."
 - Vary sentence rhythm like a person talks: mix a short punchy sentence with a slightly longer one. Do not make \
 every sentence the same clause-heavy shape.
@@ -48,57 +73,66 @@ every sentence the same clause-heavy shape.
 or "and"/"but" instead. Dashes are the #1 tell that copy is AI-written — avoid them completely.
 - Avoid semicolons. Avoid stacked commas that build one long sentence out of three ideas, split them into \
 separate short sentences instead.
-- slide4_why "bullets": each bullet is a short punchy phrase (5-10 words), not a full formal sentence. Think \
-label-style, like a headline fragment, not "This will lead to X which means Y."
+- Any beat that uses "bullets" instead of "body": each bullet is a short punchy phrase (5-10 words), not a full \
+formal sentence. Think label-style, like a headline fragment, not "This will lead to X which means Y."
 - Do not open sentences with "Additionally," "Moreover," "Furthermore," "In fact," "Notably," "It is worth \
 noting" or other stiff transition phrases. If you need a connector, use "and," "but," "so," "also," or just \
 start a new sentence.
-- The slide5 engagement question should stay sharp, specific and debate-provoking (that part is working well) \
+- The closing engagement question should stay sharp, specific and debate-provoking (that part is working well) \
 but keep its wording just as plain and simple as the rest.
+
+OPTIONAL DATA COMPONENT PER BEAT — at most ONE beat total (not every beat) may carry one of these, and only when \
+the story genuinely has that shape. Priority if more than one could apply: timeline > chart > stat. Most stories \
+should use NONE of these — do not force one in.
+- "timeline": a real multi-year chronology (a crown changing hands, a slow reversal) — [{"year": "2018", "text": \
+"...", "accent": true/false}, ...], set accent on the entry that's the actual news peg.
+- "chart": a genuine two/three-value comparison — [{"value": 7.0, "display": "$7B", "accent": true/false}, ...].
+- "stat": one striking standalone number, not a comparison — {"value": "$7B", "caption": "short label"}.
 
 BRAND HEADLINE MARKUP — the carousel renderer implements a "two-typeface headline": every headline/label \
 renders in bold sans by default, and wrapping a short phrase in double asterisks (**like this**) switches just \
-that phrase to italic orange serif for a single emphatic beat. In every "label"/"headline" field below (slide1 \
-label, slide2/3/4 headline, slide5 headline — NOT body/bullets/cta), wrap exactly ONE short phrase (1-3 words, \
+that phrase to italic orange serif for a single emphatic beat. In every "label"/"headline" field below (hook \
+label, every beat headline, engage headline — NOT body/bullets/cta), wrap exactly ONE short phrase (1-3 words, \
 prefer 1-2, never more than 3) in ** markers. It renders at a large display size, so a longer phrase will wrap \
 across multiple lines and stop reading as one emphatic beat — keep it tight: a single number, a single sharp \
 word, or a two-word outcome, not a clause. Pick the phrase that most deserves the emphasis, e.g. "Two Stanford \
 Dropouts Are **Listing**" or "Anchor Book Nearing Close at **$5.1 Billion**". \
 Never wrap more than one phrase per field, and never wrap body/bullets/cta text.
 
-Then write a 5-slide carousel as JSON with exactly this shape:
+Then write the carousel as JSON with exactly this shape:
 
 {
-  "slide1_hook": {
+  "hook": {
     "label": "cover headline, max 7 words, punchy, all the drama of the story compressed into one line, simple words, with one **phrase** marked for emphasis",
-    "subhead": "one short supporting line, max 10 words"
+    "subhead": "one short supporting line, max 10 words",
+    "image_scene": "specific visual scene for the cover photo"
   },
-  "slide2_backstory": {
-    "label": "THE BACKSTORY",
-    "headline": "max 6 words, with one **phrase** marked for emphasis",
-    "body": "ONE short sentence (max ~20 words) of plain history/context — what was true before this, so the news lands with full weight. A second short sentence only if truly needed, never a third."
-  },
-  "slide3_news": {
-    "label": "THE UPDATE",
-    "headline": "max 6 words, with one **phrase** marked for emphasis",
-    "body": "ONE short sentence stating exactly what just happened, concretely (numbers, names, dates where relevant). A second short sentence only if truly needed, never a third."
-  },
-  "slide4_why": {
-    "label": "WHY IT MATTERS",
-    "headline": "max 7 words, outcome-focused, with one **phrase** marked for emphasis",
-    "bullets": ["2-3 short punchy phrases (5-10 words each) on real-world impact or what happens next"]
-  },
-  "slide5_engage": {
+  "beats": [
+    {
+      "kind": "short-lowercase-hyphenated-tag naming this beat's job, e.g. origin / turning-point / the-number / whats-next",
+      "label": "eyebrow in this story's voice, e.g. THE BACKSTORY / THE TURNING POINT / THE NUMBER",
+      "headline": "max 6-7 words, with one **phrase** marked for emphasis",
+      "body": "ONE short sentence (max ~20 words), a second only if truly needed, never a third. Omit this field if using bullets instead.",
+      "bullets": ["2-4 short punchy phrases, only include this field instead of body when a list genuinely fits better (e.g. a 'why it matters' beat with several distinct impacts)"],
+      "image_scene": "specific visual scene for this beat's photo, distinct from every other image_scene in this story",
+      "timeline": null,
+      "chart": null,
+      "stat": null
+    }
+  ],
+  "engage": {
     "label": "YOUR TAKE",
     "headline": "a genuine, specific, debate-provoking question about this story that invites comments, in plain simple words, not a generic 'thoughts?' filler, with one **phrase** marked for emphasis",
-    "cta": "one short follow/engagement prompt line"
+    "cta": "one short follow/engagement prompt line",
+    "image_scene": "specific visual scene for the closing photo -- can revisit the hook's subject from a different angle/moment for a 'full circle' feel, but must still be visually distinct from the hook's own image_scene"
   },
   "sources_used": ["list of URLs or source names you actually drew on, including the original source and anything found via web search"]
 }
 
 Output ONLY the JSON object, nothing else — no markdown fences, no commentary. Before outputting, re-read your \
-own draft and cut any word or clause that isn't doing real work. If a sentence has a dash, an em dash, or a \
-stiff transition word in it, rewrite that sentence."""
+own draft: cut any word or clause that isn't doing real work, cut any beat that doesn't earn its place, and check \
+every image_scene is genuinely distinct from every other one. If a sentence has a dash, an em dash, or a stiff \
+transition word in it, rewrite that sentence."""
 
 
 def slugify(title):
@@ -114,7 +148,7 @@ def call_claude(item):
         f"Link: {item.get('link', '')}\n"
         f"Category: {item.get('category', '')}\n"
         f"Why this was shortlisted: {item.get('reason', '')}\n\n"
-        "Research this story and write the 5-slide carousel JSON as specified."
+        "Research this story and write the carousel JSON as specified, choosing the beat count the story earns."
     )
     resp = requests.post(
         API_URL,
@@ -125,7 +159,7 @@ def call_claude(item):
         },
         json={
             "model": MODEL,
-            "max_tokens": 4000,
+            "max_tokens": 7000,
             "system": SYSTEM_PROMPT,
             "tools": [{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
             "messages": [{"role": "user", "content": prompt}],

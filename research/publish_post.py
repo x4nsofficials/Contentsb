@@ -80,13 +80,17 @@ def find_content_json(slug, title=None):
 
 def build_caption(data):
     s = data["slides"]
-    lines = [strip_markup(s["slide1_hook"]["label"])]
-    if s["slide1_hook"].get("subhead"):
-        lines.append(s["slide1_hook"]["subhead"])
+    # New schema (variable beat count): {"hook":..., "beats":[...], "engage":...}.
+    # Old schema (fixed 5 slides, still present in already-generated stories):
+    # {"slide1_hook":..., "slide2_backstory":..., ..., "slide5_engage":...}.
+    hook, engage = (s["hook"], s["engage"]) if "hook" in s else (s["slide1_hook"], s["slide5_engage"])
+    lines = [strip_markup(hook["label"])]
+    if hook.get("subhead"):
+        lines.append(hook["subhead"])
     lines.append("")
-    lines.append(strip_markup(s["slide5_engage"]["headline"]))
-    if s["slide5_engage"].get("cta"):
-        lines.append(s["slide5_engage"]["cta"])
+    lines.append(strip_markup(engage["headline"]))
+    if engage.get("cta"):
+        lines.append(engage["cta"])
     lines.append("")
     lines.append("Follow for daily business stories that matter to India.")
     lines.append("#India #Business #StartupNews #Markets")
@@ -94,15 +98,22 @@ def build_caption(data):
 
 
 def image_files(slug):
+    """Stories now render a variable number of slides named "{slug}-{NN}-{kind}.png",
+    where a plain filename sort gives the right order. Older stories used a fixed set of
+    5 names (cover/backstory/news/why/engage), and a few of the earliest used a flat
+    layout with no per-story subfolder at all (e.g. "zepto") -- fall back through both."""
     out_dir = CODE_OUT / slug
-    files = [out_dir / f"{slug}-{k}.png" for k in SLIDE_KINDS]
-    found = [f for f in files if f.exists()]
-    if found:
-        return found
-    # A few early stories (e.g. "zepto") were rendered with their PNGs directly under
-    # assets/code_pilot/ instead of their own subfolder; fall back to that flat layout.
-    flat_files = [CODE_OUT / f"{slug}-{k}.png" for k in SLIDE_KINDS]
-    return [f for f in flat_files if f.exists()]
+    if out_dir.is_dir():
+        numbered = sorted(out_dir.glob(f"{slug}-[0-9][0-9]-*.png"))
+        if numbered:
+            return numbered
+        legacy = [f for f in (out_dir / f"{slug}-{k}.png" for k in SLIDE_KINDS) if f.exists()]
+        if legacy:
+            return legacy
+    flat_numbered = sorted(CODE_OUT.glob(f"{slug}-[0-9][0-9]-*.png"))
+    if flat_numbered:
+        return flat_numbered
+    return [f for f in (CODE_OUT / f"{slug}-{k}.png" for k in SLIDE_KINDS) if f.exists()]
 
 
 def web_path(f):

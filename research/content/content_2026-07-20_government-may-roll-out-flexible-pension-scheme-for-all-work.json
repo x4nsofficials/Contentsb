@@ -1,0 +1,99 @@
+{
+  "generated_at": "2026-07-20T00:00:00",
+  "source_item": {
+    "title": "Government may roll out flexible pension scheme for all workers under EPFO 3.0 reforms: Report",
+    "source": "LiveMint - Money",
+    "link": "https://www.livemint.com/money/personal-finance/government-may-roll-out-flexible-pension-scheme-for-all-workers-under-epfo-3-0-reforms-report-11784438771493.html",
+    "category": "market",
+    "score": 7.0
+  },
+  "slides": {
+    "hook": {
+      "label": "India's **Biggest** Pension Shake-Up Is Here",
+      "subhead": "Gig workers may finally get a retirement plan.",
+      "image_scene": "A Swiggy delivery rider on a motorbike at a busy city intersection, helmet on, phone mount visible on the handlebar, shot from street level at dusk."
+    },
+    "beats": [
+      {
+        "kind": "the-gap",
+        "label": "THE PROBLEM",
+        "headline": "**76%** of India's Workers Have No Pension",
+        "body": "India has 55 crore workers. Nearly 42 crore of them work in the unorganised sector and get nothing when they retire.",
+        "image_scene": "An elderly construction labourer sitting on a half-built wall eating lunch from a tiffin box, safety helmet resting beside him, shot in the afternoon glare.",
+        "timeline": null,
+        "chart": null,
+        "stat": {
+          "value": "42 Cr",
+          "caption": "workers with little or no pension cover"
+        }
+      },
+      {
+        "kind": "origin",
+        "label": "THE OLD RULE",
+        "headline": "Old System Only Covered the **Formal Few**",
+        "body": "EPFO's pension scheme, running since 1995, covers only workers at companies with 20-plus employees earning below Rs 15,000 a month. Everyone else is out.",
+        "image_scene": "A corporate office lobby with a security badge scanner at the entrance, suited employees swiping in, shot from outside the glass doors.",
+        "timeline": null,
+        "chart": null,
+        "stat": null
+      },
+      {
+        "kind": "the-news",
+        "label": "WHAT'S CHANGING",
+        "headline": "EPFO 3.0 Wants to Cover **Everyone**",
+        "body": "The government is designing a new contributory pension scheme for gig workers, unorganised workers, construction workers, and even higher-wage employees currently left out.",
+        "image_scene": "A wide shot of a busy vegetable market with vendors, loaders, and a food delivery bike all in the same frame, capturing the variety of informal work.",
+        "timeline": null,
+        "chart": null,
+        "stat": null
+      },
+      {
+        "kind": "how-it-works",
+        "label": "HOW IT WORKS",
+        "headline": "Save Now, Pick Your Pension **at 55**",
+        "body": "You save into your own digital account until age 55. At that point you choose how to draw it down. At 60, the \"Target Retirement Sum\" converts into a monthly pension based on actual returns.",
+        "image_scene": "A person's hands holding a smartphone showing a savings progress bar or retirement corpus tracker app, blurred background of a kitchen table.",
+        "timeline": null,
+        "chart": null,
+        "stat": null
+      },
+      {
+        "kind": "who-pays",
+        "label": "WHO PUTS IN THE MONEY",
+        "headline": "Swiggy and Uber Could **Chip In** Too",
+        "body": "The fund would draw from workers, employers, government top-ups for low earners, and platform companies contributing 1-2% of their annual turnover.",
+        "image_scene": "The Zomato or Swiggy logo on a food delivery bag hanging off a parked motorcycle outside a restaurant, shot tight and close-up.",
+        "timeline": null,
+        "chart": null,
+        "stat": null
+      },
+      {
+        "kind": "whats-next",
+        "label": "NOT DONE YET",
+        "headline": "Still a Proposal. **No Sign-Off** Yet.",
+        "body": "The scheme is at an early stage with no formal government approval. The Ministry has not even decided which agency will run it.",
+        "image_scene": "An empty government meeting room with files stacked on a table and a whiteboard with diagrams, shot from the doorway.",
+        "timeline": null,
+        "chart": null,
+        "stat": null
+      }
+    ],
+    "engage": {
+      "label": "YOUR TAKE",
+      "headline": "Should gig platforms like Swiggy and Zomato be **forced to pay** into your pension?",
+      "cta": "Drop your take below. Follow for more policy stories that affect your money.",
+      "image_scene": "A delivery rider checking his phone while leaning against his bike outside an apartment building at night, the building's lit lobby visible behind him."
+    },
+    "sources_used": [
+      "https://www.livemint.com/money/personal-finance/government-may-roll-out-flexible-pension-scheme-for-all-workers-under-epfo-3-0-reforms-report-11784438771493.html",
+      "https://www.outlookbusiness.com/economy-and-policy/govts-new-pension-plan-for-gig-workers-under-epfo-30-all-you-need-to-know",
+      "https://officenewz.com/2026/07/18/centre-plans-new-pension-cover-for-gig-and-unorganised-sector-workers-under-epfo-3-0/",
+      "https://zeenews.india.com/economy/centre-plans-new-pension-cover-for-gig-and-unorganised-sector-workers-under-epfo-3-0-3061518.html",
+      "https://www.theweek.in/news/biz-tech/2026/07/17/will-swiggy-and-uber-have-to-pay-if-gig-workers-get-a-pension-under-epfo-30.html",
+      "https://www.latestly.com/business/epfo-may-extend-pf-and-pension-benefits-to-self-employed-and-gig-workers-under-new-universal-scheme-7520351.html",
+      "https://www.india.com/business/epfo-3-0-reforms-pension-gig-workers-good-news-workers-modi-government-plans-report-8476668/",
+      "https://en.wikipedia.org/wiki/Employees%27_Provident_Fund_Organisation",
+      "https://www.impriindia.com/insights/employee-pension-scheme-eps-1995/"
+    ]
+  }
+}
