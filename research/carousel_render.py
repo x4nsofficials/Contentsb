@@ -442,7 +442,7 @@ def cover_slide(headline, subhead, bg_src=None, logo_src=None, story_num=1, badg
 .cover-plate {{ margin-bottom:36px; }}
 .cover-col .headline {{ font-weight:800; letter-spacing:-0.025em; color:#fff;
   font-size: calc(var(--scale) * 172px); line-height:0.96; margin-bottom:26px; }}
-.cover-col .subhead {{ font-size: calc(var(--scale) * 30px); color: rgba(255,255,255,0.72);
+.cover-col .subhead {{ font-size: calc(var(--scale) * 37px); color: rgba(255,255,255,0.8);
   font-weight:600; line-height:1.42; max-width:560px; }}
 """
     inner = (
@@ -675,7 +675,7 @@ def story_beat_slide(kind, label, headline, bg_src, body=None, bullets=None,
             f'<div class="e-num">{i:02d}</div><p class="e-text">{b}</p></div>'
             for i, b in enumerate(bullets, start=1)
         )
-        content_extra_css = ".beat-text .e-item { padding: 30px 0; } .beat-text .e-text { font-size: calc(var(--scale) * 32px); }"
+        content_extra_css = ".beat-text .e-item { padding: 30px 0; } .beat-text .e-text { font-size: calc(var(--scale) * 39px); }"
     else:
         content_html = f'<p class="body">{body or ""}</p>'
         content_extra_css = ""
@@ -686,8 +686,8 @@ def story_beat_slide(kind, label, headline, bg_src, body=None, bullets=None,
 .beat-text {{ --scale:1; --accent-color:{ORANGE_LIGHT}; --e-line:rgba(255,255,255,0.22); overflow:hidden; }}
 .beat-text .headline {{ font-weight:800; letter-spacing:-0.02em; color:#fff;
   font-size: calc(var(--scale) * 78px); line-height:1.05; margin-bottom:32px; }}
-.beat-text .body {{ font-size: calc(var(--scale) * 34px); color:rgba(255,255,255,0.85);
-  font-weight:500; line-height:1.5; }}
+.beat-text .body {{ font-size: calc(var(--scale) * 40px); color:rgba(255,255,255,0.9);
+  font-weight:500; line-height:1.48; }}
 {content_extra_css}
 """
     bg = _img_src(bg_src)
@@ -744,10 +744,10 @@ def engage_slide(label, headline, cta, story_num=1, badge_num=5, total=5, pill_t
   max-width:820px; display:flex; flex-direction:column; justify-content:center;
   --scale:1; --accent-color:{ORANGE_LIGHT if cinematic else "#fff"}; }}
 .eg-wrap .lead {{ font-weight:600; color:{text_color}; opacity:{lead_opacity};
-  font-size: calc(var(--scale) * 30px); line-height:1.42; margin-bottom:22px; max-width:640px; }}
+  font-size: calc(var(--scale) * 35px); line-height:1.42; margin-bottom:22px; max-width:640px; }}
 .eg-wrap .headline {{ font-weight:800; letter-spacing:-0.02em; color:{text_color};
   font-size: calc(var(--scale) * 72px); line-height:1.08; margin-bottom:32px; }}
-.eg-wrap .cta {{ font-size: calc(var(--scale) * 27px); color:{text_color}; font-weight:700;
+.eg-wrap .cta {{ font-size: calc(var(--scale) * 32px); color:{text_color}; font-weight:700;
   opacity:{cta_opacity}; margin-bottom:38px; }}
 """
     lead_html = f'<p class="lead">{lead}</p>' if lead else ""
