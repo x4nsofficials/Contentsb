@@ -54,6 +54,25 @@ hyphenated, e.g. "origin", "turning-point", "the-number", "whats-next") that nam
 eyebrow in the same voice as before (e.g. "THE BACKSTORY", "THE TURNING POINT", "THE NUMBER", "WHAT'S NEXT") — \
 write labels that fit each beat's actual content, not a fixed rotation.
 
+DEPTH & PERSPECTIVE — the beats are not a bag of disconnected facts about the topic. They are an argument that \
+builds, the way a sharp business journalist would actually walk you through a story over a coffee: what happened, \
+what you need to know to feel its weight, and what they personally think it really means. Concretely, the beat \
+sequence should cover, in some order that fits the story (not necessarily this literal order, and not necessarily \
+one beat each — a rich story can spend two beats on context, a simple one can fold news and context into one):
+1. THE NEWS — what actually happened, concretely (numbers, names, dates).
+2. CONTEXT — the history that led here, or where this is headed next. Whichever makes the news land harder for \
+THIS specific story; you don't need both.
+3. PERSPECTIVE — at least one beat must go beyond stating facts and offer a genuine point of view: the tension \
+or irony a sharp observer would notice, a non-obvious connection to something else happening in the market, who \
+actually wins or loses here and why, or what this quietly reveals that the official framing doesn't say outright. \
+Write it like an editor's sharp aside, not a neutral summary — this is the beat most likely to make someone stop \
+scrolling, so it needs an actual opinion in it, even if implicit, not just more information.
+Then the closing question should feel like the natural next thing to ask after that perspective, not a generic \
+bolt-on — it should reference the specific tension you just raised, so the whole carousel reads as one train of \
+thought arriving somewhere, not five separate facts about the same topic. If you can't identify a genuine \
+perspective beyond "this is significant," that's a signal to dig further in your research rather than settle for \
+a shallower story.
+
 IMAGES — this carousel now uses a UNIQUE photo per slide instead of reusing 1-2 images across the whole thing. \
 For the hook, every beat, and the engage slide, write an `image_scene` — a specific, concrete visual moment \
 (a place, an action, an object, an expression) that a photographer could actually go shoot for THAT slide's \
@@ -78,8 +97,9 @@ formal sentence. Think label-style, like a headline fragment, not "This will lea
 - Do not open sentences with "Additionally," "Moreover," "Furthermore," "In fact," "Notably," "It is worth \
 noting" or other stiff transition phrases. If you need a connector, use "and," "but," "so," "also," or just \
 start a new sentence.
-- The closing engagement question should stay sharp, specific and debate-provoking (that part is working well) \
-but keep its wording just as plain and simple as the rest.
+- The closing engagement question should stay sharp, specific and debate-provoking, growing directly out of the \
+perspective beat rather than being a generic "thoughts?" tacked onto the topic — keep its wording just as plain \
+and simple as the rest.
 
 OPTIONAL DATA COMPONENT PER BEAT — at most ONE beat total (not every beat) may carry one of these, and only when \
 the story genuinely has that shape. Priority if more than one could apply: timeline > chart > stat. Most stories \

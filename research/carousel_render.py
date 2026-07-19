@@ -84,7 +84,7 @@ body {{ font-family:'Hanken Grotesk',sans-serif; }}
 
 /* StoryB's own mark -- the one piece of brand furniture that stays on every slide.
    Sized to read clearly, not shrunk into a corner afterthought. */
-.storyb-mark {{ position:absolute; top:50px; right:56px; z-index:6; height:34px; display:flex; align-items:center; }}
+.storyb-mark {{ position:absolute; top:48px; right:56px; z-index:6; height:48px; display:flex; align-items:center; }}
 .storyb-mark img {{ height:100%; width:auto; display:block; }}
 
 /* Soft radial glow -- a brand-orange depth cue behind a hero element (a logo, a big
@@ -693,7 +693,6 @@ def story_beat_slide(kind, label, headline, bg_src, body=None, bullets=None,
     bg = _img_src(bg_src)
     inner = (
         f'<img class="bg-photo" src="{bg}"><div class="scrim-full"></div><div class="grain"></div>'
-        f'{ghost_glyph_html(f"{badge_num:02d}", top=-40, left=-24, size=760, opacity=0.08, color=WHITE)}'
         f'{storyb_mark_html("light")}'
         f'<div class="beat-grid">'
         f'<div class="beat-text" id="beat-text">'
