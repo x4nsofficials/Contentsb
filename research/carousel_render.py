@@ -73,6 +73,15 @@ body {{ font-family:'Hanken Grotesk',sans-serif; }}
 .grain {{ position:absolute; inset:0; z-index:3; opacity:0.05; mix-blend-mode:overlay;
   background-image:url('{GRAIN_DATA_URI}'); background-size:220px 220px; pointer-events:none; }}
 
+/* A stronger, more evenly-distributed scrim than .scrim -- for slides whose text spans
+   most of the frame height (news/why/engage in cinematic photo mode) rather than sitting
+   in a bottom third, so a photo busy enough to look good behind a short cover headline
+   doesn't fight with body copy or a chart higher up the frame. */
+.scrim-full {{ position:absolute; inset:0; z-index:1;
+  background: linear-gradient(180deg, rgba(11,11,12,0.58) 0%, rgba(11,11,12,0.74) 55%, rgba(11,11,12,0.9) 100%); }}
+.scrim-full-orange {{ position:absolute; inset:0; z-index:1;
+  background: linear-gradient(160deg, rgba(233,72,15,0.5) 0%, rgba(20,18,17,0.86) 65%, rgba(11,11,12,0.94) 100%); }}
+
 /* StoryB's own mark -- the one piece of brand furniture that stays on every slide.
    Sized to read clearly, not shrunk into a corner afterthought. */
 .storyb-mark {{ position:absolute; top:50px; right:56px; z-index:6; height:34px; display:flex; align-items:center; }}
@@ -125,6 +134,16 @@ body {{ font-family:'Hanken Grotesk',sans-serif; }}
   margin-top:3px; box-shadow:0 0 0 6px rgba(233,72,15,0.16); }}
 .tl-text {{ font-size:23px; font-weight:600; line-height:1.38; color:{INK}; padding-top:2px; }}
 .tl-item.accent .tl-text {{ font-weight:800; color:{ORANGE_DARK}; }}
+
+/* Light variant -- same timeline component, recolored for a dark photo backdrop
+   instead of the cream reading page (see news_slide's cinematic mode). */
+.timeline.light .tl-year {{ color:rgba(255,255,255,0.55); }}
+.timeline.light .tl-marker::before {{ background:rgba(255,255,255,0.55); }}
+.timeline.light .tl-item:not(.tl-item-last) .tl-marker::after {{ background:rgba(255,255,255,0.22); }}
+.timeline.light .tl-item.accent .tl-marker::before {{ background:{ORANGE_LIGHT};
+  box-shadow:0 0 0 6px rgba(238,110,58,0.25); }}
+.timeline.light .tl-text {{ color:rgba(255,255,255,0.92); }}
+.timeline.light .tl-item.accent .tl-text {{ color:{ORANGE_LIGHT}; }}
 
 /* Solid pill button -- the brand guide's own documented CTA component. */
 .pill-btn {{ display:inline-flex; align-items:center; gap:12px; padding:22px 40px;
@@ -308,7 +327,7 @@ def stat_compare_svg(bars, width=320, height=360, bar_w=88, gap=56,
     )
 
 
-def timeline_html(events, accent_color=ORANGE):
+def timeline_html(events, accent_color=ORANGE, light=False):
     """A vertical chronology component -- real HTML (not SVG) so year/event text wraps
     naturally. Used on the news slide when a story's 'infographic' beat is really a
     multi-year sequence of turning points (a crown changing hands, a slow reversal) that
@@ -317,6 +336,8 @@ def timeline_html(events, accent_color=ORANGE):
     events: [{"year": "2018", "text": "Apple first to hit $1 trillion"}, ...]. Set
     "accent": True on the entry that is the story's actual news peg (usually the most
     recent/decisive one) -- it renders in bold brand orange with a bigger marker.
+    `light=True` recolors it for a dark photo backdrop (news slide's cinematic mode)
+    instead of the cream reading page -- see the .timeline.light rules in BASE_CSS.
     """
     n = len(events)
     items = []
@@ -333,7 +354,8 @@ def timeline_html(events, accent_color=ORANGE):
             f'<div class="tl-text">{e["text"]}</div>'
             f"</div>"
         )
-    return f'<div class="timeline">{"".join(items)}</div>'
+    wrap_cls = "timeline light" if light else "timeline"
+    return f'<div class="{wrap_cls}">{"".join(items)}</div>'
 
 
 def _data_uri(path):
@@ -467,21 +489,32 @@ def backstory_slide(label, headline, body, bg_src, story_num=1, badge_num=2, tot
 
 def news_slide(label, headline, body, story_num=1, badge_num=3, total=5,
                proof=None, chart=None, chart_caption=None, chart_annotate=True,
-               timeline=None, stat=None):
-    """Cream 'reading page'. A big bold headline, body copy, and one story-appropriate
-    aside component in the right column, separated by a single hairline rule. The aside
-    is picked per story, not forced -- a bar chart only earns its place when the story is
+               timeline=None, stat=None, bg_src=None):
+    """Two visual modes. With `bg_src`: full-bleed photo + scrim, matching the cover/
+    backstory slides' cinematic treatment (the default for every story going forward, so
+    the whole carousel reads as one continuous photo-driven story instead of switching to
+    a flat 'reading page' partway through). Without it (legacy stories rendered before a
+    clean, un-textannotated source photo was available per slide): the original cream
+    reading page. Either way: a big bold headline, body copy, and one story-appropriate
+    aside component in the right column, separated by a hairline rule. The aside is
+    picked per story, not forced -- a bar chart only earns its place when the story is
     genuinely a two-value comparison; a multi-year 'crown changing hands' story gets a
     `timeline` chronology instead, and a story whose real news is one striking number
     (not a comparison) gets a plain `stat` numeral card. Priority when more than one is
-    passed: timeline > chart > stat > none (headline/body only, single column). No
-    eyebrow label, no press-name pill, no tiny axis captions -- just the headline, the
-    copy, and (at most) one number or sequence doing real work."""
+    passed: timeline > chart > stat > none (headline/body only, single column)."""
+    cinematic = bg_src is not None
     if timeline:
-        aside_html = timeline_html(timeline)
+        aside_html = timeline_html(timeline, light=cinematic)
         aside_class = "news-timeline"
     elif chart:
-        aside_html = stat_compare_svg(chart, width=430, height=560, bar_w=132, gap=76, annotate=chart_annotate)
+        if cinematic:
+            aside_html = stat_compare_svg(
+                chart, width=430, height=560, bar_w=132, gap=76, annotate=chart_annotate,
+                base_color="rgba(255,255,255,0.32)", ink="rgba(255,255,255,0.92)",
+                mark_color=ORANGE_LIGHT,
+            )
+        else:
+            aside_html = stat_compare_svg(chart, width=430, height=560, bar_w=132, gap=76, annotate=chart_annotate)
         aside_class = "news-chart"
     elif stat:
         value, caption = stat
@@ -492,27 +525,43 @@ def news_slide(label, headline, body, story_num=1, badge_num=3, total=5,
         aside_class = ""
 
     if aside_html is not None:
-        aside_col = f'<div class="news-divider"></div><div class="news-aside {aside_class}">{aside_html}</div>'
+        divider_cls = "news-divider-light" if cinematic else "news-divider"
+        aside_col = f'<div class="{divider_cls}"></div><div class="news-aside {aside_class}">{aside_html}</div>'
         grid_cols = "1.05fr 1px 1fr"
     else:
         aside_col = ""
         grid_cols = "1fr"
+
+    text_color = "#fff" if cinematic else INK
+    body_color = "rgba(255,255,255,0.82)" if cinematic else "rgba(11,11,12,0.8)"
+    accent_color = ORANGE_LIGHT if cinematic else ORANGE
     extra_css = f"""
-.news-grid {{ position:absolute; top:130px; left:56px; right:56px; bottom:100px; z-index:5;
+.news-grid {{ position:absolute; top:150px; left:56px; right:56px; bottom:110px; z-index:5;
   display:grid; grid-template-columns:{grid_cols}; column-gap:56px; align-items:center; }}
 .news-divider {{ background:rgba(11,11,12,0.14); align-self:stretch; }}
-.news-text {{ --scale:1; --accent-color:{ORANGE}; overflow:hidden; }}
-.news-text .headline {{ font-weight:800; letter-spacing:-0.02em; color:{INK};
+.news-divider-light {{ background:rgba(255,255,255,0.2); align-self:stretch; }}
+.news-text {{ --scale:1; --accent-color:{accent_color}; overflow:hidden; }}
+.news-text .headline {{ font-weight:800; letter-spacing:-0.02em; color:{text_color};
   font-size: calc(var(--scale) * 80px); line-height:1.03; margin-bottom:34px; }}
-.news-text .body {{ font-size: calc(var(--scale) * 34px); color:rgba(11,11,12,0.8);
+.news-text .body {{ font-size: calc(var(--scale) * 34px); color:{body_color};
   font-weight:500; line-height:1.5; }}
 .news-aside {{ display:flex; align-items:center; justify-content:center; }}
 """
+    if cinematic:
+        bg = _img_src(bg_src)
+        bg_html = f'<img class="bg-photo" src="{bg}"><div class="scrim-full"></div><div class="grain"></div>'
+        mark_variant = "light"
+        ghost_color = WHITE
+        ghost_opacity = 0.08
+    else:
+        bg_html = f'<div class="bg-solid" style="background:{CREAM};"></div><div class="grain" style="opacity:0.035;"></div>'
+        mark_variant = "dark"
+        ghost_color = INK
+        ghost_opacity = 0.045
     inner = (
-        f'<div class="bg-solid" style="background:{CREAM};"></div>'
-        f'{ghost_glyph_html(f"{badge_num:02d}", top=-40, left=-24, size=760, opacity=0.045, color=INK)}'
-        f'<div class="grain" style="opacity:0.035;"></div>'
-        f'{storyb_mark_html("dark")}'
+        f"{bg_html}"
+        f'{ghost_glyph_html(f"{badge_num:02d}", top=-40, left=-24, size=760, opacity=ghost_opacity, color=ghost_color)}'
+        f'{storyb_mark_html(mark_variant)}'
         f'<div class="news-grid">'
         f'<div class="news-text" id="news-text">'
         f'<p class="headline">{_style_headline(headline)}</p>'
@@ -525,35 +574,52 @@ def news_slide(label, headline, body, story_num=1, badge_num=3, total=5,
     return inner, extra_css, autofit
 
 
-def why_slide(label, headline, bullets, story_num=1, badge_num=4, total=5, stat=None):
-    """Cream reading page, indexed list: an italic orange numeral and a hairline rule
-    between rows -- the bullets are the content, so the numbering stays. Optional `stat`
-    (value, caption) renders as a filled, lifted numeral-card component: a real stat with
-    visual weight instead of a bare number over a tiny caption."""
+def why_slide(label, headline, bullets, story_num=1, badge_num=4, total=5, stat=None, bg_src=None):
+    """Two visual modes, same as news_slide: with `bg_src`, a full-bleed photo + scrim
+    matching the cinematic cover/backstory treatment; without it, the original cream
+    reading page. Indexed list either way -- an italic orange numeral and a hairline rule
+    between rows, since the bullets are the content and the numbering stays. Optional
+    `stat` (value, caption) renders as a filled, lifted numeral-card component: a real
+    stat with visual weight instead of a bare number over a tiny caption."""
+    cinematic = bg_src is not None
     items_html = "".join(
         f'<div class="e-item{" e-item-first" if i == 1 else ""}">'
         f'<div class="e-num">{i:02d}</div><p class="e-text">{b}</p></div>'
         for i, b in enumerate(bullets, start=1)
     )
     stat_html = numeral_card_html(stat[0], stat[1].upper()) if stat else ""
+
+    text_color = "#fff" if cinematic else INK
+    body_color = "rgba(255,255,255,0.88)" if cinematic else "rgba(11,11,12,0.86)"
+    line_color = "rgba(255,255,255,0.22)" if cinematic else "rgba(11,11,12,0.14)"
     extra_css = f"""
-.w-stack {{ position:absolute; left:56px; right:56px; top:150px; bottom:90px; z-index:5;
+.w-stack {{ position:absolute; left:56px; right:56px; top:150px; bottom:110px; z-index:5;
   display:flex; flex-direction:column; justify-content:center; overflow:hidden;
-  --scale:1; --accent-color:{ORANGE}; --e-line:rgba(11,11,12,0.14); }}
-.w-stack .headline {{ font-weight:800; letter-spacing:-0.02em; color:{INK};
+  --scale:1; --accent-color:{ORANGE_LIGHT if cinematic else ORANGE}; --e-line:{line_color}; }}
+.w-stack .headline {{ font-weight:800; letter-spacing:-0.02em; color:{text_color};
   font-size: calc(var(--scale) * 82px); line-height:1.05; margin-bottom:50px; }}
 .e-item {{ padding:42px 0; }}
-.e-text {{ font-size: calc(var(--scale) * 38px); color:rgba(11,11,12,0.86);
+.e-text {{ font-size: calc(var(--scale) * 38px); color:{body_color};
   font-weight:600; line-height:1.42; padding-top:2px; }}
 .w-stack .e-num {{ font-size:40px; }}
 .w-stack .numeral-card {{ margin-top:60px; }}
 .w-stack .numeral-card-val {{ font-size:118px; }}
 """
+    if cinematic:
+        bg = _img_src(bg_src)
+        bg_html = f'<img class="bg-photo" src="{bg}"><div class="scrim-full"></div><div class="grain"></div>'
+        mark_variant = "light"
+        ghost_color = WHITE
+        ghost_opacity = 0.08
+    else:
+        bg_html = f'<div class="bg-solid" style="background:{CREAM};"></div><div class="grain" style="opacity:0.035;"></div>'
+        mark_variant = "dark"
+        ghost_color = INK
+        ghost_opacity = 0.045
     inner = (
-        f'<div class="bg-solid" style="background:{CREAM};"></div>'
-        f'{ghost_glyph_html("?", top=-90, right=-40, size=680, opacity=0.045, color=INK)}'
-        f'<div class="grain" style="opacity:0.035;"></div>'
-        f'{storyb_mark_html("dark")}'
+        f"{bg_html}"
+        f'{ghost_glyph_html("?", top=-90, right=-40, size=680, opacity=ghost_opacity, color=ghost_color)}'
+        f'{storyb_mark_html(mark_variant)}'
         f'<div class="w-stack" id="w-stack">'
         f'<p class="headline">{_style_headline(headline)}</p>'
         f"{items_html}"
@@ -578,39 +644,49 @@ def _split_engage_headline(text):
     return m.group(1), m.group(2)
 
 
-def engage_slide(label, headline, cta, story_num=1, badge_num=5, total=5, pill_text="Drop your take"):
-    """Dark brand-gradient bookend, asymmetric like the cover: a left-aligned column with
-    an oversized ghost question mark bleeding off the top-right -- a device pulled
-    directly from the slide's own content (it's the question slide). The headline reads
-    in two registers -- a smaller, quieter lead sentence for context, then the actual
-    bold hook question -- but both now share the same sans-serif family (weight/size/
-    opacity is what separates them). Splitting that quiet lead into its own italic-serif
-    typeface as before meant the same typeface (Newsreader italic) was doing two
-    unrelated jobs on one slide -- a hushed aside here, a loud one-beat highlight there
-    in the headline's own **accent** span -- which read as confusing/arbitrary rather
-    than a deliberate two-typeface system. Content is vertically centered in the space
-    below the brand mark (rather than hugging the bottom edge) so a short headline
-    doesn't leave a large dead gap above it, the way a bottom-only anchor did on a flat
-    gradient background with no photo to justify the empty space. Closes on a real solid-
-    ink pill button. No stamp, no ticker, no folio, no footer."""
+def engage_slide(label, headline, cta, story_num=1, badge_num=5, total=5, pill_text="Drop your take", bg_src=None):
+    """Two visual modes. With `bg_src`: a full-bleed photo bookend -- reusing the cover
+    image brings the story full circle -- under an orange-tinted dark scrim (.scrim-full-
+    orange), keeping this slide's brand-color identity as the carousel's CTA beat while
+    staying photo-driven like every other slide, matching the cinematic cover/backstory
+    treatment instead of breaking format on the last slide. Without it (legacy stories):
+    the original flat brand-gradient background. Either way: a left-aligned column with
+    an oversized ghost question mark bleeding off the top-right, a two-register headline
+    (a smaller, quieter lead sentence for context, then the bold hook question -- both in
+    the same sans-serif family; weight/size/opacity is what separates them, not a second
+    typeface, so the **accent** span in the hook stays the only italic-serif moment on the
+    slide), vertically centered in the space below the brand mark so a short headline
+    doesn't leave a dead gap above it. Closes on a real solid-ink pill button. No stamp,
+    no ticker, no folio, no footer."""
+    cinematic = bg_src is not None
     lead, hook = _split_engage_headline(headline)
+    text_color = "#fff" if cinematic else INK
+    lead_opacity = 0.72 if cinematic else 0.6
+    cta_opacity = 0.88 if cinematic else 0.8
     extra_css = f"""
 .eg-wrap {{ position:absolute; left:56px; right:100px; top:170px; bottom:130px; z-index:5;
   max-width:820px; display:flex; flex-direction:column; justify-content:center;
-  --scale:1; --accent-color:#fff; }}
-.eg-wrap .lead {{ font-weight:600; color:{INK}; opacity:0.6;
+  --scale:1; --accent-color:{ORANGE_LIGHT if cinematic else "#fff"}; }}
+.eg-wrap .lead {{ font-weight:600; color:{text_color}; opacity:{lead_opacity};
   font-size: calc(var(--scale) * 30px); line-height:1.42; margin-bottom:22px; max-width:640px; }}
-.eg-wrap .headline {{ font-weight:800; letter-spacing:-0.02em; color:{INK};
+.eg-wrap .headline {{ font-weight:800; letter-spacing:-0.02em; color:{text_color};
   font-size: calc(var(--scale) * 72px); line-height:1.08; margin-bottom:32px; }}
-.eg-wrap .cta {{ font-size: calc(var(--scale) * 27px); color:{INK}; font-weight:700; opacity:0.8; margin-bottom:38px; }}
+.eg-wrap .cta {{ font-size: calc(var(--scale) * 27px); color:{text_color}; font-weight:700;
+  opacity:{cta_opacity}; margin-bottom:38px; }}
 """
     lead_html = f'<p class="lead">{lead}</p>' if lead else ""
     pill_html = pill_button_html(pill_text, style="ink") if pill_text else ""
+    if cinematic:
+        bg = _img_src(bg_src)
+        bg_html = f'<img class="bg-photo" src="{bg}"><div class="scrim-full-orange"></div><div class="grain"></div>'
+        ghost_color, ghost_opacity = WHITE, 0.1
+    else:
+        bg_html = f'<div class="bg-solid" style="background:{BRAND_GRADIENT};"></div><div class="grain"></div>'
+        ghost_color, ghost_opacity = INK, 0.09
     inner = (
-        f'<div class="bg-solid" style="background:{BRAND_GRADIENT};"></div>'
-        f'{ghost_glyph_html("?", top=-70, right=-30, size=560, opacity=0.09, color=INK)}'
-        f'<div class="grain"></div>'
-        f'{storyb_mark_html("dark")}'
+        f"{bg_html}"
+        f'{ghost_glyph_html("?", top=-70, right=-30, size=560, opacity=ghost_opacity, color=ghost_color)}'
+        f'{storyb_mark_html("light" if cinematic else "dark")}'
         f'<div class="eg-wrap" id="eg-wrap">'
         f"{lead_html}"
         f'<p class="headline">{_style_headline(hook)}</p>'

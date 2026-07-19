@@ -26,16 +26,34 @@ CODE_OUT = HERE / "assets" / "code_pilot"
 ADMIN_TOKEN = os.environ.get("ADMIN_TOKEN")
 
 
-def build_bundle():
+MAX_BATCH_BYTES = 15_000_000  # stay well under Render's proxy request-size limit
+
+
+def iter_batches():
+    """Group files into zip-able batches capped by size (not by story, since story
+    folders vary in size) -- a single ~130MB upload got connection-reset, almost
+    certainly Render's proxy enforcing a body-size limit well under that."""
+    batch, batch_size = [], 0
+    for f in sorted(CODE_OUT.rglob("*")):
+        if not f.is_file():
+            continue
+        size = f.stat().st_size
+        if batch and batch_size + size > MAX_BATCH_BYTES:
+            yield batch
+            batch, batch_size = [], 0
+        batch.append(f)
+        batch_size += size
+    if batch:
+        yield batch
+
+
+def zip_batch(files):
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
-        count = 0
-        for f in CODE_OUT.rglob("*"):
-            if f.is_file():
-                zf.write(f, arcname=str(f.relative_to(HERE)))
-                count += 1
+        for f in files:
+            zf.write(f, arcname=str(f.relative_to(HERE)))
     buf.seek(0)
-    return buf, count
+    return buf
 
 
 def main():
@@ -48,20 +66,25 @@ def main():
         sys.exit(1)
     base_url = sys.argv[1].rstrip("/")
 
-    bundle, count = build_bundle()
-    size_mb = bundle.getbuffer().nbytes / 1_000_000
-    print(f"bundling {count} files ({size_mb:.1f} MB) from {CODE_OUT}...")
+    batches = list(iter_batches())
+    total_files = sum(len(b) for b in batches)
+    print(f"uploading {total_files} files from {CODE_OUT} in {len(batches)} batch(es)...")
 
-    resp = requests.post(
-        f"{base_url}/admin/restore",
-        headers={"X-Admin-Token": ADMIN_TOKEN},
-        files={"bundle": ("bundle.zip", bundle, "application/zip")},
-        timeout=300,
-    )
-    if resp.status_code != 200:
-        print(f"FAILED ({resp.status_code}): {resp.text[:500]}")
-        sys.exit(1)
-    print("done:", resp.json())
+    for i, batch in enumerate(batches, 1):
+        bundle = zip_batch(batch)
+        size_mb = bundle.getbuffer().nbytes / 1_000_000
+        print(f"  batch {i}/{len(batches)}: {len(batch)} files, {size_mb:.1f} MB...", end=" ", flush=True)
+        resp = requests.post(
+            f"{base_url}/admin/restore",
+            headers={"X-Admin-Token": ADMIN_TOKEN},
+            files={"bundle": ("bundle.zip", bundle, "application/zip")},
+            timeout=120,
+        )
+        if resp.status_code != 200:
+            print(f"FAILED ({resp.status_code}): {resp.text[:500]}")
+            sys.exit(1)
+        print("ok")
+    print("done")
 
 
 if __name__ == "__main__":

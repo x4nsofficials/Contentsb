@@ -188,21 +188,26 @@ def render_slides(data, slug, cover_bg, backstory_bg, log):
     )
     jobs.append((inner, css, out_dir / f"{slug}-backstory.png", autofit))
 
+    # Slides 3-5 now go photo-driven too (bg_src), same cinematic treatment as the cover/
+    # backstory slides, instead of switching to a flat cream/orange background partway
+    # through the carousel. Reusing the same two generated photos (alternating cover/
+    # backstory rather than repeating one back-to-back) keeps this at zero extra image-
+    # generation cost -- see news_slide/why_slide/engage_slide's cinematic-mode docstrings.
     inner, css, autofit = news_slide(
         label=s["slide3_news"]["label"], headline=s["slide3_news"]["headline"],
-        body=s["slide3_news"]["body"], badge_num=3,
+        body=s["slide3_news"]["body"], badge_num=3, bg_src=cover_bg,
     )
     jobs.append((inner, css, out_dir / f"{slug}-news.png", autofit))
 
     inner, css, autofit = why_slide(
         label=s["slide4_why"]["label"], headline=s["slide4_why"]["headline"],
-        bullets=s["slide4_why"]["bullets"], badge_num=4,
+        bullets=s["slide4_why"]["bullets"], badge_num=4, bg_src=backstory_bg,
     )
     jobs.append((inner, css, out_dir / f"{slug}-why.png", autofit))
 
     inner, css, autofit = engage_slide(
         label=s["slide5_engage"]["label"], headline=s["slide5_engage"]["headline"],
-        cta=s["slide5_engage"]["cta"], badge_num=5,
+        cta=s["slide5_engage"]["cta"], badge_num=5, bg_src=cover_bg,
     )
     jobs.append((inner, css, out_dir / f"{slug}-engage.png", autofit))
 

@@ -20,21 +20,30 @@ MODEL = "claude-sonnet-4-6"
 BATCH_SIZE = 300
 TOP_N = 25
 
-SYSTEM_PROMPT = """You score content candidates for an India-focused business/growth Instagram carousel page. The \
-goal is maximum reach and engagement on social media, NOT just informing industry insiders of hard news — so score \
-for carousel/content-worthiness, not just business seriousness.
+SYSTEM_PROMPT = """You score content candidates for an India-focused business/growth Instagram carousel page that \
+runs TWO content pillars, and both need real representation in what you shortlist, not just the easier-to-find one:
+1. Business & Markets (India) — funding, policy, market-moving company news.
+2. Entrepreneurship & founder-building — content that helps someone building a company actually get better at it:
+   lessons, tactics, mistakes, turnarounds, hiring/growth/leadership advice, founder stories. This pillar is \
+   NOT reactive news about a triggering event — an evergreen "how we scaled hiring" or "the mistake that nearly \
+   killed our startup" essay belongs here and should score just as high as a funding headline when it's well told.
+
+The goal is maximum reach and engagement on social media, NOT just informing industry insiders of hard news — so \
+score for carousel/content-worthiness, not just business seriousness.
 
 Value multiple content types, not only funding/policy news:
 - Funding rounds, IPOs, M&A — especially with a clear narrative (comeback, underdog, record-breaking)
+- Founder-building lessons and advice — a specific, concrete tactic or hard-won lesson (hiring, scaling, pivoting, \
+surviving a near-failure), not generic listicle filler ("5 tips for success")
 - Founder stories, pivots, turnarounds, human-interest angles behind a company or entrepreneur
 - Milestones and firsts (record-breaking launches, historic achievements, cultural moments)
 - Marketing campaigns or culturally resonant business moves
 - Policy/regulatory changes — but only ones with a clear before/after stakes story, not routine notices
 
 Judge each item less as "is this important to a professional reader" and more as "does this lend itself to a \
-compelling carousel that gives context/history, states the news, explains why it matters or what happens next, \
-and ends on a question that sparks debate/comments." Prioritize items with a clear narrative arc and mass \
-relatability — someone outside the industry should still find it interesting. De-prioritize routine, same-format \
+compelling carousel that gives context/history, states the news (or the lesson), explains why it matters or what \
+happens next, and ends on a question that sparks debate/comments." Prioritize items with a clear narrative arc and \
+mass relatability — someone outside the industry should still find it interesting. De-prioritize routine, same-format \
 news repeated across many companies with no distinguishing story (e.g. yet another bank's unremarkable quarterly \
 beat with nothing narratively distinct), personal finance tips/explainers, and specialist-only news with no human \
 or narrative hook.
