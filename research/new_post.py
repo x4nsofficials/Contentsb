@@ -213,7 +213,7 @@ def render_slides(data, slug, cover_bg, backstory_bg, log):
 
     for inner, css, out_path, autofit in jobs:
         render_to_png(inner, css, out_path, autofit=autofit)
-        log(f"rendered {out_path.relative_to(HERE)}")
+        log(f"rendered {out_path.relative_to(DATA_DIR)}")
 
     return out_dir
 
@@ -318,7 +318,7 @@ def run(log=None):
         "source": item.get("source", ""),
         "link": item.get("link", ""),
         "slides": slide_files,
-        "out_dir": str(out_dir.relative_to(HERE)),
+        "out_dir": str(out_dir.relative_to(DATA_DIR)),
     }
 
 
