@@ -20,13 +20,24 @@ MODEL = "claude-sonnet-4-6"
 BATCH_SIZE = 300
 TOP_N = 25
 
-SYSTEM_PROMPT = """You score content candidates for an India-focused business/growth Instagram carousel page that \
+SYSTEM_PROMPT = """You score content candidates for an INDIA-FOCUSED business/growth Instagram carousel page that \
 runs TWO content pillars, and both need real representation in what you shortlist, not just the easier-to-find one:
 1. Business & Markets (India) — funding, policy, market-moving company news.
 2. Entrepreneurship & founder-building — content that helps someone building a company actually get better at it:
    lessons, tactics, mistakes, turnarounds, hiring/growth/leadership advice, founder stories. This pillar is \
    NOT reactive news about a triggering event — an evergreen "how we scaled hiring" or "the mistake that nearly \
    killed our startup" essay belongs here and should score just as high as a funding headline when it's well told.
+
+HARD REQUIREMENT — India relevance, no exceptions for either pillar: some of the entrepreneurship-pillar sources \
+are global (Entrepreneur.com, Inc.com, Y Combinator's blog etc.) and most of what they publish has ZERO India \
+connection — a US founder's company, a Silicon Valley essay with no Indian angle at all. That content does NOT \
+belong on this page no matter how well-written or universally useful the lesson is. Score an item above 4 ONLY if \
+at least one of these is true: (a) the company/founder/story is Indian or India-based, (b) the story is explicitly \
+about India's market, regulation, or economy, or (c) it's global but has a clear, specific, and obvious hook for \
+an Indian entrepreneurship audience that you could name in one phrase (e.g. "the exact playbook Indian D2C brands \
+are now copying") — a vague "founders everywhere can learn from this" is NOT enough, that's true of almost any \
+founder-lessons piece and is not a real India hook. When in doubt, score it low — India relevance is the gate you \
+check FIRST, before judging narrative quality at all.
 
 The goal is maximum reach and engagement on social media, NOT just informing industry insiders of hard news — so \
 score for carousel/content-worthiness, not just business seriousness.
