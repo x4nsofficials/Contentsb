@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-07-18T18:16:34.292238",
+  "source_item": {
+    "title": "China's DeepSeek to raise fresh capital at $74 billion valuation ahead of onshore IPO",
+    "source": "Economic Times - Tech",
+    "link": "https://economictimes.indiatimes.com/tech/artificial-intelligence/chinas-deepseek-to-raise-fresh-capital-at-74-billion-valuation-ahead-of-onshore-ipo/articleshow/132476828.cms",
+    "category": "funding",
+    "score": 7.0
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "China's DeepSeek Eyes $74 Billion IPO Debut",
+      "subhead": "The AI that shocked Wall Street is now going public.",
+      "cover_image": "assets/covers/deepseek.png"
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "From Side Project to Global Disruptor",
+      "body": "Liang Wenfeng started DeepSeek in 2023, funded entirely by his own hedge fund. In January 2025, its R1 model stunned the world and wiped out $500 billion in US AI stocks in a day."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "New Funding Round, $74B Price Tag",
+      "body": "DeepSeek is raising fresh funds at a $74 billion valuation, Reuters reported on July 15. That's just weeks after its first outside raise: $7.4 billion in June at a $66 billion valuation."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "AI Arms Race Gets a New Leader",
+      "bullets": [
+        "Even 'cheap AI' now costs billions to build",
+        "DeepSeek is building its own chips, doubling staff",
+        "A STAR Market IPO would be a big signal"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "DeepSeek proved you don't need billions to build great AI, then went and raised billions anyway. Was the 'cheap AI' story always temporary, or is this just what happens once you get serious?",
+      "cta": "Follow for daily business stories explained simply. Share this with someone in tech \ud83d\udc47"
+    },
+    "sources_used": [
+      "https://economictimes.indiatimes.com/tech/artificial-intelligence/chinas-deepseek-to-raise-fresh-capital-at-74-billion-valuation-ahead-of-onshore-ipo/articleshow/132476828.cms",
+      "https://finance.yahoo.com/technology/ai/articles/chinas-deepseek-raise-fresh-capital-095807183.html (Reuters via Yahoo Finance)",
+      "https://techstartups.com/2026/07/15/deepseek-eyes-74-billion-valuation-in-new-funding-round-ahead-of-planned-ipo/",
+      "https://www.investing.com/news/stock-market-news/chinas-deepseek-to-raise-fresh-capital-at-74-billion-valuation-ahead-of-onshore-ipo-sources-say-4799575",
+      "https://capacityglobal.com/news/deepseek-eyes-74bn-valuation/",
+      "https://blockonomi.com/deepseek-eyes-74b-valuation-with-ipo-plans-lifting-chinese-ai-sector/",
+      "https://www.techtarget.com/whatis/feature/DeepSeek-explained-Everything-you-need-to-know",
+      "https://cacm.acm.org/opinion/deepseek-inside-origins-technology-and-impact/",
+      "https://cyber.fsi.stanford.edu/publication/taking-stock-deepseek-shock",
+      "https://tribune.com.pk/story/2618406/chinas-deepseek-to-raise-fresh-capital-at-74-billion-valuation-ahead-of-onshore-ipo-sources-say"
+    ]
+  }
+}

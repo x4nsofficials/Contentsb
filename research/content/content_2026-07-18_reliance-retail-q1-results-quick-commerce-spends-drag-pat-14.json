@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-07-18T19:08:24.267210",
+  "source_item": {
+    "title": "Reliance Retail Q1 results: Quick-commerce spends drag PAT 14% YoY to Rs 2,806 crore; revenue rises 7%",
+    "source": "Economic Times - Markets",
+    "link": "https://economictimes.indiatimes.com/markets/stocks/earnings/reliance-retail-q1-results-pat-drops-14-yoy-to-rs-2806-crore-due-to-quick-commerce-spends-revenue-up-7-4-yoy/articleshow/132462433.cms",
+    "category": "market",
+    "score": 6
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "Reliance Profit Drops 14% On Quick Commerce",
+      "subhead": "Revenue rose 7%, but quick-commerce spending ate into profit."
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "JioMart's Rocky Road To Quick Commerce",
+      "body": "Reliance's first quick delivery bet, JioMart Express, launched in 2022 and shut down by 2023. It relaunched in late 2024 with zero delivery fees, aiming to take on Blinkit, Zepto, and Swiggy Instamart."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "Q1 FY27: Revenue Up, Profit Down 14%",
+      "body": "Reliance Retail's Q1 revenue rose 7.4% to Rs 90,408 crore, but net profit fell 14.2% to Rs 2,806 crore. Quick commerce spending weighed on margins, even as the company added 252 new stores."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "The Bet: Trade Margin For Market Share",
+      "bullets": [
+        "JioMart is closing in on India's #2 spot",
+        "Zero fees signal a price war, not a feature",
+        "Plans to double retail EBITDA in three years",
+        "Digital now drives over a quarter of fashion sales"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "Reliance is taking a 14% profit hit to chase quick commerce share from Blinkit and Zepto. Smart long game, or margin bleed that never stops?",
+      "cta": "Follow for daily breakdowns of India's biggest business stories."
+    },
+    "sources_used": [
+      "https://economictimes.indiatimes.com/markets/stocks/earnings/reliance-retail-q1-results-pat-drops-14-yoy-to-rs-2806-crore-due-to-quick-commerce-spends-revenue-up-7-4-yoy/articleshow/132462433.cms",
+      "https://www.newkerala.com/news/a/reliance-retail-q1-revenue-rises-74-rs-90408-644.htm",
+      "https://newsable.asianetnews.com/business/reliance-retail-q1-fy27-revenue-rises-while-net-profit-declines-articleshow-lsvogux",
+      "https://inc42.com/features/reliance-jiomart-quick-commerce-push-rattle-blinkit-zepto/",
+      "https://www.business-standard.com/companies/news/reliance-retail-enters-quick-commerce-challenges-blinkit-swiggy-instamart-124100800310_1.html"
+    ]
+  }
+}

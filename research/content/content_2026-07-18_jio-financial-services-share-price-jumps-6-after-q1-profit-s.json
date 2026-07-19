@@ -1,0 +1,46 @@
+{
+  "generated_at": "2026-07-18T18:30:00+05:30",
+  "source_item": {
+    "title": "Jio Financial Services share price jumps 6% after Q1 profit soars 155%; should you buy the stock?",
+    "source": "LiveMint - Markets",
+    "link": "https://www.livemint.com/market/stock-market-news/jio-financial-services-share-price-jumps-6-after-q1-profit-soars-155-in-q1-results-2026-should-you-buy-or-sell-stock-11784269234338.html",
+    "category": "market",
+    "score": 6
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "Jio Financial's Profit Jumped 156%",
+      "subhead": "Stock pops 6% as lending and payments businesses scale fast"
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "The Demerger That Struggled to Prove Itself",
+      "body": "Jio Financial split off from Reliance in 2023 to run lending, payments and insurance. Investors have been waiting to see if it could actually grow fast."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "Profit Hits Rs 830 Crore, Up 156%",
+      "body": "Jio Financial's Q1 profit rose 156% to Rs 830 crore. Lending AUM grew 2.6x and the JioFinance app crossed 25 million users."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "Brokerages Turn Bullish Despite Cost Worries",
+      "bullets": [
+        "Motilal Oswal: Buy, target Rs 315 (34% upside)",
+        "Geojit: Rs 273 target on broad growth",
+        "Key risk: rising operating expenses next quarter"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "Has Jio Financial finally proven its lending and payments bet, or is one strong quarter not enough?",
+      "cta": "Share your take below and follow for more earnings breakdowns"
+    },
+    "sources_used": [
+      "https://www.livemint.com/market/stock-market-news/jio-financial-services-share-price-jumps-6-after-q1-profit-soars-155-in-q1-results-2026-should-you-buy-or-sell-stock-11784269234338.html",
+      "https://www.business-standard.com/companies/quarterly-results/jio-financial-services-q1-profit-rises-156-to-830-crore-income-up-141-126071601164_1.html",
+      "https://www.businesstoday.in/markets/stocks/story/jio-financial-share-price-target-after-q1-mofsl-sees-34-upside-retains-buy-543508-2026-07-17",
+      "https://topnews.in/jio-financial-services-share-price-target-rs-273-geojit-investments-2419140"
+    ]
+  }
+}

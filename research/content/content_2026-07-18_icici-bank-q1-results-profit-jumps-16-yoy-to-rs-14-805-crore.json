@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-07-18T18:19:53.631979",
+  "source_item": {
+    "title": "ICICI Bank Q1 Results: Profit jumps 16% YoY to Rs 14,805 crore; NII rises 13% as margins expand",
+    "source": "Economic Times - Markets",
+    "link": "https://economictimes.indiatimes.com/markets/stocks/earnings/icici-bank-q1-results-profit-jumps-16-yoy-to-rs-14805-crore-nii-rises-13-as-margins-expand/articleshow/132477062.cms",
+    "category": "market",
+    "score": 6.0
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "ICICI Bank's Biggest Profit Quarter Ever",
+      "subhead": "₹14,805 crore in one quarter, and margins are rising."
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "From World Bank Project to Profit Machine",
+      "body": "ICICI started in 1955 as a World Bank-backed lender for India's industry. It's now India's second-largest bank by assets, after becoming a private bank in 1994."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "Q1 FY27: 16% Profit Jump, Margins Expand",
+      "body": "ICICI Bank's profit jumped 16% to ₹14,805 crore this quarter. Its lending grew too, with advances up 19.6% to ₹16.3 lakh crore."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "Why India Should Care About This Number",
+      "bullets": [
+        "Margins rising even as RBI cuts rates",
+        "Bad loans falling, credit quality improving",
+        "₹22,963 crore set aside as a safety buffer"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "ICICI is beating HDFC Bank on profit growth this quarter. Is India's private banking crown about to change hands?",
+      "cta": "Follow for daily Indian business stories that actually matter. Drop your take in the comments 👇"
+    },
+    "sources_used": [
+      "https://economictimes.indiatimes.com/markets/stocks/earnings/icici-bank-q1-results-profit-jumps-16-yoy-to-rs-14805-crore-nii-rises-13-as-margins-expand/articleshow/132477062.cms",
+      "https://www.businesstoday.in/markets/stocks/story/icici-bank-q1-results-net-profit-rises-15-9-to-rs-14805-crore-asset-quality-stays-stable-543762-2026-07-18",
+      "https://www.freepressjournal.in/business/icici-banks-q1-fy27-net-profit-climbs-to-15440-crore-up-46-qoq",
+      "https://www.icici.bank.in/about-us/history",
+      "https://en.wikipedia.org/wiki/ICICI_Bank",
+      "https://www.icici.bank.in/ms/aboutus/annual-reports/2024-25/html/our-theme.html"
+    ]
+  }
+}

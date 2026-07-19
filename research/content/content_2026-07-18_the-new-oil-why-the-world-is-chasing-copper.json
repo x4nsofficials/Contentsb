@@ -1,0 +1,56 @@
+{
+  "generated_at": "2026-07-18T18:21:33.299344",
+  "source_item": {
+    "title": "The New Oil? Why the world is chasing copper",
+    "source": "Economic Times - Markets",
+    "link": "https://economictimes.indiatimes.com/markets/commodities/news/the-new-oil-why-the-world-is-chasing-copper/articleshow/132474599.cms",
+    "category": "market",
+    "score": 6.0
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "Copper Is the New Oil. Here's Why.",
+      "subhead": "The metal powering EVs and AI is running out."
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "Copper Was Always Important. Now It's Critical.",
+      "body": "Copper has long been a boring but essential metal for wires and electronics. Now EVs, solar, wind, and AI data centers all need far more copper than before, straining supply."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "Demand Is Surging. Supply Cannot Keep Up.",
+      "body": "The world could face a 30% copper supply shortfall by 2035, the IEA says. Mines are getting harder to find, so Goldman Sachs sees prices near $15,000 a tonne by 2035, up from about $10,000-13,000 now."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "No Copper Means No Clean Energy",
+      "bullets": [
+        "India's 500 GW clean energy goal needs copper it lacks",
+        "AI data centers alone may need 550,000 tonnes by 2030",
+        "Copper is now a national security priority worldwide"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "India imports over half its copper but has untapped reserves at home. Should we mine them, even with environmental costs?",
+      "cta": "Follow for more stories on the commodities shaping India's future 🔩"
+    },
+    "sources_used": [
+      "https://economictimes.indiatimes.com/markets/commodities/news/the-new-oil-why-the-world-is-chasing-copper/articleshow/132474599.cms",
+      "https://www.cruxinvestor.com/posts/how-copper-supply-deficits-are-reshaping-the-critical-minerals-landscape",
+      "https://www.spglobal.com/en/research-insights/special-reports/copper-in-the-age-of-ai",
+      "https://www.woodmac.com/horizons/soaring-copper-demand-obstacle-to-future-growth/",
+      "https://www.woodmac.com/press-releases/soaring-copper-demand-an-obstacle-to-future-growth/",
+      "https://sprott.com/insights/copper-wired-for-the-future/",
+      "https://www.goldmansachs.com/insights/articles/copper-prices-forecast-to-decline-from-record-highs-in-2026",
+      "https://csep.org/reports/the-copper-report-navigating-through-the-demand-and-supply-gap/",
+      "https://www.kotakneo.com/investing-guide/articles/india-copper-demand/",
+      "https://discoveryalert.com.au/copper-demand-clean-energy-2025/",
+      "https://www.ey.com/en_us/insights/mining-metals/coppers-role-in-the-energy-transition-grows-as-demand-surges",
+      "https://finance.yahoo.com/news/one-eye-popping-prediction-shows-003940754.html",
+      "https://blogs.worldbank.org/en/opendata/metal-prices-poised-to-strengthen-further",
+      "https://www.expertmarketresearch.com/price-forecast/copper-price-forecast"
+    ]
+  }
+}

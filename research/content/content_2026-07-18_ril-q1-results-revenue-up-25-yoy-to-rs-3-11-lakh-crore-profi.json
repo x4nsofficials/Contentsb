@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-07-18T18:17:39.036358",
+  "source_item": {
+    "title": "RIL Q1 Results: Revenue up 25% YoY to Rs 3.11 lakh crore, profit beats Street estimates",
+    "source": "Economic Times - Markets",
+    "link": "https://economictimes.indiatimes.com/markets/stocks/earnings/ril-q1-results-profit-falls-22-yoy-to-rs-20946-crore-due-to-one-time-exceptional-item/articleshow/132462892.cms",
+    "category": "market",
+    "score": 7.0
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "RIL Just Crossed ₹3 Lakh Crore Revenue",
+      "subhead": "India's biggest company just hit a record quarter."
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "From Oil Refiner to India's Everything Company",
+      "body": "Reliance grew from an oil and textile company into a giant spanning retail, telecom, and energy. Last year's profit also got a one-time boost of Rs 8,924 crore from selling its Asian Paints stake."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "Revenue Hits ₹3 Lakh Crore First Time",
+      "body": "Revenue hit a record ₹3.11 lakh crore this quarter, up 25% year on year, and EBITDA rose 10% to ₹54,067 crore. Net profit fell 22% to ₹20,946 crore, but only because of a one-time gain last year, so core profit still grew."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "Three Big Things To Watch Next",
+      "bullets": [
+        "Jio's ₹37,700 crore IPO could be India's biggest ever",
+        "Jio now has 533 million users and rising prices",
+        "O2C profit hit a 4-year high, more growth ahead"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "Jio's IPO could value it at $170 billion. Would you buy in, or is that too pricey?",
+      "cta": "Follow for daily breakdowns of India's biggest business stories, in plain English."
+    },
+    "sources_used": [
+      "https://economictimes.indiatimes.com/markets/stocks/earnings/ril-q1-results-profit-falls-22-yoy-to-rs-20946-crore-due-to-one-time-exceptional-item/articleshow/132462892.cms",
+      "https://www.business-standard.com/companies/quarterly-results/reliance-industries-q1fy27-results-net-profit-falls-22-4-to-20-946-crore-126071701147_1.html",
+      "https://www.business-standard.com/companies/quarterly-results/ril-q1-results-revenue-jumps-27-to-breach-3-trillion-for-the-first-time-126071701380_1.html",
+      "https://www.outlookbusiness.com/markets/reliance-industries-q1-results-revenue-hits-3-lakh-cr-for-first-time-o2c-jio-lead-operational-growth-profit-ebitda-margins",
+      "https://www.prokerala.com/news/articles/a1789256.html",
+      "https://www.newkerala.com/news/a/reliance-industries-q1-revenue-jumps-245-rs-34-310.htm",
+      "https://www.jpvfin.com/blog/reliance-q1-fy27-results-complete-analysis",
+      "https://anandrathi.com/blog/jio-ipo",
+      "https://www.easyfinance4u.com/jio-ipo-2026-date-price-valuation/",
+      "https://www.niftytrader.in/markets/jio-drhp-ipo-ril-shareholders-windfall/",
+      "https://www.sahi.com/blogs/jio-ipo-drhp-filed-with-sebi-fresh-issue-of-27-crore-shares"
+    ]
+  }
+}

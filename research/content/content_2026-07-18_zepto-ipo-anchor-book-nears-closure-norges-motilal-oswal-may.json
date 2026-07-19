@@ -1,0 +1,57 @@
+{
+  "generated_at": "2026-07-18T19:00:00.000000",
+  "source_item": {
+    "title": "Zepto IPO anchor book nears closure; Norges, Motilal Oswal may take 40-45%",
+    "source": "Economic Times - Markets",
+    "link": "https://economictimes.indiatimes.com/markets/ipos/fpos/zepto-ipo-anchor-book-nears-closure-norges-motilal-oswal-may-take-40-45-pc/articleshow/132463512.cms",
+    "category": "market",
+    "score": 6
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "Two Stanford Dropouts Are About to List",
+      "subhead": "Zepto's \u20b911,000 crore IPO anchor book is nearly locked in.",
+      "cover_image": "assets/code_pilot/zepto-cover.png",
+      "cover_source": "code"
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "From Lockdown Grocery Problem to Unicorn",
+      "body": "Zepto started in 2020 as KiranaKart, a grocery app from teen founders Aadit Palicha and Kaivalya Vohra stuck in Mumbai lockdowns. They dropped out of Stanford, renamed it Zepto, and built a 10-minute delivery network that made it a unicorn by 2023.",
+      "cover_image": "assets/code_pilot/zepto-backstory.png",
+      "cover_source": "code"
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "Anchor Book Nearing Close at $5.1 Billion",
+      "body": "Zepto's anchor book for its \u20b911,000 crore IPO is almost final, with Norges and Motilal Oswal set to take 40-45% of it. The IPO values Zepto at $5.1 billion, down from $7 billion just months ago.",
+      "cover_image": "assets/code_pilot/zepto-news.png",
+      "cover_source": "code"
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "First Pure-Play Quick Commerce IPO in India",
+      "bullets": [
+        "First quick-commerce company to list in India",
+        "Valuation cut shows investors want profits, not just growth",
+        "Could set the valuation bar for Blinkit and Instamart"
+      ],
+      "cover_image": "assets/code_pilot/zepto-why.png",
+      "cover_source": "code"
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "Zepto is going public at $5.1 billion, nearly $2 billion below its valuation from months ago. Is that a healthy reality check, or a warning sign for quick commerce?",
+      "cta": "Follow for daily Indian business stories that actually matter. Drop your take in the comments \ud83d\udc47",
+      "cover_image": "assets/code_pilot/zepto-engage.png",
+      "cover_source": "code"
+    },
+    "sources_used": [
+      "https://economictimes.indiatimes.com/markets/ipos/fpos/zepto-ipo-anchor-book-nears-closure-norges-motilal-oswal-may-take-40-45-pc/articleshow/132463512.cms",
+      "https://www.whalesbook.com/news/English/other/Zepto-IPO-Anchor-Round-Gains-Steam-at-dollar51-Billion-Valuation/6a5a3cd9fe1c9287f473fd40",
+      "https://topologypro.one/zepto-ipo-norges-motilal-oswal-among-investors-eyeing-40-45-of-anchor-book-631992.html",
+      "https://en.wikipedia.org/wiki/Zepto_(company)",
+      "https://www.cnbc.com/2025/12/29/zepto-confidential-ipo-filing-india-quick-commerce-instamart-swiggy-blinkit-zomato-eternal-flipkart-amazon.html"
+    ]
+  }
+}

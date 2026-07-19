@@ -1,0 +1,49 @@
+{
+  "generated_at": "2026-07-18T19:08:24.267210",
+  "source_item": {
+    "title": "Reliance Jio Q1 Results: IPO-bound telco's net profit rises 9% YoY to Rs 7,764 crore; ARPU climbs to Rs 215.6",
+    "source": "Economic Times - Markets",
+    "link": "https://economictimes.indiatimes.com/markets/stocks/earnings/reliance-jio-q1-results-ipo-bound-telcos-net-profit-rises-9-yoy-to-rs-7764-crore-arpu-climbs-to-rs-215-6/articleshow/132462455.cms",
+    "category": "market",
+    "score": 6
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "Jio's Profit Rises 9% Before Its IPO",
+      "subhead": "Broadband and 5G growth boost telecom arm ahead of listing."
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "From Rs250/GB To India's Broadband King",
+      "body": "Jio launched in 2016 with free data and calls, crashing data prices from Rs 250 per GB to under Rs 10. In 2020, Reliance spun it off as Jio Platforms and raised over $20 billion from Meta, Google, and others."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "Profit Up 9%, ARPU Climbs To Rs215.6",
+      "body": "Jio's Q1 net profit rose 9.2% to Rs 7,764 crore, on revenue up 12% to Rs 45,961 crore. ARPU climbed to Rs 215.6, and Jio added 8.9 million users to reach 533.3 million."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "Numbers That Matter For The IPO Pitch",
+      "bullets": [
+        "Rising ARPU is the growth story for IPO investors",
+        "Broadband market share crossed 43%, now India's leader",
+        "AirFiber drove over 75% of new broadband signups",
+        "Akash Ambani touts Jio's top 20 patent portfolio"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "Jio wants to be valued as a tech company, not just a telecom operator, ahead of its IPO. Do these numbers back that up, or is it still just a phone company?",
+      "cta": "Follow for daily breakdowns of India's biggest business stories."
+    },
+    "sources_used": [
+      "https://economictimes.indiatimes.com/markets/stocks/earnings/reliance-jio-q1-results-ipo-bound-telcos-net-profit-rises-9-yoy-to-rs-7764-crore-arpu-climbs-to-rs-215-6/articleshow/132462455.cms",
+      "https://www.chinapulse.com/data-news/2026/07/17/reliance-jio-q1-results-ipo-bound-telcos-net-profit-rises-9-yoy-to-rs-7764-crore-arpu-climbs-to-rs-215-6",
+      "https://www.storyboard18.com/amp/digital/jio-platforms-reports-double-digit-growth-in-q1-fy27-earnings-jio-platforms-q1-fy27-earnings-ws-l-104714.htm",
+      "https://www.business-standard.com/companies/quarterly-results/jio-platforms-q1-results-profit-rises-9-2-to-7-764-cr-revenue-up-12-126071701210_1.html",
+      "https://en.wikipedia.org/wiki/Jio",
+      "https://www.businesstoday.in/latest/corporate/story/10-years-of-reliance-jio-how-mukesh-ambanis-telecom-venture-changed-indias-digital-story-537909-2026-06-19"
+    ]
+  }
+}

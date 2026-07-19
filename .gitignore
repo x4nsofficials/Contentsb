@@ -1,0 +1,10 @@
+.env
+__pycache__/
+*.pyc
+
+# Generated per-story assets: large binary images, regenerated per-story rather than
+# versioned. The initial set is deployed separately via research/deploy_seed.py ->
+# the /admin/restore endpoint, not through git. content/ and digests/ (small JSON) and
+# preview.html stay tracked as the seed the app bootstraps a fresh persistent disk from.
+research/assets/covers/
+research/assets/code_pilot/

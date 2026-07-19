@@ -1,0 +1,50 @@
+{
+  "generated_at": "2026-07-18T19:08:24.267210",
+  "source_item": {
+    "title": "Jio likely to begin IPO marketing from next week for India's largest offer",
+    "source": "LiveMint - Companies",
+    "link": "https://www.livemint.com/companies/jio-platforms-reliance-industries-ipo-drhp-sebi-roadshows-soft-marketing-11784260405025.html",
+    "category": "market",
+    "score": 6
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "India's Biggest IPO Starts Selling",
+      "subhead": "Jio starts talking to investors after strong Q1 results."
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "Seven Years In The Making",
+      "body": "Mukesh Ambani first talked about listing Jio in 2019, but the plan stalled for years. He finally committed to 2026, and Jio filed its draft IPO papers with SEBI on June 19."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "Soft Marketing Begins Before Roadshows",
+      "body": "Jio Platforms will start informal meetings with big investors next week, right after its Q1 results. The IPO could raise up to Rs 40,000 crore, with bankers valuing Jio between $100 billion and $180 billion."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "Why It Could Shake Up Markets",
+      "bullets": [
+        "Could beat Hyundai's IPO as India's biggest ever",
+        "Rs 27,500 crore of proceeds will cut telecom debt",
+        "Recent big IPOs give confidence in Jio's pricing"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "Jio's IPO is finally here after seven years. Are you buying the hype, or waiting for the price band?",
+      "cta": "Follow for daily breakdowns of India's biggest business stories."
+    },
+    "sources_used": [
+      "https://www.livemint.com/companies/jio-platforms-reliance-industries-ipo-drhp-sebi-roadshows-soft-marketing-11784260405025.html",
+      "https://mintnl.substack.com/p/the-next-big-step-in-jio-ipo",
+      "https://www.cnbc.com/2026/06/19/india-jio-platforms-ipo-mukesh-ambani.html",
+      "https://www.business-standard.com/markets/ipo/mukesh-ambani-s-record-india-ipo-for-jio-delayed-by-regulatory-limbo-126030600763_1.html",
+      "https://groww.in/blog/jio-platforms-ltd-files-drhp-with-sebi-check-key-issue-details",
+      "https://entrackr.com/news/jio-platforms-files-drhp-for-fresh-issue-only-ipo-12055178",
+      "https://www.sebi.gov.in/filings/public-issues/jun-2026/jio-platforms-ltd-drhp_102248.html",
+      "https://anandrathi.com/blog/jio-ipo"
+    ]
+  }
+}

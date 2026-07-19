@@ -1,0 +1,45 @@
+{
+  "generated_at": "2026-07-18T18:30:00+05:30",
+  "source_item": {
+    "title": "US less reliable? India may need to open the door wider to the Dragon",
+    "source": "Economic Times - Economy",
+    "link": "https://economictimes.indiatimes.com/news/economy/foreign-trade/us-less-reliable-india-may-need-to-open-door-wider-to-china-investment-narendra-modi-economic-adviser-rakesh-mohan-press-note-3/articleshow/132452461.cms",
+    "category": "policy",
+    "score": 6
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "Modi's own adviser: let China in more",
+      "subhead": "Rakesh Mohan pushes India to rethink its China wall"
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "India shut its China door in 2020",
+      "body": "After the 2020 border clashes, India tightened rules on Chinese investment and stayed out of the RCEP trade deal. India now imports a lot from China but exports very little back, and that gap has stayed wide."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "PMEAC's Rakesh Mohan urges Chinese investment push",
+      "body": "Rakesh Mohan, a top adviser to PM Modi, wants India to ease curbs on Chinese investment in textiles and footwear. He also wants India to rethink joining RCEP and to seek membership in the CPTPP."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "A potential shift in India's China strategy",
+      "bullets": [
+        "Shows growing support to ease China investment rules",
+        "Could bring new investment and jobs in manufacturing",
+        "A hedge against unpredictable US trade policy"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "Should India ease its China investment rules to boost manufacturing, or is that too risky after 2020?",
+      "cta": "Share your view below and follow for more trade policy updates"
+    },
+    "sources_used": [
+      "https://economictimes.indiatimes.com/news/economy/foreign-trade/us-less-reliable-india-may-need-to-open-door-wider-to-china-investment-narendra-modi-economic-adviser-rakesh-mohan-press-note-3/articleshow/132452461.cms",
+      "https://www.bloomberg.com/news/articles/2026-07-17/modi-adviser-urges-india-to-seek-more-chinese-investment-trade",
+      "https://www.business-standard.com/economy/news/india-should-rethink-china-investment-policy-says-pmeac-member-126071700263_1.html"
+    ]
+  }
+}

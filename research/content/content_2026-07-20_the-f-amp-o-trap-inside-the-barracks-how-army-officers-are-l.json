@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-07-20T00:17:42.551852",
+  "source_item": {
+    "title": "The F&amp;O trap inside the barracks: How army officers are losing crores chasing the next trade",
+    "source": "LiveMint - Money",
+    "link": "https://www.livemint.com/money/personal-finance/the-f-o-trap-inside-the-barracks-how-army-officers-are-losing-crores-chasing-the-next-trade-11784376144752.html",
+    "category": "market",
+    "score": 7.0
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "Officers, Stable Salaries, and **Crores Lost** in F&O",
+      "subhead": "The F&O trap has found a new victim inside the barracks."
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "F&O Was Already a **Mass Problem**",
+      "body": "In FY25, 91% of retail traders in India lost money on F&O. The average loss per person was Rs 1.1 lakh, and total losses hit Rs 1.06 lakh crore in a single year."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "Now It Is **Hitting the Barracks**",
+      "body": "Serving and retired defence officers are falling into the same trap. A stable salary gives them easy loan access, early wins build false confidence, and leveraged bets then wipe out savings worth crores."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "A Salary That Feels Safe Is **Deadly Bait**",
+      "bullets": [
+        "Guaranteed pay makes banks offer big credit lines",
+        "One winning trade hooks you. Losses come quietly.",
+        "Retirement savings wiped out, not just pocket money"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "Should the army **ban F&O trading** for serving officers?",
+      "cta": "Drop your take below. Share this with someone still chasing the next trade."
+    },
+    "sources_used": [
+      "https://www.livemint.com/money/personal-finance/the-f-o-trap-inside-the-barracks-how-army-officers-are-losing-crores-chasing-the-next-trade-11784376144752.html",
+      "https://www.moneylife.in/article/106-lakh-crore-lost-by-individual-traders-in-fo-in-fy2425-govt-confirms-sebi-action-on-4-entities-for-market-abuse/79124.html",
+      "https://zerodha.com/z-connect/subtext/what-data-says-about-fo-india",
+      "https://blogs.fintrens.com/fo-trading-crisis-india-2026/",
+      "https://www.business-standard.com/markets/news/over-93-retail-traders-lost-money-in-f-o-in-three-years-says-sebi-124092300853_1.html",
+      "https://www.vivekam.co.in/91-of-retail-traders-lost-money-in-fo/"
+    ]
+  }
+}

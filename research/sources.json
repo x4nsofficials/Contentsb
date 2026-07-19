@@ -1,0 +1,38 @@
+{
+  "pillar": "business_markets_india",
+  "description": "Business & Markets pillar, India-focused: startup funding, RBI/government policy changes, market-moving news for an Indian business audience.",
+  "rss_feeds": [
+    { "name": "Inc42", "category": "funding", "url": "https://inc42.com/feed/" },
+    { "name": "YourStory", "category": "funding", "url": "https://yourstory.com/feed" },
+    { "name": "Moneycontrol - Business", "category": "market", "url": "https://www.moneycontrol.com/rss/business.xml" },
+    { "name": "Moneycontrol - Economy", "category": "policy", "url": "https://www.moneycontrol.com/rss/economy.xml" },
+    { "name": "Moneycontrol - Results", "category": "market", "url": "https://www.moneycontrol.com/rss/results.xml" },
+    { "name": "Moneycontrol - Technology", "category": "funding", "url": "https://www.moneycontrol.com/rss/technology.xml" },
+    { "name": "LiveMint - Money", "category": "market", "url": "https://www.livemint.com/rss/money" },
+    { "name": "LiveMint - Companies", "category": "market", "url": "https://www.livemint.com/rss/companies" },
+    { "name": "LiveMint - Markets", "category": "market", "url": "https://www.livemint.com/rss/markets" },
+    { "name": "Economic Times - Markets", "category": "market", "url": "https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms" },
+    { "name": "Economic Times - Economy", "category": "policy", "url": "https://economictimes.indiatimes.com/news/economy/rssfeeds/1373380680.cms" },
+    { "name": "Economic Times - Tech", "category": "funding", "url": "https://economictimes.indiatimes.com/tech/rssfeeds/13357270.cms" },
+    { "name": "RBI - Press Releases", "category": "policy", "url": "https://www.rbi.org.in/pressreleases_rss.xml" },
+    { "name": "YourStory - Funding", "category": "funding", "url": "https://yourstory.com/category/funding/feed" },
+    { "name": "Inc42 - Features", "category": "narrative", "url": "https://inc42.com/features/feed/" },
+    { "name": "afaqs!", "category": "marketing", "url": "https://www.afaqs.com/rss" }
+  ],
+  "dropped_sources": {
+    "note": "Tried and blocked/broken as of 2026-07-18 — revisit later or replace.",
+    "entries": [
+      { "name": "Entrackr", "url": "https://entrackr.com/feed/", "issue": "404 - feed path no longer valid, needs a working alternative" },
+      { "name": "Business Standard", "url": "https://www.business-standard.com/rss/economy-policy-102.rss", "issue": "403 - bot-blocked (Akamai), needs different fetch approach" },
+      { "name": "PIB (Press Information Bureau)", "url": "https://pib.gov.in/", "issue": "No working RSS endpoint found - returns HTML, not feed XML. Government policy announcements source, worth revisiting via scraping" },
+      { "name": "YourStory - People", "url": "https://yourstory.com/category/people/feed", "issue": "403 - Cloudflare bot challenge" },
+      { "name": "Storyboard18", "url": "https://www.storyboard18.com/feed", "issue": "404 - wrong feed path, marketing/advertising source worth finding correct URL for" },
+      { "name": "Business Today", "url": "https://www.businesstoday.in/rssfeeds/2116.cms", "issue": "404 - wrong feed ID, needs correct section ID" },
+      { "name": "exchange4media", "url": "https://www.exchange4media.com/rss/latest-news.xml", "issue": "403 - Cloudflare bot challenge" }
+    ]
+  },
+  "x_accounts_watchlist": {
+    "note": "Not auto-ingested yet — X has no free RSS/API tier for timelines. Candidates for later scraping (Chrome MCP) or paid X API integration.",
+    "handles": ["Entrackr", "Inc42", "moneycontrolcom", "RBI", "PIB_India", "ETMarkets"]
+  }
+}

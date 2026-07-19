@@ -1,0 +1,51 @@
+{
+  "generated_at": "2026-07-18T18:23:10.097385",
+  "source_item": {
+    "title": "Netflix shares tumble 13% after weak sales forecast, hit 22-month low",
+    "source": "LiveMint - Markets",
+    "link": "https://www.livemint.com/market/netflix-shares-tumble-13-after-weak-sales-forecast-hit-22-month-low-11784295044711.html",
+    "category": "market",
+    "score": 6.0
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "Netflix Crashes to a 22-Month Low",
+      "subhead": "From record highs to a brutal selloff. What happened?"
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "From Streaming King to Growth Doubts",
+      "body": "Netflix hit an all time high in June 2025, powered by hits like Stranger Things and Squid Game. But its content slate weakened this year, and a failed bid for Warner Bros. Discovery raised doubts about future growth."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "Weak Forecast Triggers a 13% Crash",
+      "body": "Netflix's Q2 revenue hit $12.56 billion, up 13% and in line with estimates, but weak Q3 guidance spooked investors. Shares fell 13% to their lowest level since August 2024, now down 44% from last year's peak."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "Growth Story Under the Microscope",
+      "bullets": [
+        "Trades at 20x earnings, so any slowdown hits hard",
+        "Cutting viewership reports spooked investors at a bad time",
+        "Ad revenue is still just $3B of $51B"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "Netflix is betting its future on ads and live sports while sharing less data on viewership. Is its high stock price still justified, or has the easy money already been made?",
+      "cta": "Follow for daily business stories explained simply. Drop your take in the comments 👇"
+    },
+    "sources_used": [
+      "https://www.livemint.com/market/netflix-shares-tumble-13-after-weak-sales-forecast-hit-22-month-low-11784295044711.html",
+      "https://www.cnbc.com/2026/07/16/netflix-nflx-earnings-q2-2026.html",
+      "https://www.933thedrive.com/2026/07/17/lacks-excitement-netflix-tumbles-9-as-weak-earnings-forecast-deepens-doubts-over-growth/",
+      "https://americanbazaaronline.com/2026/07/17/netflix-share-drop-10-after-earnings-forecast-disappoints-investors-484765/",
+      "https://www.aol.com/articles/netflix-shares-tank-weak-forecast-211433000.html",
+      "https://www.benzinga.com/markets/earnings/26/07/60513688/netflix-q2-highlights-stock-dives-on-guidance-what-investors-should-know",
+      "https://www.investing.com/equities/netflix,-inc.-earnings",
+      "https://finance.yahoo.com/markets/stocks/articles/netflix-gears-report-q2-earnings-145700087.html",
+      "https://www.spglobal.com/market-intelligence/en/news-insights/research/2026/07/netflix-earnings-preview-q2-2026"
+    ]
+  }
+}

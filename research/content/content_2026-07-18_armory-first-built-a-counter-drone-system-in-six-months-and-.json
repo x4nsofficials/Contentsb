@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-07-18T18:18:09.349257",
+  "source_item": {
+    "title": "Armory first built a counter-drone system in six months, and now it has a Rs 100 crore defence order",
+    "source": "YourStory",
+    "link": "https://yourstory.com/2026/07/armory-rs-100-crore-defence-order",
+    "category": "funding",
+    "score": 7.0
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "2-Year-Old Startup Lands ₹100 Crore Defence Order",
+      "subhead": "India's youngest defence-tech bet just paid off big."
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "A Border Crisis Nobody Solved Fast Enough",
+      "body": "Drones were sneaking across India's borders to smuggle weapons and drugs. In 2024, IIT Bombay grad Amardeep Singh founded Armory to stop them."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "₹100 Crore MoD Order for SURGE",
+      "body": "Armory just won three MoD contracts worth ₹100 crore (~$10.5 Mn) for its SURGE counter-drone system. SURGE spots drones up to 5 km away and jams them up to 3 km."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "What This Means for Defence Startups",
+      "bullets": [
+        "MoD is betting on startups, not just old giants",
+        "Defence-tech funding jumped from $450M to $548M",
+        "Next: hard-kill drone tech and a new fundraise"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "Should the Ministry of Defence fast-track startups like Armory, or is moving fast on national security too risky?",
+      "cta": "Follow for more on India's biggest business moments, told simply."
+    },
+    "sources_used": [
+      "https://yourstory.com/2026/07/armory-rs-100-crore-defence-order",
+      "https://inc42.com/buzz/armory-gets-%E2%82%B9100-cr-defence-ministry-order-for-counter-drone-systems/",
+      "https://www.business-standard.com/companies/start-ups/defence-tech-startup-armory-gets-100-cr-order-from-ministry-of-defence-126050401375_1.html",
+      "https://www.startupnama.com/2026/05/armory-wins-inr-100-crore-ministry-of.html",
+      "https://startuptalky.com/news/armory-secures-inr-100-crore-ministry-of-defence-order-for-its-indigenous-counter-unmanned-aerial-systems-c-uas-surge/",
+      "https://startuppedia.in/startup-stories/gurugram-startup-armory-is-building-indias-next-gen-counter-drone-shield-12017793",
+      "https://www.dronefederation.in/media-hub/armory-secure-rs-100-crore-mod-contract",
+      "https://www.whalesbook.com/news/English/aerospace-defense/Armory-Secures-indian-rupee100-Cr-Ministry-of-Defence-Order-for-AI-Drone-System/69f8acbc9d1c906648242126",
+      "https://www.armory.in/",
+      "https://smefutures.com/inside-armory-gurugram-defence-tech-startup-taking-on-indias-drone-threat/",
+      "https://viestories.com/startupnews/defence-tech-startup-armory-gets-100-crore-order-from-mod-for-indigenous-ai-powered-counter-drone-system-11805124"
+    ]
+  }
+}

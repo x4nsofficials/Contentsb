@@ -1,0 +1,51 @@
+{
+  "generated_at": "2026-07-18T18:20:59.154367",
+  "source_item": {
+    "title": "Yes Bank Q1 Results: Net profit surges 34% YoY to Rs 1,071 crore; NII advances 18%",
+    "source": "Economic Times - Markets",
+    "link": "https://economictimes.indiatimes.com/markets/stocks/earnings/yes-bank-q1-results-net-profit-surges-34-yoy-to-rs-1071-crore-nii-advances-18/articleshow/132476478.cms",
+    "category": "market",
+    "score": 6.0
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "Yes Bank Is Back. Numbers Prove It.",
+      "subhead": "The bank that nearly died just posted a strong profit."
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "From ₹370 Stock to ₹50,000 Withdrawal Cap",
+      "body": "Yes Bank's stock once hit ₹370 in 2018, back when it was India's fastest-growing private bank. Bad loans and fleeing deposits forced the RBI to cap withdrawals at ₹50,000 in 2020, until SBI led a ₹10,000 crore bailout."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "34% Profit Jump. Ratings Upgraded. Margins Hold.",
+      "body": "Yes Bank's profit jumped 34% to Rs 1,071 crore this quarter, and net interest income grew 17.5%. Bad loans kept falling, and Moody's, CARE, ICRA, and now S&P all upgraded its ratings."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "This Turnaround Changes What's Possible Next",
+      "bullets": [
+        "Japan's SMBC now owns a 24% stake",
+        "Better ratings mean cheaper funding ahead",
+        "Proof that a near-collapsed bank can recover"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "SBI and other Indian banks bailed out Yes Bank in 2020, and now a Japanese bank is its biggest shareholder. Is that proof India's banking system is maturing, or did the rescue just hand a prize asset to foreign capital?",
+      "cta": "Follow for daily Indian business stories explained simply. Drop your take in the comments 👇"
+    },
+    "sources_used": [
+      "https://economictimes.indiatimes.com/markets/stocks/earnings/yes-bank-q1-results-net-profit-surges-34-yoy-to-rs-1071-crore-nii-advances-18/articleshow/132476478.cms",
+      "https://www.businesstoday.in/markets/stocks/story/yes-bank-q1-results-net-profit-climbs-33-to-rs-1072-crore-what-ceo-vinay-m-tonse-says-543758-2026-07-18",
+      "https://www.freepressjournal.in/business/yes-bank-net-profit-rises-337-to-10710-crore-in-q1-fy27",
+      "https://www.business-standard.com/markets/news/smbc-completes-20-percent-acquisition-yes-bank-top-shareholder-stake-125091800652_1.html",
+      "https://www.retailbankerinternational.com/news/smbc-purchase-4-2-stake-yes-bank/",
+      "https://ifsa-network.com/publications/from-trust-to-turmoil-the-yes-bank-financial-scam/",
+      "https://financewithkarthik.com/yes-bank-crisis-story-rise-fall-rbi-rescue/",
+      "https://en.wikipedia.org/wiki/Yes_Bank",
+      "https://elischolar.library.yale.edu/cgi/viewcontent.cgi?article=1560&context=journal-of-financial-crises"
+    ]
+  }
+}

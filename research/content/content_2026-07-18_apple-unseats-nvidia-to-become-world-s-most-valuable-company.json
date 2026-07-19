@@ -1,0 +1,47 @@
+{
+  "generated_at": "2026-07-18T19:00:00.000000",
+  "source_item": {
+    "title": "Apple unseats Nvidia to become world's most valuable company as AI bets shift",
+    "source": "Economic Times - Markets",
+    "link": "https://economictimes.indiatimes.com/markets/us-stocks/news/apple-unseats-nvidia-to-become-worlds-most-valuable-company-as-ai-bets-shift/articleshow/132464148.cms",
+    "category": "market",
+    "score": 6
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "Apple Just Dethroned Nvidia. Again.",
+      "subhead": "$4.88 trillion vs $4.86 trillion. AI money is shifting."
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "Nvidia's Two-Year Reign Atop the Market",
+      "body": "Apple used to be the value king, hitting $1 trillion first back in 2018. Then Nvidia's AI chip boom took over, passing Apple in 2024 and hitting $5 trillion in 2025."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "Apple Reclaims the Crown at $4.88 Trillion",
+      "body": "Apple's value hit $4.88 trillion, edging past Nvidia's $4.86 trillion after Nvidia shares fell 3.5%. It's Apple's first time back on top since April last year."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "The AI Trade Is Rotating, Not Ending",
+      "bullets": [
+        "AI's next winners may not be chipmakers",
+        "Nvidia's still strong, this is just a market swing",
+        "Expect more swaps at the top spot"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "Apple never built its own AI model but just passed Nvidia anyway. Is AI hype overrated, or is Apple just better at quietly cashing in on it?",
+      "cta": "Follow for daily global business stories that actually matter. Drop your take in the comments 👇"
+    },
+    "sources_used": [
+      "https://economictimes.indiatimes.com/markets/us-stocks/news/apple-unseats-nvidia-to-become-worlds-most-valuable-company-as-ai-bets-shift/articleshow/132464148.cms",
+      "https://www.bnnbloomberg.ca/business/technology/2026/07/17/apple-closes-in-on-nvidia-in-race-for-worlds-most-valuable-company/",
+      "https://www.forbes.com/sites/tylerroush/2026/07/17/apple-unseats-nvidia-as-worlds-largest-company/",
+      "https://www.cnbc.com/2024/06/05/nvidia-passes-apple-in-market-cap.html",
+      "https://www.cnbc.com/2025/01/21/nvidia-passes-apple-again-to-become-worlds-most-valuable-company-.html"
+    ]
+  }
+}

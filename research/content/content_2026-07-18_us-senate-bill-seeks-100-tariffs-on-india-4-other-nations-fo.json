@@ -1,0 +1,44 @@
+{
+  "generated_at": "2026-07-18T18:30:00+05:30",
+  "source_item": {
+    "title": "US Senate bill seeks 100% tariffs on India, 4 other nations for buying Russian oil",
+    "source": "Economic Times - Economy",
+    "link": "https://economictimes.indiatimes.com/news/economy/foreign-trade/us-senate-bill-seeks-100-tariffs-on-india-4-other-nations-for-buying-russian-oil/articleshow/132454203.cms",
+    "category": "policy",
+    "score": 6
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "US Senate wants 100% tariffs on India",
+      "subhead": "The target: countries still buying Russian oil"
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "India kept buying discounted Russian crude",
+      "body": "Since the Ukraine war began, Russia has sold oil to Asia at steep discounts. India and China became the biggest buyers, and India says it needs the cheap oil for energy security."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "Bipartisan bill targets India, China, three others",
+      "body": "A bipartisan bill from Senators Richard Blumenthal and the late Lindsey Graham has over 60 backers in Congress. It proposes 100% tariffs on the top 5 buyers of Russian oil and gas: India, China, Slovakia, Hungary, and Azerbaijan."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "Tariffs as a geopolitical weapon, first time",
+      "bullets": [
+        "Congress's first use of tariffs to punish a war",
+        "Aims to cut off Russia's war funding",
+        "Could strain India's energy trade with the US"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "Should India keep buying discounted Russian oil even if it risks 100% US tariffs?",
+      "cta": "Tell us where you stand and follow for more policy updates"
+    },
+    "sources_used": [
+      "https://economictimes.indiatimes.com/news/economy/foreign-trade/us-senate-bill-seeks-100-tariffs-on-india-4-other-nations-for-buying-russian-oil/articleshow/132454203.cms",
+      "https://www.business-standard.com/economy/news/us-senate-bill-seeks-100-tariffs-on-india-china-for-buying-russian-oil-126071700414_1.html"
+    ]
+  }
+}

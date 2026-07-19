@@ -1,0 +1,61 @@
+{
+  "generated_at": "2026-07-18T18:18:49.564365",
+  "source_item": {
+    "title": "PM Narendra Modi launches India's first hydrogen train: what it really changes",
+    "source": "YourStory",
+    "link": "https://yourstory.com/2026/07/india-first-hydrogen-train-jind-sonipat-explained",
+    "category": "funding",
+    "score": 7.0
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "India's First Hydrogen Train Just Changed History",
+      "subhead": "Biggest green rail milestone since electrification. Here's what it means.",
+      "cover_image": "assets/covers/hydrogen-train.png"
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "India's Rail Was Nearly All Green",
+      "body": "Indian Railways has electrified over 99% of its network, but heritage hill routes like Darjeeling still ran on diesel. In 2023, Railways announced plans for 35 hydrogen trains, and picked Jind-Sonipat in Haryana as the test route."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "NaMo Green Rail Is Now Officially Running",
+      "body": "On July 17, PM Modi flagged off India's first hydrogen train, the NaMo Green Rail, from Jind in Haryana. Built entirely in India, it seats 2,600 passengers, runs the 89 km Jind-Sonipat route, and emits only water vapour."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "Historic Milestone, But Real Tests Ahead",
+      "bullets": [
+        "Joins Germany and China with hydrogen trains in service",
+        "Plans 35 more trains for routes like Darjeeling and Nilgiri",
+        "Fuel cells are imported, and green hydrogen costs more",
+        "Germany's hydrogen train fleet struggled with cell wear"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "India built the train body but imports the fuel cell, its core engine. Is this really 'Make in India', or are we calling a stepping stone the finish line?",
+      "cta": "Follow for more on India's biggest business and infrastructure stories, explained simply. \ud83d\ude86"
+    },
+    "sources_used": [
+      "https://yourstory.com/2026/07/india-first-hydrogen-train-jind-sonipat-explained",
+      "https://www.aljazeera.com/economy/2026/7/17/india-debuts-hydrogen-powered-train-as-part-of-sustainability-drive",
+      "https://www.businesstoday.in/india/story/pm-modi-launches-indias-first-hydrogen-train-on-jind-sonipat-route-unveils-major-development-projects-543531-2026-07-17",
+      "https://www.pib.gov.in/FactsheetDetails.aspx?ModuleId=16&NoteId=150774&id=150774&reg=48&lang=2",
+      "https://www.pib.gov.in/PressReleasePage.aspx?PRID=1896102",
+      "https://techxplore.com/news/2026-07-india-hydrogen-powered-energy.html",
+      "https://www.taipeitimes.com/News/world/archives/2026/07/18/2003860967",
+      "https://www.nextias.com/ca/current-affairs/17-07-2026/india-first-hydrogen-powered-train",
+      "https://www.nextias.com/ca/editorial-analysis/17-07-2026/hydrogen-trains-india",
+      "https://www.thecore.in/opinion/the-plinth/india-hydrogen-train-fuel-stack-import-trainset-865140",
+      "https://en.wikipedia.org/wiki/Hydrogen_train",
+      "https://visionias.in/current-affairs/news-today/2026-07-13/science-and-technology/india-set-to-launch-its-first-hydrogen-train-under-hydrogen-for-heritage-project",
+      "https://www.collegesimplified.in/post/hydrogen-powered-trains-in-india-the-future-of-green-transportation-explained",
+      "https://ddnews.gov.in/en/charting-a-green-course-hydrogen-fuelled-trains-in-india/",
+      "https://www.investindia.gov.in/team-india-blogs/fuelling-sustainability-rails-indias-leap-green-hydrogen-upcoming-train-trials",
+      "https://www.whalesbook.com/news/English/transportation/India-Launches-Longest-Hydrogen-Train-Key-Tech-and-Cost-Hurdles/6a59f034fe1c9287f4731c21",
+      "https://organiser.org/2026/07/17/370340/bharat/jinds-tevar-has-changed-pm-modi-launches-indias-first-hydrogen-train-rolls-out-rs-14700-crore-projects/"
+    ]
+  }
+}

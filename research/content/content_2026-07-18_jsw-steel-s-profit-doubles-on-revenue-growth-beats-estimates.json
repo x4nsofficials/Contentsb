@@ -1,0 +1,46 @@
+{
+  "generated_at": "2026-07-18T19:00:00.000000",
+  "source_item": {
+    "title": "JSW Steel's profit doubles on revenue growth, beats estimates",
+    "source": "Economic Times - Markets",
+    "link": "https://economictimes.indiatimes.com/markets/stocks/earnings/jsw-steels-profit-doubles-on-revenue-growth-beats-estimates/articleshow/132465171.cms",
+    "category": "market",
+    "score": 6
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "JSW Steel's Profit Just Doubled",
+      "subhead": "₹4,696 crore in one quarter, more than anyone expected."
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "India's Steel Giant Was Fighting Weak Prices",
+      "body": "JSW Steel is one of India's biggest steelmakers, but weak steel prices and high costs had squeezed its profits for months. Analysts expected only a small recovery this quarter."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "Profit More Than Doubles, Crushes Estimates",
+      "body": "Profit came in at ₹4,696 crore for Q1 FY27, more than double last year's ₹2,209 crore. Revenue rose 9.8% to ₹47,364 crore, well above what analysts expected."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "A Steel Beat That Signals Broader Demand",
+      "bullets": [
+        "Record sales show real demand, not just price gains",
+        "Falling debt gives JSW room to keep expanding",
+        "A big beat like this signals a stronger economy"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "JSW Steel beat estimates by over ₹1,100 crore while still spending big on expansion. Is this the start of a steel supercycle in India, or just a one quarter blip?",
+      "cta": "Follow for daily Indian business stories that actually matter. Drop your take in the comments 👇"
+    },
+    "sources_used": [
+      "https://economictimes.indiatimes.com/markets/stocks/earnings/jsw-steels-profit-doubles-on-revenue-growth-beats-estimates/articleshow/132465171.cms",
+      "https://www.equitypandit.com/jsw-steel-rallies-as-q1-profit-more-than-doubles/",
+      "https://hdfcsky.com/news/jsw-steel-q1-profit-more-than-doubles-to-rs-4696-crore",
+      "https://www.ainvest.com/news/jsw-steel-200-billion-rupee-fy26-capex-plan-strategic-catalyst-long-term-growth-2507/"
+    ]
+  }
+}

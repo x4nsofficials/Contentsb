@@ -1,0 +1,56 @@
+{
+  "generated_at": "2026-07-18T18:20:24.550037",
+  "source_item": {
+    "title": "China's Kimi K3 rattles US AI industry",
+    "source": "Economic Times - Tech",
+    "link": "https://economictimes.indiatimes.com/tech/artificial-intelligence/chinas-kimi-k3-rattles-us-ai-industry/articleshow/132476840.cms",
+    "category": "funding",
+    "score": 6.0
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "China's Kimi Just Dethroned America's Best AI",
+      "subhead": "A 3-year-old startup just hit #1 in AI coding."
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "From Zero to China's Hottest AI Lab",
+      "body": "Moonshot AI started in 2023, led by ex-Google researcher Yang Zhilin. By May 2026, it had raised $2 billion at a $20 billion valuation."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "Kimi K3: World's Largest Open AI Model",
+      "body": "Moonshot released Kimi K3 on July 16, a 2.8 trillion parameter model, the largest open one ever. It jumped straight to #1 on a top coding leaderboard, beating both Claude and GPT-5.6."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "The Price-Performance Gap Is Gone",
+      "bullets": [
+        "Costs 5x less than Claude, and beats it",
+        "Nasdaq dropped 1.4% the day after launch",
+        "Full weights go free and open on July 27"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "If a Chinese open AI is #1 at coding and costs 5x less, why would any startup still pay for OpenAI or Anthropic?",
+      "cta": "Follow for daily breakdowns of the stories reshaping global business and tech."
+    },
+    "sources_used": [
+      "https://economictimes.indiatimes.com/tech/artificial-intelligence/chinas-kimi-k3-rattles-us-ai-industry/articleshow/132476840.cms",
+      "https://www.tomshardware.com/tech-industry/artificial-intelligence/moonshot-releases-2-8-trillion-parameter-kimi-k3",
+      "https://venturebeat.com/technology/chinas-moonshot-ai-releases-kimi-k3-the-largest-open-source-model-ever-rivaling-top-u-s-systems",
+      "https://www.winzheng.com/en/article/kimi-k3-tops-frontend-code-arena-moonshot-ai",
+      "https://techstartups.com/2026/07/16/moonshot-ai-launches-kimi-k3-claims-1-spot-on-code-arena-beating-claude-fable-5/",
+      "https://startupfortune.com/moonshot-ais-kimi-k3-tops-a-coding-leaderboard-at-a-fraction-of-the-price/",
+      "https://startupfortune.com/kimi-k3-tops-claude-opus-48-on-a-major-coding-benchmark-and-rattles-ai-valuations/",
+      "https://futurism.com/artificial-intelligence/chinese-ai-kimi-moonshot-benchmark-claude-chatgpt",
+      "https://decrypt.co/373716/china-kimi-k3-largest-open-source-ai-model-ever-beats-claude-fable-gpt-5-6-sol",
+      "https://en.wikipedia.org/wiki/Moonshot_AI",
+      "https://techcrunch.com/2026/05/07/chinas-moonshot-ai-raises-2b-at-20b-valuation-as-demand-for-open-source-ai-skyrockets/",
+      "https://entrepreneurloop.com/moonshot-ai-funding-20-billion-valuation-kimi-2026/",
+      "https://techfundingnews.com/chinas-moonshot-ai-reportedly-seeks-up-to-2b-at-30b-valuation-as-race-to-challenge-openai-intensifies/",
+      "https://thenextweb.com/news/moonshot-ai-20bn-valuation-kimi-meituan-china-mobile"
+    ]
+  }
+}

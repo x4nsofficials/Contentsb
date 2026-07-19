@@ -1,0 +1,46 @@
+{
+  "generated_at": "2026-07-18T19:00:00.000000",
+  "source_item": {
+    "title": "AI won't diminish IT services, will instead make it more vital: Anand Mahindra at Tech Mahindra AGM",
+    "source": "Economic Times - Tech",
+    "link": "https://economictimes.indiatimes.com/tech/artificial-intelligence/ai-wont-diminish-it-services-will-instead-make-it-more-vital-anand-mahindra-at-tech-mahindra-agm/articleshow/132464964.cms",
+    "category": "funding",
+    "score": 6
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "Mahindra: AI Won't Kill IT Services",
+      "subhead": "He says AI makes India's $200-billion industry more vital."
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "The Fear AI Would Gut IT Jobs",
+      "body": "For two years, India's IT industry has feared AI would replace jobs. So all eyes were on what Tech Mahindra's chairman would say."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "Mahindra Says AI Is an Opportunity",
+      "body": "At Tech Mahindra's 39th AGM, Anand Mahindra said AI will make IT services more important, not less. He said businesses still run on old, tangled systems, and someone needs to manage AI inside them."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "Big Stakes for Jobs and Strategy",
+      "bullets": [
+        "IT firms could shift from coding to managing AI",
+        "Govt picked Tech Mahindra for its national AI mission",
+        "Pushback on fears haunting India's 5 million IT workers"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "Mahindra says AI will make IT services more important, not less. Can India's IT giants actually reinvent themselves fast enough, or is this just AGM optimism?",
+      "cta": "Follow for daily Indian business stories that actually matter. Drop your take in the comments 👇"
+    },
+    "sources_used": [
+      "https://economictimes.indiatimes.com/tech/artificial-intelligence/ai-wont-diminish-it-services-will-instead-make-it-more-vital-anand-mahindra-at-tech-mahindra-agm/articleshow/132464964.cms",
+      "https://www.business-standard.com/technology/tech-news/ai-will-not-diminish-role-of-it-services-tech-mahindra-s-anand-mahindra-126071701198_1.html",
+      "https://www.businesstoday.in/technology/artificial-intelligence/story/ai-wont-kill-indias-it-industry-anand-mahindra-dismisses-fears-over-ai-replacing-it-services-543728-2026-07-17",
+      "https://www.newkerala.com/news/a/ai-will-transform-not-diminish-indias-it-services-578.htm"
+    ]
+  }
+}

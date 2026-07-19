@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StoryB — Business & Markets India — Content Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0B0B0C;
+    --warm-900: #141211;
+    --warm-700: #3B3532;
+    --warm-500: #7C736B;
+    --warm-300: #D3CCC4;
+    --warm-200: #E7E2DC;
+    --warm-100: #F3F0EC;
+    --warm-50:  #FAF8F6;
+    --white: #FFFFFF;
+    --orange-500: #E9480F;
+    --orange-400: #EE6E3A;
+    --orange-600: #D33C08;
+    --orange-100: #FCE2D6;
+    --brand-gradient: linear-gradient(135deg, #F26A2E 0%, #E9480F 48%, #DA3C06 100%);
+    --font-serif: 'Playfair Display', 'Times New Roman', Georgia, serif;
+    --font-sans: 'Hanken Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { background: var(--ink); color: var(--white); font-family: var(--font-sans); padding: 32px 20px 100px; }
+  @media (min-width: 640px) { body { padding: 48px 40px 100px; } }
+
+  .page-header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; flex-wrap: wrap; }
+  .page-logo { height: 26px; width: auto; display: block; }
+  .page-title { font-size: 15px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.55); border-left: 1px solid rgba(255,255,255,0.2); padding-left: 14px; }
+  .page-sub { font-size: 12.5px; color: rgba(255,255,255,0.4); margin-top: 10px; }
+
+  .story { margin-bottom: 56px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 26px; }
+  .story-meta { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 18px; gap: 16px; }
+  .story-rank { font-size: 10.5px; font-weight: 700; letter-spacing: 2px; color: var(--orange-400); text-transform: uppercase; }
+  .story-title { font-size: 16px; font-weight: 600; color: #fff; margin-top: 4px; max-width: 640px; line-height: 1.35; }
+  .story-src { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 6px; }
+  .story-src a { color: rgba(255,255,255,0.5); text-decoration: none; border-bottom: 1px dotted rgba(255,255,255,0.25); }
+  .score-badge { flex-shrink: 0; background: rgba(233,72,15,0.15); border: 1px solid rgba(233,72,15,0.4); color: var(--orange-400);
+    font-size: 18px; font-weight: 700; padding: 6px 13px; border-radius: 10px; }
+
+  /* Slides: horizontal snap-scroll strip on every screen size. This is the fix for the
+     mobile "cropped" bug — cards no longer force a fixed aspect-ratio + overflow:hidden
+     (which clipped long copy on narrow viewports). Instead each card has a natural,
+     content-driven height and the row scrolls sideways like a real IG carousel. */
+  .row {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 6px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .row::-webkit-scrollbar { height: 6px; }
+  .row::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+
+  .slide {
+    position: relative;
+    scroll-snap-align: start;
+    flex: 0 0 78vw;
+    max-width: 300px;
+    min-height: 340px;
+    background: var(--warm-50);
+    border-radius: 16px;
+    padding: 20px 18px 18px;
+    display: flex;
+    flex-direction: column;
+  }
+  @media (min-width: 640px) { .slide { flex-basis: 240px; } }
+  @media (min-width: 1100px) { .slide { flex-basis: calc(20% - 10px); } }
+
+  .slide-num { position: absolute; top: 10px; right: 14px; font-size: 38px; font-weight: 800; color: rgba(20,18,17,0.06); line-height: 1; font-family: var(--font-serif); z-index: 2; }
+  .slide-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--orange-500); margin-bottom: 10px; }
+  .slide-headline { font-family: var(--font-serif); font-weight: 700; color: var(--warm-900); line-height: 1.22; margin-bottom: 8px; }
+  .slide1 .slide-headline { font-size: 20px; }
+
+  /* Cover slide with a generated hero image: photo fills the card, a bottom-up dark
+     gradient (matches the brand's --img-warm-overlay token) protects text legibility,
+     and headline/label/subhead sit on top in white instead of the cream-card ink. */
+  .slide.has-cover { background: var(--warm-900); justify-content: flex-end; }
+  .slide.has-cover .cover-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .slide.has-cover .cover-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,11,12,0) 35%, rgba(11,11,12,0.9) 100%); z-index: 1; }
+  .slide.has-cover .slide-label, .slide.has-cover .slide-num { position: relative; z-index: 2; color: var(--orange-400); }
+  .slide.has-cover .slide-headline { position: relative; z-index: 2; color: #fff; }
+  .slide.has-cover .slide-sub, .slide.has-cover .slide-body { position: relative; z-index: 2; color: rgba(255,255,255,0.7); }
+  .slide.has-cover .slide-bullets { position: relative; z-index: 2; color: rgba(255,255,255,0.85); }
+  .slide.has-cover .slide-cta { position: relative; z-index: 2; color: var(--orange-400); }
+
+  /* Fully-baked Canva slide: the exported PNG already contains all headline/logo/badge/footer
+     pixels, so the card becomes a pure image frame with zero HTML text overlay and no padding. */
+  .slide.has-baked { padding: 0; overflow: hidden; }
+  .slide.has-baked .cover-img.baked { position: static; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .slide2 .slide-headline, .slide3 .slide-headline, .slide4 .slide-headline { font-size: 16px; }
+  .slide5 .slide-headline { font-size: 16px; }
+  .slide-rule { width: 30px; height: 3px; background: var(--brand-gradient); margin-bottom: 10px; border-radius: 2px; }
+  .slide-body { font-size: 13px; color: var(--warm-700); line-height: 1.5; }
+  .slide-sub { font-size: 13px; color: var(--warm-500); line-height: 1.45; }
+  .slide-bullets { list-style: none; font-size: 12.5px; color: var(--warm-700); line-height: 1.5; }
+  .slide-bullets li { margin-bottom: 7px; padding-left: 14px; position: relative; }
+  .slide-bullets li::before { content: ""; position: absolute; left: 0; top: 6px; width: 6px; height: 6px; border-radius: 50%; background: var(--orange-500); }
+  .slide-cta { margin-top: auto; font-size: 12px; font-weight: 700; color: var(--orange-600); padding-top: 10px; }
+  .slide-handle { font-size: 9px; color: var(--warm-500); margin-top: 4px; }
+  .scroll-hint { font-size: 10px; color: rgba(255,255,255,0.3); margin: 6px 2px 10px; letter-spacing: 0.5px; }
+
+  .sources { margin-top: 14px; font-size: 10px; color: rgba(255,255,255,0.25); line-height: 1.6; }
+  .sources summary { cursor: pointer; color: rgba(255,255,255,0.4); font-size: 10.5px; }
+  .sources ul { margin-top: 6px; padding-left: 16px; }
+  .sources a { color: rgba(255,255,255,0.35); }
+
+  /* Generate-new-post widget: lives on the preview page itself, talks to server.py's
+     /generate + /status endpoints (only functional when this page is served by
+     server.py, not opened as a bare file). */
+  .gen-widget { margin: 22px 0 40px; padding: 20px 22px; background: var(--warm-900);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; }
+  .gen-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .gen-btn { appearance: none; border: none; border-radius: 999px; padding: 13px 24px;
+    font-size: 13.5px; font-weight: 700; font-family: var(--font-sans); background: var(--brand-gradient);
+    color: #fff; cursor: pointer; white-space: nowrap; transition: opacity 0.15s ease, transform 0.1s ease; }
+  .gen-btn:hover:not(:disabled) { opacity: 0.9; }
+  .gen-btn:active:not(:disabled) { transform: scale(0.98); }
+  .gen-btn:disabled { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.4); cursor: not-allowed; }
+  .gen-status { font-size: 12.5px; color: rgba(255,255,255,0.5); flex: 1 1 240px; min-width: 200px; }
+  .gen-log { margin-top: 14px; display: none; background: #000; border-radius: 10px; padding: 12px 14px;
+    font: 11.5px/1.6 'JetBrains Mono', ui-monospace, monospace; color: rgba(255,255,255,0.65);
+    max-height: 200px; overflow-y: auto; white-space: pre-wrap; }
+  .gen-error { margin-top: 12px; font-size: 12.5px; color: #F2836B; display: none; }
+
+  /* Public-URL bar: shared by every story's publish panel, since the Graph API needs
+     a publicly reachable URL to fetch each slide image (a Cloudflare tunnel address,
+     typically) and that address changes whenever the tunnel restarts. */
+  .pub-bar { display: flex; align-items: center; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+  .pub-bar label { font-size: 12px; color: rgba(255,255,255,0.5); white-space: nowrap; }
+  .pub-bar input { flex: 1 1 260px; min-width: 220px; background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.14); border-radius: 8px; padding: 9px 12px;
+    font-size: 12.5px; color: #fff; font-family: var(--font-sans); }
+  .pub-bar input::placeholder { color: rgba(255,255,255,0.3); }
+
+  /* Per-story "Post to Instagram & Facebook" controls, injected by script below into
+     every .story section (existing and future-generated alike). */
+  .pub-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+  .pub-toggle { appearance: none; border: 1px solid rgba(233,72,15,0.5);
+    background: rgba(233,72,15,0.1); color: var(--orange-400); border-radius: 999px;
+    padding: 8px 18px; font-size: 12px; font-weight: 700; font-family: var(--font-sans);
+    cursor: pointer; }
+  .pub-toggle:hover { background: rgba(233,72,15,0.18); }
+  .pub-export { appearance: none; border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.85); border-radius: 999px;
+    padding: 8px 18px; font-size: 12px; font-weight: 700; font-family: var(--font-sans);
+    cursor: pointer; }
+  .pub-export:hover { background: rgba(255,255,255,0.1); }
+  .pub-export:disabled { opacity: 0.6; cursor: not-allowed; }
+  .pub-export-status { font-size: 12px; color: rgba(255,255,255,0.5); }
+  .pub-panel { display: none; margin-top: 16px; padding: 18px 20px; background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; }
+  .pub-panel.open { display: block; }
+  .pub-panel textarea { width: 100%; min-height: 110px; background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.14); border-radius: 8px; padding: 10px 12px;
+    font-size: 12.5px; line-height: 1.5; color: #fff; font-family: var(--font-sans); resize: vertical; }
+  .pub-targets { display: flex; gap: 18px; margin: 12px 0; font-size: 12.5px; color: rgba(255,255,255,0.7); }
+  .pub-targets label { display: flex; align-items: center; gap: 7px; cursor: pointer; }
+  .pub-targets input[type=checkbox] { accent-color: var(--orange-500); }
+  .pub-targets .unavailable { color: rgba(255,255,255,0.3); }
+  .pub-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .pub-confirm { appearance: none; border: none; border-radius: 999px; padding: 10px 22px;
+    font-size: 12.5px; font-weight: 700; font-family: var(--font-sans); background: var(--brand-gradient);
+    color: #fff; cursor: pointer; }
+  .pub-confirm:disabled { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.4); cursor: not-allowed; }
+  .pub-cancel { appearance: none; border: 1px solid rgba(255,255,255,0.2); background: transparent;
+    color: rgba(255,255,255,0.6); border-radius: 999px; padding: 10px 18px; font-size: 12.5px;
+    font-family: var(--font-sans); cursor: pointer; }
+  .pub-status { font-size: 12px; color: rgba(255,255,255,0.5); }
+  .pub-log { margin-top: 12px; display: none; background: #000; border-radius: 10px; padding: 10px 12px;
+    font: 11px/1.6 'JetBrains Mono', ui-monospace, monospace; color: rgba(255,255,255,0.6);
+    max-height: 160px; overflow-y: auto; white-space: pre-wrap; }
+  .pub-error { margin-top: 10px; font-size: 12px; color: #F2836B; display: none; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <img class="page-logo" src="assets/storyb-logo.png" alt="StoryB">
+  <p class="page-title">Business & Markets — India</p>
+</div>
+<p class="page-sub">Generated Jul 19, 2026 01:53 · 27 carousels · shortlisted from digest_2026-07-18_scored.json</p>
+
+<div class="gen-widget">
+  <div class="gen-row">
+    <button class="gen-btn" id="gen-btn">Generate new post</button>
+    <p class="gen-status" id="gen-status">Pulls fresh news, scores it, writes and images the next new story, and adds it below.</p>
+  </div>
+  <div class="gen-log" id="gen-log"></div>
+  <p class="gen-error" id="gen-error"></p>
+  <div class="pub-bar">
+    <label for="pub-base-url">Public URL for posting</label>
+    <input id="pub-base-url" type="text" placeholder="https://your-tunnel.trycloudflare.com (needed so Instagram/Facebook can fetch the images)">
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var btn = document.getElementById('gen-btn');
+  var statusEl = document.getElementById('gen-status');
+  var logEl = document.getElementById('gen-log');
+  var errorEl = document.getElementById('gen-error');
+  var defaultStatus = statusEl.textContent;
+  var poller = null;
+
+  function renderLog(lines) {
+    if (!lines || !lines.length) { logEl.style.display = 'none'; return; }
+    logEl.style.display = 'block';
+    logEl.textContent = lines.join('\n');
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+
+  function poll() {
+    fetch('/status').then(function (r) { return r.json(); }).then(function (state) {
+      renderLog(state.log);
+      if (state.error) {
+        errorEl.style.display = 'block';
+        errorEl.textContent = state.error;
+      }
+      if (state.done) {
+        clearInterval(poller);
+        poller = null;
+        if (state.error) {
+          btn.disabled = false;
+          btn.textContent = 'Generate new post';
+          statusEl.textContent = defaultStatus;
+          return;
+        }
+        var result = state.result;
+        if (result && result.new_story) {
+          statusEl.textContent = 'Added Story ' + String(result.rank).padStart(2, '0') + ': ' + result.title + '. Reloading...';
+          setTimeout(function () {
+            window.location.href = '/preview.html#story-' + String(result.rank).padStart(2, '0');
+            window.location.reload();
+          }, 900);
+        } else {
+          btn.disabled = false;
+          btn.textContent = 'Generate new post';
+          statusEl.textContent = 'No new not-yet-published story cleared the score bar right now. Try again shortly.';
+        }
+      }
+    }).catch(function (e) {
+      clearInterval(poller);
+      poller = null;
+      btn.disabled = false;
+      btn.textContent = 'Generate new post';
+      errorEl.style.display = 'block';
+      errorEl.textContent = 'Lost connection to the local server: ' + e;
+    });
+  }
+
+  btn.addEventListener('click', function () {
+    btn.disabled = true;
+    btn.textContent = 'Working...';
+    errorEl.style.display = 'none';
+    statusEl.textContent = 'Fetching news and scoring it...';
+    fetch('/generate', { method: 'POST' }).then(function (r) {
+      if (!r.ok) { return r.json().then(function (b) { throw new Error(b.error || 'failed to start'); }); }
+      poller = setInterval(poll, 1500);
+    }).catch(function (e) {
+      btn.disabled = false;
+      btn.textContent = 'Generate new post';
+      errorEl.style.display = 'block';
+      errorEl.textContent = e.message || String(e);
+    });
+  });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Shared "public URL" input, persisted so it survives reloads (the tunnel address
+  // doesn't change on every click, just whenever the tunnel itself restarts).
+  var urlInput = document.getElementById('pub-base-url');
+  var saved = window.localStorage.getItem('pub-base-url');
+  if (saved) urlInput.value = saved;
+  urlInput.addEventListener('input', function () {
+    window.localStorage.setItem('pub-base-url', urlInput.value.trim());
+  });
+
+  function slugFromSection(section) {
+    var img = section.querySelector('img.cover-img.baked');
+    if (!img) return null;
+    var src = img.getAttribute('src') || '';
+    var m = src.match(/code_pilot\/([^\/]+)\//);
+    if (m) return m[1];
+    // A few early stories have their PNGs directly under code_pilot/ with no
+    // per-story subfolder (e.g. "code_pilot/zepto-cover.png"); fall back to
+    // stripping "-cover.png" off the filename to recover the slug.
+    m = src.match(/code_pilot\/([^\/]+)-cover\.png$/);
+    return m ? m[1] : null;
+  }
+
+  function buildPanel(slug) {
+    var panel = document.createElement('div');
+    panel.className = 'pub-panel';
+    panel.innerHTML =
+      '<textarea class="pub-caption"></textarea>' +
+      '<div class="pub-targets">' +
+      '<label><input type="checkbox" class="pub-target-ig" checked> Instagram</label>' +
+      '<label><input type="checkbox" class="pub-target-fb" checked> Facebook</label>' +
+      '</div>' +
+      '<div class="pub-row">' +
+      '<button class="pub-confirm">Confirm & publish</button>' +
+      '<button class="pub-cancel">Cancel</button>' +
+      '<span class="pub-status"></span>' +
+      '</div>' +
+      '<div class="pub-log"></div>' +
+      '<p class="pub-error"></p>';
+    return panel;
+  }
+
+  document.querySelectorAll('section.story').forEach(function (section) {
+    var slug = slugFromSection(section);
+    if (!slug) return;
+
+    var actions = document.createElement('div');
+    actions.className = 'pub-actions';
+
+    var toggle = document.createElement('button');
+    toggle.className = 'pub-toggle';
+    toggle.textContent = 'Post to Instagram & Facebook';
+
+    var exportBtn = document.createElement('button');
+    exportBtn.className = 'pub-export';
+    exportBtn.type = 'button';
+    exportBtn.textContent = 'Export & open Instagram';
+
+    var exportStatusEl = document.createElement('span');
+    exportStatusEl.className = 'pub-export-status';
+
+    actions.appendChild(toggle);
+    actions.appendChild(exportBtn);
+    actions.appendChild(exportStatusEl);
+
+    var panel = buildPanel(slug);
+    var loaded = false;
+    var preparedPromise = null;
+    var poller = null;
+
+    var titleEl = section.querySelector('.story-title');
+    var title = titleEl ? titleEl.textContent.trim() : '';
+
+    var metaBlock = section.querySelector('.story-meta');
+    metaBlock.parentNode.insertBefore(actions, metaBlock.nextSibling);
+    metaBlock.parentNode.insertBefore(panel, actions.nextSibling);
+
+    var captionEl = panel.querySelector('.pub-caption');
+    var igCheck = panel.querySelector('.pub-target-ig');
+    var fbCheck = panel.querySelector('.pub-target-fb');
+    var confirmBtn = panel.querySelector('.pub-confirm');
+    var cancelBtn = panel.querySelector('.pub-cancel');
+    var statusEl = panel.querySelector('.pub-status');
+    var logEl = panel.querySelector('.pub-log');
+    var errorEl = panel.querySelector('.pub-error');
+
+    function renderLog(lines) {
+      if (!lines || !lines.length) { logEl.style.display = 'none'; return; }
+      logEl.style.display = 'block';
+      logEl.textContent = lines.join('\n');
+      logEl.scrollTop = logEl.scrollHeight;
+    }
+
+    // Fetches the caption + rendered slide list + credential status once, then
+    // caches the promise so re-opening the panel or clicking export again doesn't
+    // re-hit the server. Shared by the "Post to Instagram & Facebook" panel and the
+    // "Export & open Instagram" button below.
+    function ensureLoaded() {
+      if (preparedPromise) return preparedPromise;
+      preparedPromise = fetch('/prepare_publish', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug: slug, title: title }),
+      }).then(function (r) { return r.json().then(function (b) { return { ok: r.ok, body: b }; }); })
+        .then(function (res) {
+          if (!res.ok) { throw new Error(res.body.error || 'failed to prepare'); }
+          loaded = true;
+          captionEl.value = res.body.caption;
+          igCheck.checked = !!res.body.credentials.instagram;
+          fbCheck.checked = !!res.body.credentials.facebook;
+          if (!res.body.credentials.instagram) {
+            igCheck.disabled = true;
+            igCheck.parentNode.classList.add('unavailable');
+            igCheck.parentNode.title = 'Instagram not configured yet (missing META_PAGE_ACCESS_TOKEN / META_IG_USER_ID in .env)';
+          }
+          if (!res.body.credentials.facebook) {
+            fbCheck.disabled = true;
+            fbCheck.parentNode.classList.add('unavailable');
+            fbCheck.parentNode.title = 'Facebook not configured yet (missing META_PAGE_ACCESS_TOKEN / META_PAGE_ID in .env)';
+          }
+          return res.body;
+        }).catch(function (e) {
+          preparedPromise = null;
+          throw e;
+        });
+      return preparedPromise;
+    }
+
+    toggle.addEventListener('click', function () {
+      var isOpen = panel.classList.toggle('open');
+      if (isOpen && !loaded) {
+        statusEl.textContent = 'Loading preview...';
+        ensureLoaded().then(function (body) {
+          statusEl.textContent = body.images.length + ' slides ready. Review the caption, then confirm.';
+        }).catch(function (e) {
+          statusEl.textContent = '';
+          errorEl.style.display = 'block';
+          errorEl.textContent = e.message || String(e);
+        });
+      }
+    });
+
+    // "Export & open Instagram": for anyone who hasn't set up the Meta API tokens
+    // yet (or just prefers it), this downloads the rendered slides straight to the
+    // Downloads folder, copies the caption to the clipboard, and opens Instagram in
+    // a new tab already logged in (using the browser's existing session) so the
+    // slides can be picked from the file dialog and the caption pasted in.
+    exportBtn.addEventListener('click', function () {
+      // Open the tab synchronously, before any awaited network call, so the browser
+      // doesn't treat it as a blocked popup once we navigate it below.
+      var igWindow = window.open('about:blank', '_blank');
+      exportBtn.disabled = true;
+      var originalLabel = exportBtn.textContent;
+      exportBtn.textContent = 'Preparing...';
+      exportStatusEl.style.color = '';
+      exportStatusEl.textContent = '';
+
+      ensureLoaded().then(function (body) {
+        body.images.forEach(function (path, i) {
+          setTimeout(function () {
+            var a = document.createElement('a');
+            a.href = path;
+            a.download = path.split('/').pop();
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+          }, i * 300);
+        });
+
+        var clipPromise = (navigator.clipboard && navigator.clipboard.writeText)
+          ? navigator.clipboard.writeText(body.caption)
+          : Promise.reject(new Error('clipboard API unavailable'));
+
+        return clipPromise.then(function () {
+          if (igWindow) igWindow.location.href = 'https://www.instagram.com/';
+          exportStatusEl.textContent = 'Caption copied, ' + body.images.length + ' slides downloading. Paste the caption once Instagram opens.';
+        }).catch(function () {
+          if (igWindow) igWindow.location.href = 'https://www.instagram.com/';
+          panel.classList.add('open');
+          statusEl.textContent = body.images.length + ' slides downloading. Clipboard copy was blocked, copy the caption above instead.';
+          exportStatusEl.textContent = 'Slides downloading. Copy the caption from the panel above (clipboard access was blocked).';
+        });
+      }).catch(function (e) {
+        if (igWindow) igWindow.close();
+        exportStatusEl.style.color = '#F2836B';
+        exportStatusEl.textContent = e.message || String(e);
+      }).then(function () {
+        exportBtn.disabled = false;
+        exportBtn.textContent = originalLabel;
+      });
+    });
+
+    cancelBtn.addEventListener('click', function () {
+      panel.classList.remove('open');
+    });
+
+    confirmBtn.addEventListener('click', function () {
+      var targets = [];
+      if (igCheck.checked && !igCheck.disabled) targets.push('instagram');
+      if (fbCheck.checked && !fbCheck.disabled) targets.push('facebook');
+      var baseUrl = urlInput.value.trim();
+      if (!baseUrl) {
+        errorEl.style.display = 'block';
+        errorEl.textContent = 'Set the public URL at the top of the page first (needed so Instagram/Facebook can fetch the images).';
+        return;
+      }
+      if (!targets.length) {
+        errorEl.style.display = 'block';
+        errorEl.textContent = 'Pick at least one platform to post to.';
+        return;
+      }
+      errorEl.style.display = 'none';
+      confirmBtn.disabled = true;
+      statusEl.textContent = 'Publishing...';
+      fetch('/publish', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug: slug, base_url: baseUrl, targets: targets, caption: captionEl.value }),
+      }).then(function (r) {
+        if (!r.ok) { return r.json().then(function (b) { throw new Error(b.error || 'failed to start publish'); }); }
+        poller = setInterval(poll, 1500);
+      }).catch(function (e) {
+        confirmBtn.disabled = false;
+        statusEl.textContent = '';
+        errorEl.style.display = 'block';
+        errorEl.textContent = e.message || String(e);
+      });
+    });
+
+    function poll() {
+      fetch('/publish_status').then(function (r) { return r.json(); }).then(function (state) {
+        renderLog(state.log);
+        if (state.done) {
+          clearInterval(poller);
+          poller = null;
+          confirmBtn.disabled = false;
+          if (state.error) {
+            errorEl.style.display = 'block';
+            errorEl.textContent = state.error;
+            statusEl.textContent = '';
+          } else {
+            statusEl.textContent = 'Published.';
+          }
+        }
+      }).catch(function (e) {
+        clearInterval(poller);
+        poller = null;
+        confirmBtn.disabled = false;
+        errorEl.style.display = 'block';
+        errorEl.textContent = 'Lost connection to the local server: ' + e;
+      });
+    }
+  });
+});
+</script>
+
+<section class="story" id="story-27">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 27</p>
+      <p class="story-title">The F&amp;O trap inside the barracks: How army officers are losing crores chasing the next trade</p>
+      <p class="story-src">LiveMint - Money &middot; <a href="https://www.livemint.com/money/personal-finance/the-f-o-trap-inside-the-barracks-how-army-officers-are-losing-crores-chasing-the-next-trade-11784376144752.html" target="_blank" rel="noopener">source &#8599;</a></p>
+    </div>
+    <div class="score-badge">7.0</div>
+  </div>
+
+  <p class="scroll-hint">swipe &#8594;</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/the-f-amp-o-trap-inside-the-barracks-how-army-officers-are-l/the-f-amp-o-trap-inside-the-barracks-how-army-officers-are-l-cover.png" alt="Officers, Stable Salaries, and Crores Lost in F&amp;O">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/the-f-amp-o-trap-inside-the-barracks-how-army-officers-are-l/the-f-amp-o-trap-inside-the-barracks-how-army-officers-are-l-backstory.png" alt="F&amp;O Was Already a Mass Problem">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/the-f-amp-o-trap-inside-the-barracks-how-army-officers-are-l/the-f-amp-o-trap-inside-the-barracks-how-army-officers-are-l-news.png" alt="Now It Is Hitting the Barracks">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/the-f-amp-o-trap-inside-the-barracks-how-army-officers-are-l/the-f-amp-o-trap-inside-the-barracks-how-army-officers-are-l-why.png" alt="A Salary That Feels Safe Is Deadly Bait">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/the-f-amp-o-trap-inside-the-barracks-how-army-officers-are-l/the-f-amp-o-trap-inside-the-barracks-how-army-officers-are-l-engage.png" alt="Should the army ban F&amp;O trading for serving officers?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (6)</summary>
+    <ul><li><a href="https://www.livemint.com/money/personal-finance/the-f-o-trap-inside-the-barracks-how-army-officers-are-losing-crores-chasing-the-next-trade-11784376144752.html" target="_blank" rel="noopener">https://www.livemint.com/money/personal-finance/the-f-o-trap-inside-the-barracks-how-army-officers-are-losing-crores-chasing-the-next-trade-11784376144752.html</a></li><li><a href="https://www.moneylife.in/article/106-lakh-crore-lost-by-individual-traders-in-fo-in-fy2425-govt-confirms-sebi-action-on-4-entities-for-market-abuse/79124.html" target="_blank" rel="noopener">https://www.moneylife.in/article/106-lakh-crore-lost-by-individual-traders-in-fo-in-fy2425-govt-confirms-sebi-action-on-4-entities-for-market-abuse/79124.html</a></li><li><a href="https://zerodha.com/z-connect/subtext/what-data-says-about-fo-india" target="_blank" rel="noopener">https://zerodha.com/z-connect/subtext/what-data-says-about-fo-india</a></li><li><a href="https://blogs.fintrens.com/fo-trading-crisis-india-2026/" target="_blank" rel="noopener">https://blogs.fintrens.com/fo-trading-crisis-india-2026/</a></li><li><a href="https://www.business-standard.com/markets/news/over-93-retail-traders-lost-money-in-f-o-in-three-years-says-sebi-124092300853_1.html" target="_blank" rel="noopener">https://www.business-standard.com/markets/news/over-93-retail-traders-lost-money-in-f-o-in-three-years-says-sebi-124092300853_1.html</a></li><li><a href="https://www.vivekam.co.in/91-of-retail-traders-lost-money-in-fo/" target="_blank" rel="noopener">https://www.vivekam.co.in/91-of-retail-traders-lost-money-in-fo/</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story" id="story-26">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 26</p>
+      <p class="story-title">Amul flaunts Argentina and Spain sponsorships in World Cup final print ad</p>
+      <p class="story-src">afaqs! &middot; <a href="https://www.afaqs.com/news/advertising/amul-flaunts-argentina-and-spain-sponsorships-in-world-cup-final-print-ad-12178782" target="_blank" rel="noopener">source &#8599;</a></p>
+    </div>
+    <div class="score-badge">7.0</div>
+  </div>
+
+  <p class="scroll-hint">swipe &#8594;</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/amul-flaunts-argentina-and-spain-sponsorships-in-world-cup-f/amul-flaunts-argentina-and-spain-sponsorships-in-world-cup-f-cover.png" alt="Amul Sponsors Both World Cup Finalists">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/amul-flaunts-argentina-and-spain-sponsorships-in-world-cup-f/amul-flaunts-argentina-and-spain-sponsorships-in-world-cup-f-backstory.png" alt="Amul&#x27;s football bet started in 2022">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/amul-flaunts-argentina-and-spain-sponsorships-in-world-cup-f/amul-flaunts-argentina-and-spain-sponsorships-in-world-cup-f-news.png" alt="A full-page ad nobody else could run">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/amul-flaunts-argentina-and-spain-sponsorships-in-world-cup-f/amul-flaunts-argentina-and-spain-sponsorships-in-world-cup-f-why.png" alt="Big brand signal for Indian companies">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/amul-flaunts-argentina-and-spain-sponsorships-in-world-cup-f/amul-flaunts-argentina-and-spain-sponsorships-in-world-cup-f-engage.png" alt="Is Amul smart or lucky to back both finalists?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (5)</summary>
+    <ul><li><a href="https://www.afaqs.com/news/advertising/amul-flaunts-argentina-and-spain-sponsorships-in-world-cup-final-print-ad-12178782" target="_blank" rel="noopener">https://www.afaqs.com/news/advertising/amul-flaunts-argentina-and-spain-sponsorships-in-world-cup-final-print-ad-12178782</a></li><li><a href="https://bestmediainfo.com/mediainfo/advertising/amul-signs-spain-football-team-renews-argentina-partnership-through-world-cup-2026-cycle-12040790" target="_blank" rel="noopener">https://bestmediainfo.com/mediainfo/advertising/amul-signs-spain-football-team-renews-argentina-partnership-through-world-cup-2026-cycle-12040790</a></li><li><a href="https://sportsmintmedia.com/amul-expands-football-sponsorship-portfolio-with-spain-deal-and-argentina-renewal/" target="_blank" rel="noopener">https://sportsmintmedia.com/amul-expands-football-sponsorship-portfolio-with-spain-deal-and-argentina-renewal/</a></li><li><a href="https://www.espn.com/soccer/story/_/id/49370934/fifa-world-cup-final-argentina-vs-spain-need-know-predictions-odds" target="_blank" rel="noopener">https://www.espn.com/soccer/story/_/id/49370934/fifa-world-cup-final-argentina-vs-spain-need-know-predictions-odds</a></li><li><a href="https://www.cbsnews.com/news/spain-argentina-world-cup-final-records-players/" target="_blank" rel="noopener">https://www.cbsnews.com/news/spain-argentina-world-cup-final-records-players/</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 01</p>
+      <p class="story-title">Spacetech unicorn Skyroot launches Vikram-1, marks India's first private orbital rocket mission</p>
+      <p class="story-src">Economic Times - Tech · <a href="https://economictimes.indiatimes.com/tech/startups/spacetech-unicorn-skyroot-launches-vikram-1-marks-indias-first-private-orbital-rocket-mission/articleshow/132475445.cms" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">8</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/skyroot/skyroot-cover.png" alt="India's First Private Rocket Just Reached Orbit">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/skyroot/skyroot-backstory.png" alt="For Decades, Only ISRO Could Launch Rockets">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/skyroot/skyroot-news.png" alt="Vikram-1 Lifts Off, All Four Stages Succeed">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/skyroot/skyroot-why.png" alt="India's Commercial Space Race Just Sped Up">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/skyroot/skyroot-engage.png" alt="Skyroot just did what only ISRO could do before. Should ISRO feel threatened, or proud?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (11)</summary>
+    <ul><li><a href="https://economictimes.indiatimes.com/tech/startups/spacetech-unicorn-skyroot-launches-vikram-1-marks-indias-first-private-orbital-rocket-mission/articleshow/132475445.cms" target="_blank" rel="noopener">https://economictimes.indiatimes.com/tech/startups/spacetech-unicorn-skyroot-launches-vikram-1-marks-indias-first-private-orbital-rocket-mission/articleshow/132475445.cms</a></li><li><a href="https://www.space.com/space-exploration/launches-spacecraft/skyroot-aerospace-india-first-private-orbital-launch-vikram-1" target="_blank" rel="noopener">https://www.space.com/space-exploration/launches-spacecraft/skyroot-aerospace-india-first-private-orbital-launch-vikram-1</a></li><li><a href="https://spacenews.com/skyroot-prepares-for-first-orbital-launch-attempt/" target="_blank" rel="noopener">https://spacenews.com/skyroot-prepares-for-first-orbital-launch-attempt/</a></li><li><a href="https://www.business-standard.com/amp/technology/tech-news/skyroot-vikram-1-mission-aagaman-private-orbital-launch-india-126071700363_1.html" target="_blank" rel="noopener">https://www.business-standard.com/amp/technology/tech-news/skyroot-vikram-1-mission-aagaman-private-orbital-launch-india-126071700363_1.html</a></li><li><a href="https://www.techlusive.in/news/skyroot-vikram-1-launch-mission-aagaman-india-first-private-orbital-rocket-1669201/" target="_blank" rel="noopener">https://www.techlusive.in/news/skyroot-vikram-1-launch-mission-aagaman-india-first-private-orbital-rocket-1669201/</a></li><li><a href="https://en.wikipedia.org/wiki/Skyroot_Aerospace" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Skyroot_Aerospace</a></li><li><a href="https://www.dealstreetasia.com/stories/skyroot-fundraise-481532" target="_blank" rel="noopener">https://www.dealstreetasia.com/stories/skyroot-fundraise-481532</a></li><li><a href="https://www.newsbytesapp.com/news/business/skyroot-becomes-india-s-1st-space-tech-unicorn-with-60m-funding/story" target="_blank" rel="noopener">https://www.newsbytesapp.com/news/business/skyroot-becomes-india-s-1st-space-tech-unicorn-with-60m-funding/story</a></li><li><a href="https://www.indiandefensenews.in/2026/05/skyroot-aerospace-becomes-indias-first_01649859035.html" target="_blank" rel="noopener">https://www.indiandefensenews.in/2026/05/skyroot-aerospace-becomes-indias-first_01649859035.html</a></li><li><a href="https://techcrunch.com/2026/05/07/indias-first-space-tech-unicorn-emerges-as-skyroot-gears-up-for-orbital-launch/" target="_blank" rel="noopener">https://techcrunch.com/2026/05/07/indias-first-space-tech-unicorn-emerges-as-skyroot-gears-up-for-orbital-launch/</a></li><li><a href="https://www.satellitetoday.com/finance/2026/05/07/skyroot-secures-60m-in-funding-becoming-indias-first-space-unicorn/" target="_blank" rel="noopener">https://www.satellitetoday.com/finance/2026/05/07/skyroot-secures-60m-in-funding-becoming-indias-first-space-unicorn/</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 02</p>
+      <p class="story-title">Armory first built a counter-drone system in six months, and now it has a Rs 100 crore defence order</p>
+      <p class="story-src">YourStory · <a href="https://yourstory.com/2026/07/armory-rs-100-crore-defence-order" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">7</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/armory/armory-cover.png" alt="2-Year-Old Startup Lands ₹100 Crore Defence Order">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/armory/armory-backstory.png" alt="A Border Crisis Nobody Solved Fast Enough">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/armory/armory-news.png" alt="₹100 Crore MoD Order for SURGE">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/armory/armory-why.png" alt="What This Means for Defence Startups">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/armory/armory-engage.png" alt="Should the Ministry of Defence fast-track startups like Armory, or is moving fast on national security too risky?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (11)</summary>
+    <ul><li><a href="https://yourstory.com/2026/07/armory-rs-100-crore-defence-order" target="_blank" rel="noopener">https://yourstory.com/2026/07/armory-rs-100-crore-defence-order</a></li><li><a href="https://inc42.com/buzz/armory-gets-%E2%82%B9100-cr-defence-ministry-order-for-counter-drone-systems/" target="_blank" rel="noopener">https://inc42.com/buzz/armory-gets-%E2%82%B9100-cr-defence-ministry-order-for-counter-drone-systems/</a></li><li><a href="https://www.business-standard.com/companies/start-ups/defence-tech-startup-armory-gets-100-cr-order-from-ministry-of-defence-126050401375_1.html" target="_blank" rel="noopener">https://www.business-standard.com/companies/start-ups/defence-tech-startup-armory-gets-100-cr-order-from-ministry-of-defence-126050401375_1.html</a></li><li><a href="https://www.startupnama.com/2026/05/armory-wins-inr-100-crore-ministry-of.html" target="_blank" rel="noopener">https://www.startupnama.com/2026/05/armory-wins-inr-100-crore-ministry-of.html</a></li><li><a href="https://startuptalky.com/news/armory-secures-inr-100-crore-ministry-of-defence-order-for-its-indigenous-counter-unmanned-aerial-systems-c-uas-surge/" target="_blank" rel="noopener">https://startuptalky.com/news/armory-secures-inr-100-crore-ministry-of-defence-order-for-its-indigenous-counter-unmanned-aerial-systems-c-uas-surge/</a></li><li><a href="https://startuppedia.in/startup-stories/gurugram-startup-armory-is-building-indias-next-gen-counter-drone-shield-12017793" target="_blank" rel="noopener">https://startuppedia.in/startup-stories/gurugram-startup-armory-is-building-indias-next-gen-counter-drone-shield-12017793</a></li><li><a href="https://www.dronefederation.in/media-hub/armory-secure-rs-100-crore-mod-contract" target="_blank" rel="noopener">https://www.dronefederation.in/media-hub/armory-secure-rs-100-crore-mod-contract</a></li><li><a href="https://www.whalesbook.com/news/English/aerospace-defense/Armory-Secures-indian-rupee100-Cr-Ministry-of-Defence-Order-for-AI-Drone-System/69f8acbc9d1c906648242126" target="_blank" rel="noopener">https://www.whalesbook.com/news/English/aerospace-defense/Armory-Secures-indian-rupee100-Cr-Ministry-of-Defence-Order-for-AI-Drone-System/69f8acbc9d1c906648242126</a></li><li><a href="https://www.armory.in/" target="_blank" rel="noopener">https://www.armory.in/</a></li><li><a href="https://smefutures.com/inside-armory-gurugram-defence-tech-startup-taking-on-indias-drone-threat/" target="_blank" rel="noopener">https://smefutures.com/inside-armory-gurugram-defence-tech-startup-taking-on-indias-drone-threat/</a></li><li><a href="https://viestories.com/startupnews/defence-tech-startup-armory-gets-100-crore-order-from-mod-for-indigenous-ai-powered-counter-drone-system-11805124" target="_blank" rel="noopener">https://viestories.com/startupnews/defence-tech-startup-armory-gets-100-crore-order-from-mod-for-indigenous-ai-powered-counter-drone-system-11805124</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 03</p>
+      <p class="story-title">China's DeepSeek to raise fresh capital at $74 billion valuation ahead of onshore IPO</p>
+      <p class="story-src">Economic Times - Tech · <a href="https://economictimes.indiatimes.com/tech/artificial-intelligence/chinas-deepseek-to-raise-fresh-capital-at-74-billion-valuation-ahead-of-onshore-ipo/articleshow/132476828.cms" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">7</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/deepseek/deepseek-cover.png" alt="China's DeepSeek Eyes $74 Billion IPO Debut">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/deepseek/deepseek-backstory.png" alt="From Side Project to Global Disruptor">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/deepseek/deepseek-news.png" alt="New Funding Round, $74B Price Tag">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/deepseek/deepseek-why.png" alt="AI Arms Race Gets a New Leader">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/deepseek/deepseek-engage.png" alt="DeepSeek proved you don't need billions to build great AI, then went and raised billions anyway. Was the 'cheap AI' story always temporary, or is this just what happens once you get serious?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (10)</summary>
+    <ul><li><a href="https://economictimes.indiatimes.com/tech/artificial-intelligence/chinas-deepseek-to-raise-fresh-capital-at-74-billion-valuation-ahead-of-onshore-ipo/articleshow/132476828.cms" target="_blank" rel="noopener">https://economictimes.indiatimes.com/tech/artificial-intelligence/chinas-deepseek-to-raise-fresh-capital-at-74-billion-valuation-ahead-of-onshore-ipo/articleshow/132476828.cms</a></li><li><a href="https://finance.yahoo.com/technology/ai/articles/chinas-deepseek-raise-fresh-capital-095807183.html (Reuters via Yahoo Finance)" target="_blank" rel="noopener">https://finance.yahoo.com/technology/ai/articles/chinas-deepseek-raise-fresh-capital-095807183.html (Reuters via Yahoo Finance)</a></li><li><a href="https://techstartups.com/2026/07/15/deepseek-eyes-74-billion-valuation-in-new-funding-round-ahead-of-planned-ipo/" target="_blank" rel="noopener">https://techstartups.com/2026/07/15/deepseek-eyes-74-billion-valuation-in-new-funding-round-ahead-of-planned-ipo/</a></li><li><a href="https://www.investing.com/news/stock-market-news/chinas-deepseek-to-raise-fresh-capital-at-74-billion-valuation-ahead-of-onshore-ipo-sources-say-4799575" target="_blank" rel="noopener">https://www.investing.com/news/stock-market-news/chinas-deepseek-to-raise-fresh-capital-at-74-billion-valuation-ahead-of-onshore-ipo-sources-say-4799575</a></li><li><a href="https://capacityglobal.com/news/deepseek-eyes-74bn-valuation/" target="_blank" rel="noopener">https://capacityglobal.com/news/deepseek-eyes-74bn-valuation/</a></li><li><a href="https://blockonomi.com/deepseek-eyes-74b-valuation-with-ipo-plans-lifting-chinese-ai-sector/" target="_blank" rel="noopener">https://blockonomi.com/deepseek-eyes-74b-valuation-with-ipo-plans-lifting-chinese-ai-sector/</a></li><li><a href="https://www.techtarget.com/whatis/feature/DeepSeek-explained-Everything-you-need-to-know" target="_blank" rel="noopener">https://www.techtarget.com/whatis/feature/DeepSeek-explained-Everything-you-need-to-know</a></li><li><a href="https://cacm.acm.org/opinion/deepseek-inside-origins-technology-and-impact/" target="_blank" rel="noopener">https://cacm.acm.org/opinion/deepseek-inside-origins-technology-and-impact/</a></li><li><a href="https://cyber.fsi.stanford.edu/publication/taking-stock-deepseek-shock" target="_blank" rel="noopener">https://cyber.fsi.stanford.edu/publication/taking-stock-deepseek-shock</a></li><li><a href="https://tribune.com.pk/story/2618406/chinas-deepseek-to-raise-fresh-capital-at-74-billion-valuation-ahead-of-onshore-ipo-sources-say" target="_blank" rel="noopener">https://tribune.com.pk/story/2618406/chinas-deepseek-to-raise-fresh-capital-at-74-billion-valuation-ahead-of-onshore-ipo-sources-say</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 04</p>
+      <p class="story-title">MakeMyTrip IPO soon! Online travel giant files confidential DRHP with SEBI, 15 years after Nasdaq listing</p>
+      <p class="story-src">LiveMint - Markets · <a href="https://www.livemint.com/market/ipo/makemytrip-ipo-soon-online-travel-giant-files-confidential-drhp-with-sebi-15-years-after-nasdaq-listing-11784349545911.html" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">7</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/makemytrip-ipo/makemytrip-ipo-cover.png" alt="India's Top Travel App Comes Home">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/makemytrip-ipo/makemytrip-ipo-backstory.png" alt="Built For India, Listed In America">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/makemytrip-ipo/makemytrip-ipo-news.png" alt="MakeMyTrip Files DRHP For $1B IPO">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/makemytrip-ipo/makemytrip-ipo-why.png" alt="A Homecoming With Real Stakes For Everyone">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/makemytrip-ipo/makemytrip-ipo-engage.png" alt="MakeMyTrip chose America over India back in 2010. Should Indian startups list at home from day one, or does a Nasdaq listing still open more doors?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (11)</summary>
+    <ul><li><a href="https://www.livemint.com/market/ipo/makemytrip-ipo-soon-online-travel-giant-files-confidential-drhp-with-sebi-15-years-after-nasdaq-listing-11784349545911.html" target="_blank" rel="noopener">https://www.livemint.com/market/ipo/makemytrip-ipo-soon-online-travel-giant-files-confidential-drhp-with-sebi-15-years-after-nasdaq-listing-11784349545911.html</a></li><li><a href="https://techstory.in/makemytrip-files-confidential-drhp-with-sebi-for-india-ipo-worth-over-1-billion/" target="_blank" rel="noopener">https://techstory.in/makemytrip-files-confidential-drhp-with-sebi-for-india-ipo-worth-over-1-billion/</a></li><li><a href="https://www.freepressjournal.in/business/makemytrip-files-confidential-ipo-papers-with-sebi-for-listing-of-indian-subsidiary" target="_blank" rel="noopener">https://www.freepressjournal.in/business/makemytrip-files-confidential-ipo-papers-with-sebi-for-listing-of-indian-subsidiary</a></li><li><a href="https://www.business-standard.com/markets/news/makemytrip-india-files-drhp-for-india-ipo-through-confidential-route-126071701055_1.html" target="_blank" rel="noopener">https://www.business-standard.com/markets/news/makemytrip-india-files-drhp-for-india-ipo-through-confidential-route-126071701055_1.html</a></li><li><a href="https://inc42.com/buzz/makemytrip-files-confidentially-for-india-ipo/" target="_blank" rel="noopener">https://inc42.com/buzz/makemytrip-files-confidentially-for-india-ipo/</a></li><li><a href="https://www.siasat.com/makemytrip-files-ipo-papers-with-sebi-via-confidential-route-3508317/" target="_blank" rel="noopener">https://www.siasat.com/makemytrip-files-ipo-papers-with-sebi-via-confidential-route-3508317/</a></li><li><a href="https://groww.in/blog/make-my-trip-to-confidentially-file-drhp-with-sebi-for-1-billion-ipo" target="_blank" rel="noopener">https://groww.in/blog/make-my-trip-to-confidentially-file-drhp-with-sebi-for-1-billion-ipo</a></li><li><a href="https://www.outlookbusiness.com/corporate/makemytrip-to-soon-file-1-bn-india-ipo-with-kotak-axis-jp-morgan-as-advisors" target="_blank" rel="noopener">https://www.outlookbusiness.com/corporate/makemytrip-to-soon-file-1-bn-india-ipo-with-kotak-axis-jp-morgan-as-advisors</a></li><li><a href="https://en.wikipedia.org/wiki/MakeMyTrip" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/MakeMyTrip</a></li><li><a href="https://en.wikipedia.org/wiki/Ibibo" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Ibibo</a></li><li><a href="https://www.sec.gov/Archives/edgar/data/0001495153/000119312517024791/d338641dex992.htm" target="_blank" rel="noopener">https://www.sec.gov/Archives/edgar/data/0001495153/000119312517024791/d338641dex992.htm</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 05</p>
+      <p class="story-title">PM Narendra Modi launches India's first hydrogen train: what it really changes</p>
+      <p class="story-src">YourStory · <a href="https://yourstory.com/2026/07/india-first-hydrogen-train-jind-sonipat-explained" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">7</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/hydrogen-train/hydrogen-train-cover.png" alt="India's First Hydrogen Train Just Changed History">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/hydrogen-train/hydrogen-train-backstory.png" alt="India's Rail Was Nearly All Green">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/hydrogen-train/hydrogen-train-news.png" alt="NaMo Green Rail Is Now Officially Running">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/hydrogen-train/hydrogen-train-why.png" alt="Historic Milestone, But Real Tests Ahead">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/hydrogen-train/hydrogen-train-engage.png" alt="India built the train body but imports the fuel cell, its core engine. Is this really 'Make in India', or are we calling a stepping stone the finish line?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (17)</summary>
+    <ul><li><a href="https://yourstory.com/2026/07/india-first-hydrogen-train-jind-sonipat-explained" target="_blank" rel="noopener">https://yourstory.com/2026/07/india-first-hydrogen-train-jind-sonipat-explained</a></li><li><a href="https://www.aljazeera.com/economy/2026/7/17/india-debuts-hydrogen-powered-train-as-part-of-sustainability-drive" target="_blank" rel="noopener">https://www.aljazeera.com/economy/2026/7/17/india-debuts-hydrogen-powered-train-as-part-of-sustainability-drive</a></li><li><a href="https://www.businesstoday.in/india/story/pm-modi-launches-indias-first-hydrogen-train-on-jind-sonipat-route-unveils-major-development-projects-543531-2026-07-17" target="_blank" rel="noopener">https://www.businesstoday.in/india/story/pm-modi-launches-indias-first-hydrogen-train-on-jind-sonipat-route-unveils-major-development-projects-543531-2026-07-17</a></li><li><a href="https://www.pib.gov.in/FactsheetDetails.aspx?ModuleId=16&amp;NoteId=150774&amp;id=150774&amp;reg=48&amp;lang=2" target="_blank" rel="noopener">https://www.pib.gov.in/FactsheetDetails.aspx?ModuleId=16&amp;NoteId=150774&amp;id=150774&amp;reg=48&amp;lang=2</a></li><li><a href="https://www.pib.gov.in/PressReleasePage.aspx?PRID=1896102" target="_blank" rel="noopener">https://www.pib.gov.in/PressReleasePage.aspx?PRID=1896102</a></li><li><a href="https://techxplore.com/news/2026-07-india-hydrogen-powered-energy.html" target="_blank" rel="noopener">https://techxplore.com/news/2026-07-india-hydrogen-powered-energy.html</a></li><li><a href="https://www.taipeitimes.com/News/world/archives/2026/07/18/2003860967" target="_blank" rel="noopener">https://www.taipeitimes.com/News/world/archives/2026/07/18/2003860967</a></li><li><a href="https://www.nextias.com/ca/current-affairs/17-07-2026/india-first-hydrogen-powered-train" target="_blank" rel="noopener">https://www.nextias.com/ca/current-affairs/17-07-2026/india-first-hydrogen-powered-train</a></li><li><a href="https://www.nextias.com/ca/editorial-analysis/17-07-2026/hydrogen-trains-india" target="_blank" rel="noopener">https://www.nextias.com/ca/editorial-analysis/17-07-2026/hydrogen-trains-india</a></li><li><a href="https://www.thecore.in/opinion/the-plinth/india-hydrogen-train-fuel-stack-import-trainset-865140" target="_blank" rel="noopener">https://www.thecore.in/opinion/the-plinth/india-hydrogen-train-fuel-stack-import-trainset-865140</a></li><li><a href="https://en.wikipedia.org/wiki/Hydrogen_train" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Hydrogen_train</a></li><li><a href="https://visionias.in/current-affairs/news-today/2026-07-13/science-and-technology/india-set-to-launch-its-first-hydrogen-train-under-hydrogen-for-heritage-project" target="_blank" rel="noopener">https://visionias.in/current-affairs/news-today/2026-07-13/science-and-technology/india-set-to-launch-its-first-hydrogen-train-under-hydrogen-for-heritage-project</a></li><li><a href="https://www.collegesimplified.in/post/hydrogen-powered-trains-in-india-the-future-of-green-transportation-explained" target="_blank" rel="noopener">https://www.collegesimplified.in/post/hydrogen-powered-trains-in-india-the-future-of-green-transportation-explained</a></li><li><a href="https://ddnews.gov.in/en/charting-a-green-course-hydrogen-fuelled-trains-in-india/" target="_blank" rel="noopener">https://ddnews.gov.in/en/charting-a-green-course-hydrogen-fuelled-trains-in-india/</a></li><li><a href="https://www.investindia.gov.in/team-india-blogs/fuelling-sustainability-rails-indias-leap-green-hydrogen-upcoming-train-trials" target="_blank" rel="noopener">https://www.investindia.gov.in/team-india-blogs/fuelling-sustainability-rails-indias-leap-green-hydrogen-upcoming-train-trials</a></li><li><a href="https://www.whalesbook.com/news/English/transportation/India-Launches-Longest-Hydrogen-Train-Key-Tech-and-Cost-Hurdles/6a59f034fe1c9287f4731c21" target="_blank" rel="noopener">https://www.whalesbook.com/news/English/transportation/India-Launches-Longest-Hydrogen-Train-Key-Tech-and-Cost-Hurdles/6a59f034fe1c9287f4731c21</a></li><li><a href="https://organiser.org/2026/07/17/370340/bharat/jinds-tevar-has-changed-pm-modi-launches-indias-first-hydrogen-train-rolls-out-rs-14700-crore-projects/" target="_blank" rel="noopener">https://organiser.org/2026/07/17/370340/bharat/jinds-tevar-has-changed-pm-modi-launches-indias-first-hydrogen-train-rolls-out-rs-14700-crore-projects/</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 06</p>
+      <p class="story-title">RIL Q1 Results: Revenue up 25% YoY to Rs 3.11 lakh crore, profit beats Street estimates</p>
+      <p class="story-src">Economic Times - Markets · <a href="https://economictimes.indiatimes.com/markets/stocks/earnings/ril-q1-results-profit-falls-22-yoy-to-rs-20946-crore-due-to-one-time-exceptional-item/articleshow/132462892.cms" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">7</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/ril-q1/ril-q1-cover.png" alt="RIL Just Crossed ₹3 Lakh Crore Revenue">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/ril-q1/ril-q1-backstory.png" alt="From Oil Refiner to India's Everything Company">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/ril-q1/ril-q1-news.png" alt="Revenue Hits ₹3 Lakh Crore First Time">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/ril-q1/ril-q1-why.png" alt="Three Big Things To Watch Next">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/ril-q1/ril-q1-engage.png" alt="Jio's IPO could value it at $170 billion. Would you buy in, or is that too pricey?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (11)</summary>
+    <ul><li><a href="https://economictimes.indiatimes.com/markets/stocks/earnings/ril-q1-results-profit-falls-22-yoy-to-rs-20946-crore-due-to-one-time-exceptional-item/articleshow/132462892.cms" target="_blank" rel="noopener">https://economictimes.indiatimes.com/markets/stocks/earnings/ril-q1-results-profit-falls-22-yoy-to-rs-20946-crore-due-to-one-time-exceptional-item/articleshow/132462892.cms</a></li><li><a href="https://www.business-standard.com/companies/quarterly-results/reliance-industries-q1fy27-results-net-profit-falls-22-4-to-20-946-crore-126071701147_1.html" target="_blank" rel="noopener">https://www.business-standard.com/companies/quarterly-results/reliance-industries-q1fy27-results-net-profit-falls-22-4-to-20-946-crore-126071701147_1.html</a></li><li><a href="https://www.business-standard.com/companies/quarterly-results/ril-q1-results-revenue-jumps-27-to-breach-3-trillion-for-the-first-time-126071701380_1.html" target="_blank" rel="noopener">https://www.business-standard.com/companies/quarterly-results/ril-q1-results-revenue-jumps-27-to-breach-3-trillion-for-the-first-time-126071701380_1.html</a></li><li><a href="https://www.outlookbusiness.com/markets/reliance-industries-q1-results-revenue-hits-3-lakh-cr-for-first-time-o2c-jio-lead-operational-growth-profit-ebitda-margins" target="_blank" rel="noopener">https://www.outlookbusiness.com/markets/reliance-industries-q1-results-revenue-hits-3-lakh-cr-for-first-time-o2c-jio-lead-operational-growth-profit-ebitda-margins</a></li><li><a href="https://www.prokerala.com/news/articles/a1789256.html" target="_blank" rel="noopener">https://www.prokerala.com/news/articles/a1789256.html</a></li><li><a href="https://www.newkerala.com/news/a/reliance-industries-q1-revenue-jumps-245-rs-34-310.htm" target="_blank" rel="noopener">https://www.newkerala.com/news/a/reliance-industries-q1-revenue-jumps-245-rs-34-310.htm</a></li><li><a href="https://www.jpvfin.com/blog/reliance-q1-fy27-results-complete-analysis" target="_blank" rel="noopener">https://www.jpvfin.com/blog/reliance-q1-fy27-results-complete-analysis</a></li><li><a href="https://anandrathi.com/blog/jio-ipo" target="_blank" rel="noopener">https://anandrathi.com/blog/jio-ipo</a></li><li><a href="https://www.easyfinance4u.com/jio-ipo-2026-date-price-valuation/" target="_blank" rel="noopener">https://www.easyfinance4u.com/jio-ipo-2026-date-price-valuation/</a></li><li><a href="https://www.niftytrader.in/markets/jio-drhp-ipo-ril-shareholders-windfall/" target="_blank" rel="noopener">https://www.niftytrader.in/markets/jio-drhp-ipo-ril-shareholders-windfall/</a></li><li><a href="https://www.sahi.com/blogs/jio-ipo-drhp-filed-with-sebi-fresh-issue-of-27-crore-shares" target="_blank" rel="noopener">https://www.sahi.com/blogs/jio-ipo-drhp-filed-with-sebi-fresh-issue-of-27-crore-shares</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 07</p>
+      <p class="story-title">AI won't diminish IT services, will instead make it more vital: Anand Mahindra at Tech Mahindra AGM</p>
+      <p class="story-src">Economic Times - Tech · <a href="https://economictimes.indiatimes.com/tech/artificial-intelligence/ai-wont-diminish-it-services-will-instead-make-it-more-vital-anand-mahindra-at-tech-mahindra-agm/articleshow/132464964.cms" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">6</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/mahindra-it/mahindra-it-cover.png" alt="Mahindra: AI Won't Kill IT Services">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/mahindra-it/mahindra-it-backstory.png" alt="The Fear AI Would Gut IT Jobs">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/mahindra-it/mahindra-it-news.png" alt="Mahindra Says AI Is an Opportunity">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/mahindra-it/mahindra-it-why.png" alt="Big Stakes for Jobs and Strategy">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/mahindra-it/mahindra-it-engage.png" alt="Mahindra says AI will make IT services more important, not less. Can India's IT giants actually reinvent themselves fast enough, or is this just AGM optimism?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (4)</summary>
+    <ul><li><a href="https://economictimes.indiatimes.com/tech/artificial-intelligence/ai-wont-diminish-it-services-will-instead-make-it-more-vital-anand-mahindra-at-tech-mahindra-agm/articleshow/132464964.cms" target="_blank" rel="noopener">https://economictimes.indiatimes.com/tech/artificial-intelligence/ai-wont-diminish-it-services-will-instead-make-it-more-vital-anand-mahindra-at-tech-mahindra-agm/articleshow/132464964.cms</a></li><li><a href="https://www.business-standard.com/technology/tech-news/ai-will-not-diminish-role-of-it-services-tech-mahindra-s-anand-mahindra-126071701198_1.html" target="_blank" rel="noopener">https://www.business-standard.com/technology/tech-news/ai-will-not-diminish-role-of-it-services-tech-mahindra-s-anand-mahindra-126071701198_1.html</a></li><li><a href="https://www.businesstoday.in/technology/artificial-intelligence/story/ai-wont-kill-indias-it-industry-anand-mahindra-dismisses-fears-over-ai-replacing-it-services-543728-2026-07-17" target="_blank" rel="noopener">https://www.businesstoday.in/technology/artificial-intelligence/story/ai-wont-kill-indias-it-industry-anand-mahindra-dismisses-fears-over-ai-replacing-it-services-543728-2026-07-17</a></li><li><a href="https://www.newkerala.com/news/a/ai-will-transform-not-diminish-indias-it-services-578.htm" target="_blank" rel="noopener">https://www.newkerala.com/news/a/ai-will-transform-not-diminish-indias-it-services-578.htm</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 08</p>
+      <p class="story-title">Apple unseats Nvidia to become world's most valuable company as AI bets shift</p>
+      <p class="story-src">Economic Times - Markets · <a href="https://economictimes.indiatimes.com/markets/us-stocks/news/apple-unseats-nvidia-to-become-worlds-most-valuable-company-as-ai-bets-shift/articleshow/132464148.cms" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">6</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/apple-nvidia/apple-nvidia-cover.png" alt="Apple Just Dethroned Nvidia. Again.">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/apple-nvidia/apple-nvidia-backstory.png" alt="Nvidia's Two-Year Reign Atop the Market">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/apple-nvidia/apple-nvidia-news.png" alt="Apple Reclaims the Crown at $4.88 Trillion">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/apple-nvidia/apple-nvidia-why.png" alt="The AI Trade Is Rotating, Not Ending">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/apple-nvidia/apple-nvidia-engage.png" alt="Apple never built its own AI model but just passed Nvidia anyway. Is AI hype overrated, or is Apple just better at quietly cashing in on it?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (5)</summary>
+    <ul><li><a href="https://economictimes.indiatimes.com/markets/us-stocks/news/apple-unseats-nvidia-to-become-worlds-most-valuable-company-as-ai-bets-shift/articleshow/132464148.cms" target="_blank" rel="noopener">https://economictimes.indiatimes.com/markets/us-stocks/news/apple-unseats-nvidia-to-become-worlds-most-valuable-company-as-ai-bets-shift/articleshow/132464148.cms</a></li><li><a href="https://www.bnnbloomberg.ca/business/technology/2026/07/17/apple-closes-in-on-nvidia-in-race-for-worlds-most-valuable-company/" target="_blank" rel="noopener">https://www.bnnbloomberg.ca/business/technology/2026/07/17/apple-closes-in-on-nvidia-in-race-for-worlds-most-valuable-company/</a></li><li><a href="https://www.forbes.com/sites/tylerroush/2026/07/17/apple-unseats-nvidia-as-worlds-largest-company/" target="_blank" rel="noopener">https://www.forbes.com/sites/tylerroush/2026/07/17/apple-unseats-nvidia-as-worlds-largest-company/</a></li><li><a href="https://www.cnbc.com/2024/06/05/nvidia-passes-apple-in-market-cap.html" target="_blank" rel="noopener">https://www.cnbc.com/2024/06/05/nvidia-passes-apple-in-market-cap.html</a></li><li><a href="https://www.cnbc.com/2025/01/21/nvidia-passes-apple-again-to-become-worlds-most-valuable-company-.html" target="_blank" rel="noopener">https://www.cnbc.com/2025/01/21/nvidia-passes-apple-again-to-become-worlds-most-valuable-company-.html</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 09</p>
+      <p class="story-title">China's Kimi K3 rattles US AI industry</p>
+      <p class="story-src">Economic Times - Tech · <a href="https://economictimes.indiatimes.com/tech/artificial-intelligence/chinas-kimi-k3-rattles-us-ai-industry/articleshow/132476840.cms" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">6</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/kimi/kimi-cover.png" alt="China's Kimi Just Dethroned America's Best AI">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/kimi/kimi-backstory.png" alt="From Zero to China's Hottest AI Lab">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/kimi/kimi-news.png" alt="Kimi K3: World's Largest Open AI Model">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/kimi/kimi-why.png" alt="The Price-Performance Gap Is Gone">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/kimi/kimi-engage.png" alt="If a Chinese open AI is #1 at coding and costs 5x less, why would any startup still pay for OpenAI or Anthropic?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (14)</summary>
+    <ul><li><a href="https://economictimes.indiatimes.com/tech/artificial-intelligence/chinas-kimi-k3-rattles-us-ai-industry/articleshow/132476840.cms" target="_blank" rel="noopener">https://economictimes.indiatimes.com/tech/artificial-intelligence/chinas-kimi-k3-rattles-us-ai-industry/articleshow/132476840.cms</a></li><li><a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/moonshot-releases-2-8-trillion-parameter-kimi-k3" target="_blank" rel="noopener">https://www.tomshardware.com/tech-industry/artificial-intelligence/moonshot-releases-2-8-trillion-parameter-kimi-k3</a></li><li><a href="https://venturebeat.com/technology/chinas-moonshot-ai-releases-kimi-k3-the-largest-open-source-model-ever-rivaling-top-u-s-systems" target="_blank" rel="noopener">https://venturebeat.com/technology/chinas-moonshot-ai-releases-kimi-k3-the-largest-open-source-model-ever-rivaling-top-u-s-systems</a></li><li><a href="https://www.winzheng.com/en/article/kimi-k3-tops-frontend-code-arena-moonshot-ai" target="_blank" rel="noopener">https://www.winzheng.com/en/article/kimi-k3-tops-frontend-code-arena-moonshot-ai</a></li><li><a href="https://techstartups.com/2026/07/16/moonshot-ai-launches-kimi-k3-claims-1-spot-on-code-arena-beating-claude-fable-5/" target="_blank" rel="noopener">https://techstartups.com/2026/07/16/moonshot-ai-launches-kimi-k3-claims-1-spot-on-code-arena-beating-claude-fable-5/</a></li><li><a href="https://startupfortune.com/moonshot-ais-kimi-k3-tops-a-coding-leaderboard-at-a-fraction-of-the-price/" target="_blank" rel="noopener">https://startupfortune.com/moonshot-ais-kimi-k3-tops-a-coding-leaderboard-at-a-fraction-of-the-price/</a></li><li><a href="https://startupfortune.com/kimi-k3-tops-claude-opus-48-on-a-major-coding-benchmark-and-rattles-ai-valuations/" target="_blank" rel="noopener">https://startupfortune.com/kimi-k3-tops-claude-opus-48-on-a-major-coding-benchmark-and-rattles-ai-valuations/</a></li><li><a href="https://futurism.com/artificial-intelligence/chinese-ai-kimi-moonshot-benchmark-claude-chatgpt" target="_blank" rel="noopener">https://futurism.com/artificial-intelligence/chinese-ai-kimi-moonshot-benchmark-claude-chatgpt</a></li><li><a href="https://decrypt.co/373716/china-kimi-k3-largest-open-source-ai-model-ever-beats-claude-fable-gpt-5-6-sol" target="_blank" rel="noopener">https://decrypt.co/373716/china-kimi-k3-largest-open-source-ai-model-ever-beats-claude-fable-gpt-5-6-sol</a></li><li><a href="https://en.wikipedia.org/wiki/Moonshot_AI" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Moonshot_AI</a></li><li><a href="https://techcrunch.com/2026/05/07/chinas-moonshot-ai-raises-2b-at-20b-valuation-as-demand-for-open-source-ai-skyrockets/" target="_blank" rel="noopener">https://techcrunch.com/2026/05/07/chinas-moonshot-ai-raises-2b-at-20b-valuation-as-demand-for-open-source-ai-skyrockets/</a></li><li><a href="https://entrepreneurloop.com/moonshot-ai-funding-20-billion-valuation-kimi-2026/" target="_blank" rel="noopener">https://entrepreneurloop.com/moonshot-ai-funding-20-billion-valuation-kimi-2026/</a></li><li><a href="https://techfundingnews.com/chinas-moonshot-ai-reportedly-seeks-up-to-2b-at-30b-valuation-as-race-to-challenge-openai-intensifies/" target="_blank" rel="noopener">https://techfundingnews.com/chinas-moonshot-ai-reportedly-seeks-up-to-2b-at-30b-valuation-as-race-to-challenge-openai-intensifies/</a></li><li><a href="https://thenextweb.com/news/moonshot-ai-20bn-valuation-kimi-meituan-china-mobile" target="_blank" rel="noopener">https://thenextweb.com/news/moonshot-ai-20bn-valuation-kimi-meituan-china-mobile</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 10</p>
+      <p class="story-title">How a missed roommate interview helped Raj Subramaniam begin his journey to becoming FedEx CEO</p>
+      <p class="story-src">LiveMint - Companies · <a href="https://www.livemint.com/companies/news/how-a-missed-roommate-interview-helped-raj-subramaniam-begin-his-journey-to-becoming-fedex-ceo-11784372625766.html" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">6</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/fedex-raj/fedex-raj-cover.png" alt="One Phone Call. Thirty Years. FedEx CEO.">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/fedex-raj/fedex-raj-backstory.png" alt="IIT Grad With No Job Offer">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/fedex-raj/fedex-raj-news.png" alt="Roommate Said No. Raj Said Yes.">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/fedex-raj/fedex-raj-why.png" alt="One Seized Moment Built a Global Empire">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/fedex-raj/fedex-raj-engage.png" alt="Raj had IIT and two US degrees, and still almost missed his shot. Is the real skill credentials, or the courage to chase your own opportunity?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (9)</summary>
+    <ul><li><a href="https://www.livemint.com/companies/news/how-a-missed-roommate-interview-helped-raj-subramaniam-begin-his-journey-to-becoming-fedex-ceo-11784372625766.html" target="_blank" rel="noopener">https://www.livemint.com/companies/news/how-a-missed-roommate-interview-helped-raj-subramaniam-begin-his-journey-to-becoming-fedex-ceo-11784372625766.html</a></li><li><a href="https://fortune.com/2026/07/17/fedex-ceo-raj-subramaniam-landed-first-job-career-advice/" target="_blank" rel="noopener">https://fortune.com/2026/07/17/fedex-ceo-raj-subramaniam-landed-first-job-career-advice/</a></li><li><a href="https://fortune.com/2026/07/15/fedex-ceo-raj-subramaniam-tariffs-supply-chain-shipping-fortune-500-titans-and-disruptors-of-industry/" target="_blank" rel="noopener">https://fortune.com/2026/07/15/fedex-ceo-raj-subramaniam-tariffs-supply-chain-shipping-fortune-500-titans-and-disruptors-of-industry/</a></li><li><a href="https://fortune.com/article/fedex-ceo-raj-subramaniam-fred-smith-globalization-trade-tariffs/" target="_blank" rel="noopener">https://fortune.com/article/fedex-ceo-raj-subramaniam-fred-smith-globalization-trade-tariffs/</a></li><li><a href="https://horatioalger.org/members/detail/rajesh-subramaniam/" target="_blank" rel="noopener">https://horatioalger.org/members/detail/rajesh-subramaniam/</a></li><li><a href="https://en.wikipedia.org/wiki/Raj_Subramaniam" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Raj_Subramaniam</a></li><li><a href="https://www.fedex.com/en-us/about/leadership/raj-subramaniam.html" target="_blank" rel="noopener">https://www.fedex.com/en-us/about/leadership/raj-subramaniam.html</a></li><li><a href="https://indiaspora.org/business-leader/raj-subramaniam/" target="_blank" rel="noopener">https://indiaspora.org/business-leader/raj-subramaniam/</a></li><li><a href="https://www.globalindian.com/profiles/raj-subramaniam/" target="_blank" rel="noopener">https://www.globalindian.com/profiles/raj-subramaniam/</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 11</p>
+      <p class="story-title">ICICI Bank Q1 Results: Profit jumps 16% YoY to Rs 14,805 crore; NII rises 13% as margins expand</p>
+      <p class="story-src">Economic Times - Markets · <a href="https://economictimes.indiatimes.com/markets/stocks/earnings/icici-bank-q1-results-profit-jumps-16-yoy-to-rs-14805-crore-nii-rises-13-as-margins-expand/articleshow/132477062.cms" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">6</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/icici/icici-cover.png" alt="ICICI Bank's Biggest Profit Quarter Ever">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/icici/icici-backstory.png" alt="From World Bank Project to Profit Machine">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/icici/icici-news.png" alt="Q1 FY27: 16% Profit Jump, Margins Expand">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/icici/icici-why.png" alt="Why India Should Care About This Number">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/icici/icici-engage.png" alt="ICICI is beating HDFC Bank on profit growth this quarter. Is India's private banking crown about to change hands?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (6)</summary>
+    <ul><li><a href="https://economictimes.indiatimes.com/markets/stocks/earnings/icici-bank-q1-results-profit-jumps-16-yoy-to-rs-14805-crore-nii-rises-13-as-margins-expand/articleshow/132477062.cms" target="_blank" rel="noopener">https://economictimes.indiatimes.com/markets/stocks/earnings/icici-bank-q1-results-profit-jumps-16-yoy-to-rs-14805-crore-nii-rises-13-as-margins-expand/articleshow/132477062.cms</a></li><li><a href="https://www.businesstoday.in/markets/stocks/story/icici-bank-q1-results-net-profit-rises-15-9-to-rs-14805-crore-asset-quality-stays-stable-543762-2026-07-18" target="_blank" rel="noopener">https://www.businesstoday.in/markets/stocks/story/icici-bank-q1-results-net-profit-rises-15-9-to-rs-14805-crore-asset-quality-stays-stable-543762-2026-07-18</a></li><li><a href="https://www.freepressjournal.in/business/icici-banks-q1-fy27-net-profit-climbs-to-15440-crore-up-46-qoq" target="_blank" rel="noopener">https://www.freepressjournal.in/business/icici-banks-q1-fy27-net-profit-climbs-to-15440-crore-up-46-qoq</a></li><li><a href="https://www.icici.bank.in/about-us/history" target="_blank" rel="noopener">https://www.icici.bank.in/about-us/history</a></li><li><a href="https://en.wikipedia.org/wiki/ICICI_Bank" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/ICICI_Bank</a></li><li><a href="https://www.icici.bank.in/ms/aboutus/annual-reports/2024-25/html/our-theme.html" target="_blank" rel="noopener">https://www.icici.bank.in/ms/aboutus/annual-reports/2024-25/html/our-theme.html</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 12</p>
+      <p class="story-title">It's a revamp! RBI steps ahead on plan for plastic rupee notes</p>
+      <p class="story-src">Economic Times - Economy · <a href="https://economictimes.indiatimes.com/news/economy/policy/its-a-revamp-rbi-steps-ahead-on-plan-for-plastic-rupee-notes/articleshow/132468879.cms" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">6</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/rbi-plastic-notes/rbi-plastic-notes-cover.png" alt="India's Paper Rupee Era May Be Over">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/rbi-plastic-notes/rbi-plastic-notes-backstory.png" alt="India Tried This Before, and Quit">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/rbi-plastic-notes/rbi-plastic-notes-news.png" alt="RBI's Print Arm Is Calling Suppliers">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/rbi-plastic-notes/rbi-plastic-notes-why.png" alt="Cheaper, Tougher, Harder to Fake">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/rbi-plastic-notes/rbi-plastic-notes-engage.png" alt="India still runs on cash, with currency at 12.1% of GDP. But if your ₹10 note can survive a wash, would that change how you use money?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (10)</summary>
+    <ul><li><a href="https://economictimes.indiatimes.com/news/economy/policy/its-a-revamp-rbi-steps-ahead-on-plan-for-plastic-rupee-notes/articleshow/132468879.cms" target="_blank" rel="noopener">https://economictimes.indiatimes.com/news/economy/policy/its-a-revamp-rbi-steps-ahead-on-plan-for-plastic-rupee-notes/articleshow/132468879.cms</a></li><li><a href="https://www.business-standard.com/finance/news/rbi-s-currency-printing-arm-invites-bids-for-polymer-note-material-126071800475_1.html" target="_blank" rel="noopener">https://www.business-standard.com/finance/news/rbi-s-currency-printing-arm-invites-bids-for-polymer-note-material-126071800475_1.html</a></li><li><a href="https://www.business-standard.com/finance/news/rbi-set-to-unveil-polymer-rupee-notes-amid-rising-currency-demand-126052801725_1.html" target="_blank" rel="noopener">https://www.business-standard.com/finance/news/rbi-set-to-unveil-polymer-rupee-notes-amid-rising-currency-demand-126052801725_1.html</a></li><li><a href="https://thefederal.com/category/business/why-rbi-is-considering-polymer-banknotes-and-how-they-differ-from-paper-currency-244898" target="_blank" rel="noopener">https://thefederal.com/category/business/why-rbi-is-considering-polymer-banknotes-and-how-they-differ-from-paper-currency-244898</a></li><li><a href="https://www.news9live.com/business/biz-news/plastic-currency-notes-rbi-seeks-expressions-of-interest-from-global-companies-says-report-2990421" target="_blank" rel="noopener">https://www.news9live.com/business/biz-news/plastic-currency-notes-rbi-seeks-expressions-of-interest-from-global-companies-says-report-2990421</a></li><li><a href="https://www.theweek.in/news/biz-tech/2026/07/17/rbi-plastic-banknotes-eoi-currency-polymer.html" target="_blank" rel="noopener">https://www.theweek.in/news/biz-tech/2026/07/17/rbi-plastic-banknotes-eoi-currency-polymer.html</a></li><li><a href="https://www.ekamiasacademy.com/plastic-currency-india-rbi-polymer-notes-plan/" target="_blank" rel="noopener">https://www.ekamiasacademy.com/plastic-currency-india-rbi-polymer-notes-plan/</a></li><li><a href="https://www.asianmirror.us/2026/05/29/india-plastic-currency-notes-rbi/" target="_blank" rel="noopener">https://www.asianmirror.us/2026/05/29/india-plastic-currency-notes-rbi/</a></li><li><a href="https://caalley.com/news-updates/indian-news/what-are-plastic-banknotes-and-why-is-rbi-considering-them-now" target="_blank" rel="noopener">https://caalley.com/news-updates/indian-news/what-are-plastic-banknotes-and-why-is-rbi-considering-them-now</a></li><li><a href="https://www.deccanchronicle.com/tabloid/hyderabad-chronicle/plastic-in-your-wallet-is-india-ready-for-polymer-currency-1960351" target="_blank" rel="noopener">https://www.deccanchronicle.com/tabloid/hyderabad-chronicle/plastic-in-your-wallet-is-india-ready-for-polymer-currency-1960351</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 13</p>
+      <p class="story-title">Jio Financial Services share price jumps 6% after Q1 profit soars 155%; should you buy the stock?</p>
+      <p class="story-src">LiveMint - Markets · <a href="https://www.livemint.com/market/stock-market-news/jio-financial-services-share-price-jumps-6-after-q1-profit-soars-155-in-q1-results-2026-should-you-buy-or-sell-stock-11784269234338.html" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">6</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/jio-financial/jio-financial-cover.png" alt="Jio Financial's Profit Jumped 156%">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/jio-financial/jio-financial-backstory.png" alt="The Demerger That Struggled to Prove Itself">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/jio-financial/jio-financial-news.png" alt="Profit Hits Rs 830 Crore, Up 156%">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/jio-financial/jio-financial-why.png" alt="Brokerages Turn Bullish Despite Cost Worries">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/jio-financial/jio-financial-engage.png" alt="Has Jio Financial finally proven its lending and payments bet, or is one strong quarter not enough?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (4)</summary>
+    <ul><li><a href="https://www.livemint.com/market/stock-market-news/jio-financial-services-share-price-jumps-6-after-q1-profit-soars-155-in-q1-results-2026-should-you-buy-or-sell-stock-11784269234338.html" target="_blank" rel="noopener">https://www.livemint.com/market/stock-market-news/jio-financial-services-share-price-jumps-6-after-q1-profit-soars-155-in-q1-results-2026-should-you-buy-or-sell-stock-11784269234338.html</a></li><li><a href="https://www.business-standard.com/companies/quarterly-results/jio-financial-services-q1-profit-rises-156-to-830-crore-income-up-141-126071601164_1.html" target="_blank" rel="noopener">https://www.business-standard.com/companies/quarterly-results/jio-financial-services-q1-profit-rises-156-to-830-crore-income-up-141-126071601164_1.html</a></li><li><a href="https://www.businesstoday.in/markets/stocks/story/jio-financial-share-price-target-after-q1-mofsl-sees-34-upside-retains-buy-543508-2026-07-17" target="_blank" rel="noopener">https://www.businesstoday.in/markets/stocks/story/jio-financial-share-price-target-after-q1-mofsl-sees-34-upside-retains-buy-543508-2026-07-17</a></li><li><a href="https://topnews.in/jio-financial-services-share-price-target-rs-273-geojit-investments-2419140" target="_blank" rel="noopener">https://topnews.in/jio-financial-services-share-price-target-rs-273-geojit-investments-2419140</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 14</p>
+      <p class="story-title">Jio likely to begin IPO marketing from next week for India's largest offer</p>
+      <p class="story-src">LiveMint - Companies · <a href="https://www.livemint.com/companies/jio-platforms-reliance-industries-ipo-drhp-sebi-roadshows-soft-marketing-11784260405025.html" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">6</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/jio-ipo-marketing/jio-ipo-marketing-cover.png" alt="India's Biggest IPO Starts Selling">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/jio-ipo-marketing/jio-ipo-marketing-backstory.png" alt="Seven Years In The Making">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/jio-ipo-marketing/jio-ipo-marketing-news.png" alt="Soft Marketing Begins Before Roadshows">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/jio-ipo-marketing/jio-ipo-marketing-why.png" alt="Why It Could Shake Up Markets">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/jio-ipo-marketing/jio-ipo-marketing-engage.png" alt="Jio's IPO is finally here after seven years. Are you buying the hype, or waiting for the price band?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (8)</summary>
+    <ul><li><a href="https://www.livemint.com/companies/jio-platforms-reliance-industries-ipo-drhp-sebi-roadshows-soft-marketing-11784260405025.html" target="_blank" rel="noopener">https://www.livemint.com/companies/jio-platforms-reliance-industries-ipo-drhp-sebi-roadshows-soft-marketing-11784260405025.html</a></li><li><a href="https://mintnl.substack.com/p/the-next-big-step-in-jio-ipo" target="_blank" rel="noopener">https://mintnl.substack.com/p/the-next-big-step-in-jio-ipo</a></li><li><a href="https://www.cnbc.com/2026/06/19/india-jio-platforms-ipo-mukesh-ambani.html" target="_blank" rel="noopener">https://www.cnbc.com/2026/06/19/india-jio-platforms-ipo-mukesh-ambani.html</a></li><li><a href="https://www.business-standard.com/markets/ipo/mukesh-ambani-s-record-india-ipo-for-jio-delayed-by-regulatory-limbo-126030600763_1.html" target="_blank" rel="noopener">https://www.business-standard.com/markets/ipo/mukesh-ambani-s-record-india-ipo-for-jio-delayed-by-regulatory-limbo-126030600763_1.html</a></li><li><a href="https://groww.in/blog/jio-platforms-ltd-files-drhp-with-sebi-check-key-issue-details" target="_blank" rel="noopener">https://groww.in/blog/jio-platforms-ltd-files-drhp-with-sebi-check-key-issue-details</a></li><li><a href="https://entrackr.com/news/jio-platforms-files-drhp-for-fresh-issue-only-ipo-12055178" target="_blank" rel="noopener">https://entrackr.com/news/jio-platforms-files-drhp-for-fresh-issue-only-ipo-12055178</a></li><li><a href="https://www.sebi.gov.in/filings/public-issues/jun-2026/jio-platforms-ltd-drhp_102248.html" target="_blank" rel="noopener">https://www.sebi.gov.in/filings/public-issues/jun-2026/jio-platforms-ltd-drhp_102248.html</a></li><li><a href="https://anandrathi.com/blog/jio-ipo" target="_blank" rel="noopener">https://anandrathi.com/blog/jio-ipo</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 15</p>
+      <p class="story-title">JSW Steel's profit doubles on revenue growth, beats estimates</p>
+      <p class="story-src">Economic Times - Markets · <a href="https://economictimes.indiatimes.com/markets/stocks/earnings/jsw-steels-profit-doubles-on-revenue-growth-beats-estimates/articleshow/132465171.cms" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">6</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/jsw-steel/jsw-steel-cover.png" alt="JSW Steel's Profit Just Doubled">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/jsw-steel/jsw-steel-backstory.png" alt="India's Steel Giant Was Fighting Weak Prices">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/jsw-steel/jsw-steel-news.png" alt="Profit More Than Doubles, Crushes Estimates">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/jsw-steel/jsw-steel-why.png" alt="A Steel Beat That Signals Broader Demand">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/jsw-steel/jsw-steel-engage.png" alt="JSW Steel beat estimates by over ₹1,100 crore while still spending big on expansion. Is this the start of a steel supercycle in India, or just a one quarter blip?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (4)</summary>
+    <ul><li><a href="https://economictimes.indiatimes.com/markets/stocks/earnings/jsw-steels-profit-doubles-on-revenue-growth-beats-estimates/articleshow/132465171.cms" target="_blank" rel="noopener">https://economictimes.indiatimes.com/markets/stocks/earnings/jsw-steels-profit-doubles-on-revenue-growth-beats-estimates/articleshow/132465171.cms</a></li><li><a href="https://www.equitypandit.com/jsw-steel-rallies-as-q1-profit-more-than-doubles/" target="_blank" rel="noopener">https://www.equitypandit.com/jsw-steel-rallies-as-q1-profit-more-than-doubles/</a></li><li><a href="https://hdfcsky.com/news/jsw-steel-q1-profit-more-than-doubles-to-rs-4696-crore" target="_blank" rel="noopener">https://hdfcsky.com/news/jsw-steel-q1-profit-more-than-doubles-to-rs-4696-crore</a></li><li><a href="https://www.ainvest.com/news/jsw-steel-200-billion-rupee-fy26-capex-plan-strategic-catalyst-long-term-growth-2507/" target="_blank" rel="noopener">https://www.ainvest.com/news/jsw-steel-200-billion-rupee-fy26-capex-plan-strategic-catalyst-long-term-growth-2507/</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 16</p>
+      <p class="story-title">Manipal Hospitals is said to cut IPO valuation from $10-12 billion estimated earlier</p>
+      <p class="story-src">LiveMint - Markets · <a href="https://www.livemint.com/market/ipo/manipal-hospitals-is-said-to-cut-ipo-valuation-from-10-12-billion-estimated-earlier-11784276077761.html" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">6</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/manipal-hospitals/manipal-hospitals-cover.png" alt="India's biggest hospital IPO just got cheaper">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/manipal-hospitals/manipal-hospitals-backstory.png" alt="From one medical college to 38 hospitals">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/manipal-hospitals/manipal-hospitals-news.png" alt="Valuation cut to $8.3 billion amid volatility">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/manipal-hospitals/manipal-hospitals-why.png" alt="Still India's biggest listing of the year">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/manipal-hospitals/manipal-hospitals-engage.png" alt="Is an $8.3 billion valuation still too rich for a hospital chain, or a bargain after the cut?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (4)</summary>
+    <ul><li><a href="https://www.livemint.com/market/ipo/manipal-hospitals-is-said-to-cut-ipo-valuation-from-10-12-billion-estimated-earlier-11784276077761.html" target="_blank" rel="noopener">https://www.livemint.com/market/ipo/manipal-hospitals-is-said-to-cut-ipo-valuation-from-10-12-billion-estimated-earlier-11784276077761.html</a></li><li><a href="https://www.bloomberg.com/news/articles/2026-07-17/manipal-hospitals-said-to-cut-valuation-to-8-3-billion-in-ipo" target="_blank" rel="noopener">https://www.bloomberg.com/news/articles/2026-07-17/manipal-hospitals-said-to-cut-valuation-to-8-3-billion-in-ipo</a></li><li><a href="https://www.business-standard.com/markets/ipo/manipal-hospitals-cuts-ipo-valuation-to-80-000-cr-amid-market-volatility-126071700493_1.html" target="_blank" rel="noopener">https://www.business-standard.com/markets/ipo/manipal-hospitals-cuts-ipo-valuation-to-80-000-cr-amid-market-volatility-126071700493_1.html</a></li><li><a href="https://www.bloomberg.com/news/articles/2026-03-24/temasek-backed-manipal-hospitals-files-for-1-billion-india-ipo" target="_blank" rel="noopener">https://www.bloomberg.com/news/articles/2026-03-24/temasek-backed-manipal-hospitals-files-for-1-billion-india-ipo</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 17</p>
+      <p class="story-title">Netflix shares tumble 13% after weak sales forecast, hit 22-month low</p>
+      <p class="story-src">LiveMint - Markets · <a href="https://www.livemint.com/market/netflix-shares-tumble-13-after-weak-sales-forecast-hit-22-month-low-11784295044711.html" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">6</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/netflix/netflix-cover.png" alt="Netflix Crashes to a 22-Month Low">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/netflix/netflix-backstory.png" alt="From Streaming King to Growth Doubts">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/netflix/netflix-news.png" alt="Weak Forecast Triggers a 13% Crash">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/netflix/netflix-why.png" alt="Growth Story Under the Microscope">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/netflix/netflix-engage.png" alt="Netflix is betting its future on ads and live sports while sharing less data on viewership. Is its high stock price still justified, or has the easy money already been made?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (9)</summary>
+    <ul><li><a href="https://www.livemint.com/market/netflix-shares-tumble-13-after-weak-sales-forecast-hit-22-month-low-11784295044711.html" target="_blank" rel="noopener">https://www.livemint.com/market/netflix-shares-tumble-13-after-weak-sales-forecast-hit-22-month-low-11784295044711.html</a></li><li><a href="https://www.cnbc.com/2026/07/16/netflix-nflx-earnings-q2-2026.html" target="_blank" rel="noopener">https://www.cnbc.com/2026/07/16/netflix-nflx-earnings-q2-2026.html</a></li><li><a href="https://www.933thedrive.com/2026/07/17/lacks-excitement-netflix-tumbles-9-as-weak-earnings-forecast-deepens-doubts-over-growth/" target="_blank" rel="noopener">https://www.933thedrive.com/2026/07/17/lacks-excitement-netflix-tumbles-9-as-weak-earnings-forecast-deepens-doubts-over-growth/</a></li><li><a href="https://americanbazaaronline.com/2026/07/17/netflix-share-drop-10-after-earnings-forecast-disappoints-investors-484765/" target="_blank" rel="noopener">https://americanbazaaronline.com/2026/07/17/netflix-share-drop-10-after-earnings-forecast-disappoints-investors-484765/</a></li><li><a href="https://www.aol.com/articles/netflix-shares-tank-weak-forecast-211433000.html" target="_blank" rel="noopener">https://www.aol.com/articles/netflix-shares-tank-weak-forecast-211433000.html</a></li><li><a href="https://www.benzinga.com/markets/earnings/26/07/60513688/netflix-q2-highlights-stock-dives-on-guidance-what-investors-should-know" target="_blank" rel="noopener">https://www.benzinga.com/markets/earnings/26/07/60513688/netflix-q2-highlights-stock-dives-on-guidance-what-investors-should-know</a></li><li><a href="https://www.investing.com/equities/netflix,-inc.-earnings" target="_blank" rel="noopener">https://www.investing.com/equities/netflix,-inc.-earnings</a></li><li><a href="https://finance.yahoo.com/markets/stocks/articles/netflix-gears-report-q2-earnings-145700087.html" target="_blank" rel="noopener">https://finance.yahoo.com/markets/stocks/articles/netflix-gears-report-q2-earnings-145700087.html</a></li><li><a href="https://www.spglobal.com/market-intelligence/en/news-insights/research/2026/07/netflix-earnings-preview-q2-2026" target="_blank" rel="noopener">https://www.spglobal.com/market-intelligence/en/news-insights/research/2026/07/netflix-earnings-preview-q2-2026</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 18</p>
+      <p class="story-title">Reliance Jio Q1 Results: IPO-bound telco's net profit rises 9% YoY to Rs 7,764 crore; ARPU climbs to Rs 215.6</p>
+      <p class="story-src">Economic Times - Markets · <a href="https://economictimes.indiatimes.com/markets/stocks/earnings/reliance-jio-q1-results-ipo-bound-telcos-net-profit-rises-9-yoy-to-rs-7764-crore-arpu-climbs-to-rs-215-6/articleshow/132462455.cms" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">6</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/reliance-jio-q1/reliance-jio-q1-cover.png" alt="Jio's Profit Rises 9% Before Its IPO">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/reliance-jio-q1/reliance-jio-q1-backstory.png" alt="From Rs250/GB To India's Broadband King">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/reliance-jio-q1/reliance-jio-q1-news.png" alt="Profit Up 9%, ARPU Climbs To Rs215.6">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/reliance-jio-q1/reliance-jio-q1-why.png" alt="Numbers That Matter For The IPO Pitch">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/reliance-jio-q1/reliance-jio-q1-engage.png" alt="Jio wants to be valued as a tech company, not just a telecom operator, ahead of its IPO. Do these numbers back that up, or is it still just a phone company?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (6)</summary>
+    <ul><li><a href="https://economictimes.indiatimes.com/markets/stocks/earnings/reliance-jio-q1-results-ipo-bound-telcos-net-profit-rises-9-yoy-to-rs-7764-crore-arpu-climbs-to-rs-215-6/articleshow/132462455.cms" target="_blank" rel="noopener">https://economictimes.indiatimes.com/markets/stocks/earnings/reliance-jio-q1-results-ipo-bound-telcos-net-profit-rises-9-yoy-to-rs-7764-crore-arpu-climbs-to-rs-215-6/articleshow/132462455.cms</a></li><li><a href="https://www.chinapulse.com/data-news/2026/07/17/reliance-jio-q1-results-ipo-bound-telcos-net-profit-rises-9-yoy-to-rs-7764-crore-arpu-climbs-to-rs-215-6" target="_blank" rel="noopener">https://www.chinapulse.com/data-news/2026/07/17/reliance-jio-q1-results-ipo-bound-telcos-net-profit-rises-9-yoy-to-rs-7764-crore-arpu-climbs-to-rs-215-6</a></li><li><a href="https://www.storyboard18.com/amp/digital/jio-platforms-reports-double-digit-growth-in-q1-fy27-earnings-jio-platforms-q1-fy27-earnings-ws-l-104714.htm" target="_blank" rel="noopener">https://www.storyboard18.com/amp/digital/jio-platforms-reports-double-digit-growth-in-q1-fy27-earnings-jio-platforms-q1-fy27-earnings-ws-l-104714.htm</a></li><li><a href="https://www.business-standard.com/companies/quarterly-results/jio-platforms-q1-results-profit-rises-9-2-to-7-764-cr-revenue-up-12-126071701210_1.html" target="_blank" rel="noopener">https://www.business-standard.com/companies/quarterly-results/jio-platforms-q1-results-profit-rises-9-2-to-7-764-cr-revenue-up-12-126071701210_1.html</a></li><li><a href="https://en.wikipedia.org/wiki/Jio" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Jio</a></li><li><a href="https://www.businesstoday.in/latest/corporate/story/10-years-of-reliance-jio-how-mukesh-ambanis-telecom-venture-changed-indias-digital-story-537909-2026-06-19" target="_blank" rel="noopener">https://www.businesstoday.in/latest/corporate/story/10-years-of-reliance-jio-how-mukesh-ambanis-telecom-venture-changed-indias-digital-story-537909-2026-06-19</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 19</p>
+      <p class="story-title">Reliance Retail Q1 results: Quick-commerce spends drag PAT 14% YoY to Rs 2,806 crore; revenue rises 7%</p>
+      <p class="story-src">Economic Times - Markets · <a href="https://economictimes.indiatimes.com/markets/stocks/earnings/reliance-retail-q1-results-pat-drops-14-yoy-to-rs-2806-crore-due-to-quick-commerce-spends-revenue-up-7-4-yoy/articleshow/132462433.cms" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">6</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/reliance-retail-q1/reliance-retail-q1-cover.png" alt="Reliance Profit Drops 14% On Quick Commerce">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/reliance-retail-q1/reliance-retail-q1-backstory.png" alt="JioMart's Rocky Road To Quick Commerce">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/reliance-retail-q1/reliance-retail-q1-news.png" alt="Q1 FY27: Revenue Up, Profit Down 14%">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/reliance-retail-q1/reliance-retail-q1-why.png" alt="The Bet: Trade Margin For Market Share">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/reliance-retail-q1/reliance-retail-q1-engage.png" alt="Reliance is taking a 14% profit hit to chase quick commerce share from Blinkit and Zepto. Smart long game, or margin bleed that never stops?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (5)</summary>
+    <ul><li><a href="https://economictimes.indiatimes.com/markets/stocks/earnings/reliance-retail-q1-results-pat-drops-14-yoy-to-rs-2806-crore-due-to-quick-commerce-spends-revenue-up-7-4-yoy/articleshow/132462433.cms" target="_blank" rel="noopener">https://economictimes.indiatimes.com/markets/stocks/earnings/reliance-retail-q1-results-pat-drops-14-yoy-to-rs-2806-crore-due-to-quick-commerce-spends-revenue-up-7-4-yoy/articleshow/132462433.cms</a></li><li><a href="https://www.newkerala.com/news/a/reliance-retail-q1-revenue-rises-74-rs-90408-644.htm" target="_blank" rel="noopener">https://www.newkerala.com/news/a/reliance-retail-q1-revenue-rises-74-rs-90408-644.htm</a></li><li><a href="https://newsable.asianetnews.com/business/reliance-retail-q1-fy27-revenue-rises-while-net-profit-declines-articleshow-lsvogux" target="_blank" rel="noopener">https://newsable.asianetnews.com/business/reliance-retail-q1-fy27-revenue-rises-while-net-profit-declines-articleshow-lsvogux</a></li><li><a href="https://inc42.com/features/reliance-jiomart-quick-commerce-push-rattle-blinkit-zepto/" target="_blank" rel="noopener">https://inc42.com/features/reliance-jiomart-quick-commerce-push-rattle-blinkit-zepto/</a></li><li><a href="https://www.business-standard.com/companies/news/reliance-retail-enters-quick-commerce-challenges-blinkit-swiggy-instamart-124100800310_1.html" target="_blank" rel="noopener">https://www.business-standard.com/companies/news/reliance-retail-enters-quick-commerce-challenges-blinkit-swiggy-instamart-124100800310_1.html</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 20</p>
+      <p class="story-title">The New Oil? Why the world is chasing copper</p>
+      <p class="story-src">Economic Times - Markets · <a href="https://economictimes.indiatimes.com/markets/commodities/news/the-new-oil-why-the-world-is-chasing-copper/articleshow/132474599.cms" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">6</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/copper/copper-cover.png" alt="Copper Is the New Oil. Here's Why.">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/copper/copper-backstory.png" alt="Copper Was Always Important. Now It's Critical.">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/copper/copper-news.png" alt="Demand Is Surging. Supply Cannot Keep Up.">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/copper/copper-why.png" alt="No Copper Means No Clean Energy">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/copper/copper-engage.png" alt="India imports over half its copper but has untapped reserves at home. Should we mine them, even with environmental costs?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (14)</summary>
+    <ul><li><a href="https://economictimes.indiatimes.com/markets/commodities/news/the-new-oil-why-the-world-is-chasing-copper/articleshow/132474599.cms" target="_blank" rel="noopener">https://economictimes.indiatimes.com/markets/commodities/news/the-new-oil-why-the-world-is-chasing-copper/articleshow/132474599.cms</a></li><li><a href="https://www.cruxinvestor.com/posts/how-copper-supply-deficits-are-reshaping-the-critical-minerals-landscape" target="_blank" rel="noopener">https://www.cruxinvestor.com/posts/how-copper-supply-deficits-are-reshaping-the-critical-minerals-landscape</a></li><li><a href="https://www.spglobal.com/en/research-insights/special-reports/copper-in-the-age-of-ai" target="_blank" rel="noopener">https://www.spglobal.com/en/research-insights/special-reports/copper-in-the-age-of-ai</a></li><li><a href="https://www.woodmac.com/horizons/soaring-copper-demand-obstacle-to-future-growth/" target="_blank" rel="noopener">https://www.woodmac.com/horizons/soaring-copper-demand-obstacle-to-future-growth/</a></li><li><a href="https://www.woodmac.com/press-releases/soaring-copper-demand-an-obstacle-to-future-growth/" target="_blank" rel="noopener">https://www.woodmac.com/press-releases/soaring-copper-demand-an-obstacle-to-future-growth/</a></li><li><a href="https://sprott.com/insights/copper-wired-for-the-future/" target="_blank" rel="noopener">https://sprott.com/insights/copper-wired-for-the-future/</a></li><li><a href="https://www.goldmansachs.com/insights/articles/copper-prices-forecast-to-decline-from-record-highs-in-2026" target="_blank" rel="noopener">https://www.goldmansachs.com/insights/articles/copper-prices-forecast-to-decline-from-record-highs-in-2026</a></li><li><a href="https://csep.org/reports/the-copper-report-navigating-through-the-demand-and-supply-gap/" target="_blank" rel="noopener">https://csep.org/reports/the-copper-report-navigating-through-the-demand-and-supply-gap/</a></li><li><a href="https://www.kotakneo.com/investing-guide/articles/india-copper-demand/" target="_blank" rel="noopener">https://www.kotakneo.com/investing-guide/articles/india-copper-demand/</a></li><li><a href="https://discoveryalert.com.au/copper-demand-clean-energy-2025/" target="_blank" rel="noopener">https://discoveryalert.com.au/copper-demand-clean-energy-2025/</a></li><li><a href="https://www.ey.com/en_us/insights/mining-metals/coppers-role-in-the-energy-transition-grows-as-demand-surges" target="_blank" rel="noopener">https://www.ey.com/en_us/insights/mining-metals/coppers-role-in-the-energy-transition-grows-as-demand-surges</a></li><li><a href="https://finance.yahoo.com/news/one-eye-popping-prediction-shows-003940754.html" target="_blank" rel="noopener">https://finance.yahoo.com/news/one-eye-popping-prediction-shows-003940754.html</a></li><li><a href="https://blogs.worldbank.org/en/opendata/metal-prices-poised-to-strengthen-further" target="_blank" rel="noopener">https://blogs.worldbank.org/en/opendata/metal-prices-poised-to-strengthen-further</a></li><li><a href="https://www.expertmarketresearch.com/price-forecast/copper-price-forecast" target="_blank" rel="noopener">https://www.expertmarketresearch.com/price-forecast/copper-price-forecast</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 21</p>
+      <p class="story-title">US less reliable? India may need to open the door wider to the Dragon</p>
+      <p class="story-src">Economic Times - Economy · <a href="https://economictimes.indiatimes.com/news/economy/foreign-trade/us-less-reliable-india-may-need-to-open-door-wider-to-china-investment-narendra-modi-economic-adviser-rakesh-mohan-press-note-3/articleshow/132452461.cms" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">6</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/china-investment-policy/china-investment-policy-cover.png" alt="Modi's own adviser: let China in more">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/china-investment-policy/china-investment-policy-backstory.png" alt="India shut its China door in 2020">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/china-investment-policy/china-investment-policy-news.png" alt="PMEAC's Rakesh Mohan urges Chinese investment push">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/china-investment-policy/china-investment-policy-why.png" alt="A potential shift in India's China strategy">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/china-investment-policy/china-investment-policy-engage.png" alt="Should India ease its China investment rules to boost manufacturing, or is that too risky after 2020?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (3)</summary>
+    <ul><li><a href="https://economictimes.indiatimes.com/news/economy/foreign-trade/us-less-reliable-india-may-need-to-open-door-wider-to-china-investment-narendra-modi-economic-adviser-rakesh-mohan-press-note-3/articleshow/132452461.cms" target="_blank" rel="noopener">https://economictimes.indiatimes.com/news/economy/foreign-trade/us-less-reliable-india-may-need-to-open-door-wider-to-china-investment-narendra-modi-economic-adviser-rakesh-mohan-press-note-3/articleshow/132452461.cms</a></li><li><a href="https://www.bloomberg.com/news/articles/2026-07-17/modi-adviser-urges-india-to-seek-more-chinese-investment-trade" target="_blank" rel="noopener">https://www.bloomberg.com/news/articles/2026-07-17/modi-adviser-urges-india-to-seek-more-chinese-investment-trade</a></li><li><a href="https://www.business-standard.com/economy/news/india-should-rethink-china-investment-policy-says-pmeac-member-126071700263_1.html" target="_blank" rel="noopener">https://www.business-standard.com/economy/news/india-should-rethink-china-investment-policy-says-pmeac-member-126071700263_1.html</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 22</p>
+      <p class="story-title">US Senate bill seeks 100% tariffs on India, 4 other nations for buying Russian oil</p>
+      <p class="story-src">Economic Times - Economy · <a href="https://economictimes.indiatimes.com/news/economy/foreign-trade/us-senate-bill-seeks-100-tariffs-on-india-4-other-nations-for-buying-russian-oil/articleshow/132454203.cms" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">6</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/us-tariffs-bill/us-tariffs-bill-cover.png" alt="US Senate wants 100% tariffs on India">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/us-tariffs-bill/us-tariffs-bill-backstory.png" alt="India kept buying discounted Russian crude">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/us-tariffs-bill/us-tariffs-bill-news.png" alt="Bipartisan bill targets India, China, three others">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/us-tariffs-bill/us-tariffs-bill-why.png" alt="Tariffs as a geopolitical weapon, first time">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/us-tariffs-bill/us-tariffs-bill-engage.png" alt="Should India keep buying discounted Russian oil even if it risks 100% US tariffs?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (2)</summary>
+    <ul><li><a href="https://economictimes.indiatimes.com/news/economy/foreign-trade/us-senate-bill-seeks-100-tariffs-on-india-4-other-nations-for-buying-russian-oil/articleshow/132454203.cms" target="_blank" rel="noopener">https://economictimes.indiatimes.com/news/economy/foreign-trade/us-senate-bill-seeks-100-tariffs-on-india-4-other-nations-for-buying-russian-oil/articleshow/132454203.cms</a></li><li><a href="https://www.business-standard.com/economy/news/us-senate-bill-seeks-100-tariffs-on-india-china-for-buying-russian-oil-126071700414_1.html" target="_blank" rel="noopener">https://www.business-standard.com/economy/news/us-senate-bill-seeks-100-tariffs-on-india-china-for-buying-russian-oil-126071700414_1.html</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 23</p>
+      <p class="story-title">Wall Street's chip index enters bear market! Is the AI bubble finally going bust?</p>
+      <p class="story-src">Economic Times - Markets · <a href="https://economictimes.indiatimes.com/markets/us-stocks/news/wall-streets-chip-index-enters-bear-market-is-the-ai-bubble-finally-going-bust/articleshow/132473946.cms" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">6</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/chip-bear-market/chip-bear-market-cover.png" alt="China just crashed the AI chip party">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/chip-bear-market/chip-bear-market-backstory.png" alt="The Biggest Chip Rally in History">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/chip-bear-market/chip-bear-market-news.png" alt="Moonshot's Kimi K3 Sparks a Repeat">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/chip-bear-market/chip-bear-market-why.png" alt="The AI Spending Story Is Changing">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/chip-bear-market/chip-bear-market-engage.png" alt="DeepSeek spooked markets in January 2025, and stocks bounced back in weeks. Is Kimi K3 different, or will this selloff reverse too?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (13)</summary>
+    <ul><li><a href="https://economictimes.indiatimes.com/markets/us-stocks/news/wall-streets-chip-index-enters-bear-market-is-the-ai-bubble-finally-going-bust/articleshow/132473946.cms" target="_blank" rel="noopener">https://economictimes.indiatimes.com/markets/us-stocks/news/wall-streets-chip-index-enters-bear-market-is-the-ai-bubble-finally-going-bust/articleshow/132473946.cms</a></li><li><a href="https://www.hngn.com/articles/272143/20260717/semiconductor-stocks-plunge-bear-market-chinas-new-kimi-k3-ai-model-rattles-wall-street.htm" target="_blank" rel="noopener">https://www.hngn.com/articles/272143/20260717/semiconductor-stocks-plunge-bear-market-chinas-new-kimi-k3-ai-model-rattles-wall-street.htm</a></li><li><a href="https://finance.biggo.com/news/3fb9a1b4-26a2-407b-83ff-2df958e4bbd3" target="_blank" rel="noopener">https://finance.biggo.com/news/3fb9a1b4-26a2-407b-83ff-2df958e4bbd3</a></li><li><a href="https://cryptobriefing.com/moonshot-kimi-k3-ai-semiconductor-stocks-selloff/" target="_blank" rel="noopener">https://cryptobriefing.com/moonshot-kimi-k3-ai-semiconductor-stocks-selloff/</a></li><li><a href="https://finance.yahoo.com/markets/stocks/articles/kimi-k3-just-triggered-deepseek-175532711.html" target="_blank" rel="noopener">https://finance.yahoo.com/markets/stocks/articles/kimi-k3-just-triggered-deepseek-175532711.html</a></li><li><a href="https://finance.yahoo.com/markets/stocks/articles/chipmakers-other-high-flying-stocks-135145992.html" target="_blank" rel="noopener">https://finance.yahoo.com/markets/stocks/articles/chipmakers-other-high-flying-stocks-135145992.html</a></li><li><a href="https://www.theepochtimes.com/business/wall-street-review-tech-stocks-sink-as-semiconductor-sector-enters-bear-market-on-ai-worries-6063799" target="_blank" rel="noopener">https://www.theepochtimes.com/business/wall-street-review-tech-stocks-sink-as-semiconductor-sector-enters-bear-market-on-ai-worries-6063799</a></li><li><a href="https://gvwire.com/2026/07/17/wall-street-slides-as-chip-selloff-broadens/" target="_blank" rel="noopener">https://gvwire.com/2026/07/17/wall-street-slides-as-chip-selloff-broadens/</a></li><li><a href="https://www.swissinfo.ch/eng/chip-stocks-slide-into-bear-market-in-ai-unwind%3a-markets-wrap/91759205" target="_blank" rel="noopener">https://www.swissinfo.ch/eng/chip-stocks-slide-into-bear-market-in-ai-unwind%3a-markets-wrap/91759205</a></li><li><a href="https://www.msn.com/en-us/money/general/china-s-moonshot-ai-adds-to-chip-investors-worries/ar-AA2896p7" target="_blank" rel="noopener">https://www.msn.com/en-us/money/general/china-s-moonshot-ai-adds-to-chip-investors-worries/ar-AA2896p7</a></li><li><a href="https://www.cnn.com/2026/07/17/investing/us-stocks-asia" target="_blank" rel="noopener">https://www.cnn.com/2026/07/17/investing/us-stocks-asia</a></li><li><a href="https://cryptobriefing.com/chip-stocks-bear-market-ai-rally-unravels/" target="_blank" rel="noopener">https://cryptobriefing.com/chip-stocks-bear-market-ai-rally-unravels/</a></li><li><a href="https://finance.yahoo.com/markets/stocks/articles/semiconductor-stocks-verge-bear-market-210200138.html" target="_blank" rel="noopener">https://finance.yahoo.com/markets/stocks/articles/semiconductor-stocks-verge-bear-market-210200138.html</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 24</p>
+      <p class="story-title">Yes Bank Q1 Results: Net profit surges 34% YoY to Rs 1,071 crore; NII advances 18%</p>
+      <p class="story-src">Economic Times - Markets · <a href="https://economictimes.indiatimes.com/markets/stocks/earnings/yes-bank-q1-results-net-profit-surges-34-yoy-to-rs-1071-crore-nii-advances-18/articleshow/132476478.cms" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">6</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/yes-bank/yes-bank-cover.png" alt="Yes Bank Is Back. Numbers Prove It.">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/yes-bank/yes-bank-backstory.png" alt="From ₹370 Stock to ₹50,000 Withdrawal Cap">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/yes-bank/yes-bank-news.png" alt="34% Profit Jump. Ratings Upgraded. Margins Hold.">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/yes-bank/yes-bank-why.png" alt="This Turnaround Changes What's Possible Next">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/yes-bank/yes-bank-engage.png" alt="SBI and other Indian banks bailed out Yes Bank in 2020, and now a Japanese bank is its biggest shareholder. Is that proof India's banking system is maturing, or did the rescue just hand a prize asset to foreign capital?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (9)</summary>
+    <ul><li><a href="https://economictimes.indiatimes.com/markets/stocks/earnings/yes-bank-q1-results-net-profit-surges-34-yoy-to-rs-1071-crore-nii-advances-18/articleshow/132476478.cms" target="_blank" rel="noopener">https://economictimes.indiatimes.com/markets/stocks/earnings/yes-bank-q1-results-net-profit-surges-34-yoy-to-rs-1071-crore-nii-advances-18/articleshow/132476478.cms</a></li><li><a href="https://www.businesstoday.in/markets/stocks/story/yes-bank-q1-results-net-profit-climbs-33-to-rs-1072-crore-what-ceo-vinay-m-tonse-says-543758-2026-07-18" target="_blank" rel="noopener">https://www.businesstoday.in/markets/stocks/story/yes-bank-q1-results-net-profit-climbs-33-to-rs-1072-crore-what-ceo-vinay-m-tonse-says-543758-2026-07-18</a></li><li><a href="https://www.freepressjournal.in/business/yes-bank-net-profit-rises-337-to-10710-crore-in-q1-fy27" target="_blank" rel="noopener">https://www.freepressjournal.in/business/yes-bank-net-profit-rises-337-to-10710-crore-in-q1-fy27</a></li><li><a href="https://www.business-standard.com/markets/news/smbc-completes-20-percent-acquisition-yes-bank-top-shareholder-stake-125091800652_1.html" target="_blank" rel="noopener">https://www.business-standard.com/markets/news/smbc-completes-20-percent-acquisition-yes-bank-top-shareholder-stake-125091800652_1.html</a></li><li><a href="https://www.retailbankerinternational.com/news/smbc-purchase-4-2-stake-yes-bank/" target="_blank" rel="noopener">https://www.retailbankerinternational.com/news/smbc-purchase-4-2-stake-yes-bank/</a></li><li><a href="https://ifsa-network.com/publications/from-trust-to-turmoil-the-yes-bank-financial-scam/" target="_blank" rel="noopener">https://ifsa-network.com/publications/from-trust-to-turmoil-the-yes-bank-financial-scam/</a></li><li><a href="https://financewithkarthik.com/yes-bank-crisis-story-rise-fall-rbi-rescue/" target="_blank" rel="noopener">https://financewithkarthik.com/yes-bank-crisis-story-rise-fall-rbi-rescue/</a></li><li><a href="https://en.wikipedia.org/wiki/Yes_Bank" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Yes_Bank</a></li><li><a href="https://elischolar.library.yale.edu/cgi/viewcontent.cgi?article=1560&amp;context=journal-of-financial-crises" target="_blank" rel="noopener">https://elischolar.library.yale.edu/cgi/viewcontent.cgi?article=1560&amp;context=journal-of-financial-crises</a></li></ul>
+  </details>
+</section>
+
+
+<section class="story">
+  <div class="story-meta">
+    <div>
+      <p class="story-rank">Story 25</p>
+      <p class="story-title">Zepto IPO anchor book nears closure; Norges, Motilal Oswal may take 40-45%</p>
+      <p class="story-src">Economic Times - Markets · <a href="https://economictimes.indiatimes.com/markets/ipos/fpos/zepto-ipo-anchor-book-nears-closure-norges-motilal-oswal-may-take-40-45-pc/articleshow/132463512.cms" target="_blank" rel="noopener">source ↗</a></p>
+    </div>
+    <div class="score-badge">6</div>
+  </div>
+
+  <p class="scroll-hint">swipe →</p>
+  <div class="row">
+    <div class="slide slide1 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/zepto-cover.png" alt="Two Stanford Dropouts Are About to List">
+    </div>
+    <div class="slide slide2 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/zepto-backstory.png" alt="From Lockdown Grocery Problem to Unicorn">
+    </div>
+    <div class="slide slide3 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/zepto-news.png" alt="Anchor Book Nearing Close at $5.1 Billion">
+    </div>
+    <div class="slide slide4 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/zepto-why.png" alt="First Pure-Play Quick Commerce IPO in India">
+    </div>
+    <div class="slide slide5 has-cover has-baked">
+      <img class="cover-img baked" src="assets/code_pilot/zepto-engage.png" alt="Zepto is going public at $5.1 billion, nearly $2 billion below its valuation from months ago. Is that a healthy reality check, or a warning sign for quick commerce?">
+    </div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources (5)</summary>
+    <ul><li><a href="https://economictimes.indiatimes.com/markets/ipos/fpos/zepto-ipo-anchor-book-nears-closure-norges-motilal-oswal-may-take-40-45-pc/articleshow/132463512.cms" target="_blank" rel="noopener">https://economictimes.indiatimes.com/markets/ipos/fpos/zepto-ipo-anchor-book-nears-closure-norges-motilal-oswal-may-take-40-45-pc/articleshow/132463512.cms</a></li><li><a href="https://www.whalesbook.com/news/English/other/Zepto-IPO-Anchor-Round-Gains-Steam-at-dollar51-Billion-Valuation/6a5a3cd9fe1c9287f473fd40" target="_blank" rel="noopener">https://www.whalesbook.com/news/English/other/Zepto-IPO-Anchor-Round-Gains-Steam-at-dollar51-Billion-Valuation/6a5a3cd9fe1c9287f473fd40</a></li><li><a href="https://topologypro.one/zepto-ipo-norges-motilal-oswal-among-investors-eyeing-40-45-of-anchor-book-631992.html" target="_blank" rel="noopener">https://topologypro.one/zepto-ipo-norges-motilal-oswal-among-investors-eyeing-40-45-of-anchor-book-631992.html</a></li><li><a href="https://en.wikipedia.org/wiki/Zepto_(company)" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Zepto_(company)</a></li><li><a href="https://www.cnbc.com/2025/12/29/zepto-confidential-ipo-filing-india-quick-commerce-instamart-swiggy-blinkit-zomato-eternal-flipkart-amazon.html" target="_blank" rel="noopener">https://www.cnbc.com/2025/12/29/zepto-confidential-ipo-filing-india-quick-commerce-instamart-swiggy-blinkit-zomato-eternal-flipkart-amazon.html</a></li></ul>
+  </details>
+</section>
+
+
+</body>
+</html>

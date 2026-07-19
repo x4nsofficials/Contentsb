@@ -1,0 +1,46 @@
+{
+  "generated_at": "2026-07-18T18:30:00+05:30",
+  "source_item": {
+    "title": "Manipal Hospitals is said to cut IPO valuation from $10-12 billion estimated earlier",
+    "source": "LiveMint - Markets",
+    "link": "https://www.livemint.com/market/ipo/manipal-hospitals-is-said-to-cut-ipo-valuation-from-10-12-billion-estimated-earlier-11784276077761.html",
+    "category": "market",
+    "score": 6
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "India's biggest hospital IPO just got cheaper",
+      "subhead": "Manipal trims valuation to $8.3 billion from $10-12 billion"
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "From one medical college to 38 hospitals",
+      "body": "Manipal grew from one Karnataka college into India's biggest private hospital chain, with over 10,700 beds. Temasek bought a majority stake in 2023 at a $5 billion valuation."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "Valuation cut to $8.3 billion amid volatility",
+      "body": "Manipal now wants a valuation of about Rs 80,000 crore, or $8.3 billion, down from the $10-12 billion range floated earlier. It still plans to raise up to Rs 11,000 crore and could list as early as the week of July 27."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "Still India's biggest listing of the year",
+      "bullets": [
+        "Still set to beat SBI Funds as 2026's biggest IPO",
+        "Proceeds will pay down debt and fund expansion",
+        "Lower price could mean cheaper entry for investors"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "Is an $8.3 billion valuation still too rich for a hospital chain, or a bargain after the cut?",
+      "cta": "Drop your view in the comments and follow for more IPO breakdowns"
+    },
+    "sources_used": [
+      "https://www.livemint.com/market/ipo/manipal-hospitals-is-said-to-cut-ipo-valuation-from-10-12-billion-estimated-earlier-11784276077761.html",
+      "https://www.bloomberg.com/news/articles/2026-07-17/manipal-hospitals-said-to-cut-valuation-to-8-3-billion-in-ipo",
+      "https://www.business-standard.com/markets/ipo/manipal-hospitals-cuts-ipo-valuation-to-80-000-cr-amid-market-volatility-126071700493_1.html",
+      "https://www.bloomberg.com/news/articles/2026-03-24/temasek-backed-manipal-hospitals-files-for-1-billion-india-ipo"
+    ]
+  }
+}

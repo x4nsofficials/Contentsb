@@ -1,0 +1,55 @@
+{
+  "generated_at": "2026-07-18T18:22:10.134059",
+  "source_item": {
+    "title": "Wall Street's chip index enters bear market! Is the AI bubble finally going bust?",
+    "source": "Economic Times - Markets",
+    "link": "https://economictimes.indiatimes.com/markets/us-stocks/news/wall-streets-chip-index-enters-bear-market-is-the-ai-bubble-finally-going-bust/articleshow/132473946.cms",
+    "category": "market",
+    "score": 6.0
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "China just crashed the AI chip party",
+      "subhead": "Wall Street's chip index hits bear market, $3.3 trillion gone."
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "The Biggest Chip Rally in History",
+      "body": "Chip stocks surged 105% from March to June 2026 on hopes that AI demand would keep growing forever. But this happened before: China's DeepSeek did the same thing in January 2025, wiping $590 billion off Nvidia in a day."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "Moonshot's Kimi K3 Sparks a Repeat",
+      "body": "On July 17, 2026, China's Moonshot AI launched Kimi K3, a cheap AI model that matches top US models. The chip index fell over 20% from its June peak, wiping out $3.3 trillion, with Nvidia, AMD, and TSMC all down sharply."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "The AI Spending Story Is Changing",
+      "bullets": [
+        "Cheap AI weakens the case for more chips",
+        "Full Kimi K3 release on July 27 will test claims",
+        "Big Tech earnings on July 22 could fuel more selling"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "DeepSeek spooked markets in January 2025, and stocks bounced back in weeks. Is Kimi K3 different, or will this selloff reverse too?",
+      "cta": "Follow for daily market and business stories that actually matter to you. 🔔"
+    },
+    "sources_used": [
+      "https://economictimes.indiatimes.com/markets/us-stocks/news/wall-streets-chip-index-enters-bear-market-is-the-ai-bubble-finally-going-bust/articleshow/132473946.cms",
+      "https://www.hngn.com/articles/272143/20260717/semiconductor-stocks-plunge-bear-market-chinas-new-kimi-k3-ai-model-rattles-wall-street.htm",
+      "https://finance.biggo.com/news/3fb9a1b4-26a2-407b-83ff-2df958e4bbd3",
+      "https://cryptobriefing.com/moonshot-kimi-k3-ai-semiconductor-stocks-selloff/",
+      "https://finance.yahoo.com/markets/stocks/articles/kimi-k3-just-triggered-deepseek-175532711.html",
+      "https://finance.yahoo.com/markets/stocks/articles/chipmakers-other-high-flying-stocks-135145992.html",
+      "https://www.theepochtimes.com/business/wall-street-review-tech-stocks-sink-as-semiconductor-sector-enters-bear-market-on-ai-worries-6063799",
+      "https://gvwire.com/2026/07/17/wall-street-slides-as-chip-selloff-broadens/",
+      "https://www.swissinfo.ch/eng/chip-stocks-slide-into-bear-market-in-ai-unwind%3a-markets-wrap/91759205",
+      "https://www.msn.com/en-us/money/general/china-s-moonshot-ai-adds-to-chip-investors-worries/ar-AA2896p7",
+      "https://www.cnn.com/2026/07/17/investing/us-stocks-asia",
+      "https://cryptobriefing.com/chip-stocks-bear-market-ai-rally-unravels/",
+      "https://finance.yahoo.com/markets/stocks/articles/semiconductor-stocks-verge-bear-market-210200138.html"
+    ]
+  }
+}

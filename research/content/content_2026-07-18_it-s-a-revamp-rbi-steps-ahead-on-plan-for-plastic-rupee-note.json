@@ -1,0 +1,52 @@
+{
+  "generated_at": "2026-07-18T18:22:43.014021",
+  "source_item": {
+    "title": "It's a revamp! RBI steps ahead on plan for plastic rupee notes",
+    "source": "Economic Times - Economy",
+    "link": "https://economictimes.indiatimes.com/news/economy/policy/its-a-revamp-rbi-steps-ahead-on-plan-for-plastic-rupee-notes/articleshow/132468879.cms",
+    "category": "policy",
+    "score": 6.0
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "India's Paper Rupee Era May Be Over",
+      "subhead": "RBI takes its first real procurement step toward plastic money."
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "India Tried This Before, and Quit",
+      "body": "In 2012, India tested a billion plastic ₹10 notes in five cities. It got shelved because ATMs couldn't handle the thicker notes."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "RBI's Print Arm Is Calling Suppliers",
+      "body": "RBI's printing arm just asked suppliers to bid by August 18 for polymer notes. ₹10 and ₹20 notes are the likely first candidates, since they wear out fastest."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "Cheaper, Tougher, Harder to Fake",
+      "bullets": [
+        "23.8 billion worn notes destroyed in FY25 alone",
+        "Plastic notes last 2.5x longer than paper",
+        "60+ countries use them, and they're hard to fake"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "India still runs on cash, with currency at 12.1% of GDP. But if your ₹10 note can survive a wash, would that change how you use money?",
+      "cta": "Follow for more on how India's economy is quietly changing, one policy at a time."
+    },
+    "sources_used": [
+      "https://economictimes.indiatimes.com/news/economy/policy/its-a-revamp-rbi-steps-ahead-on-plan-for-plastic-rupee-notes/articleshow/132468879.cms",
+      "https://www.business-standard.com/finance/news/rbi-s-currency-printing-arm-invites-bids-for-polymer-note-material-126071800475_1.html",
+      "https://www.business-standard.com/finance/news/rbi-set-to-unveil-polymer-rupee-notes-amid-rising-currency-demand-126052801725_1.html",
+      "https://thefederal.com/category/business/why-rbi-is-considering-polymer-banknotes-and-how-they-differ-from-paper-currency-244898",
+      "https://www.news9live.com/business/biz-news/plastic-currency-notes-rbi-seeks-expressions-of-interest-from-global-companies-says-report-2990421",
+      "https://www.theweek.in/news/biz-tech/2026/07/17/rbi-plastic-banknotes-eoi-currency-polymer.html",
+      "https://www.ekamiasacademy.com/plastic-currency-india-rbi-polymer-notes-plan/",
+      "https://www.asianmirror.us/2026/05/29/india-plastic-currency-notes-rbi/",
+      "https://caalley.com/news-updates/indian-news/what-are-plastic-banknotes-and-why-is-rbi-considering-them-now",
+      "https://www.deccanchronicle.com/tabloid/hyderabad-chronicle/plastic-in-your-wallet-is-india-ready-for-polymer-currency-1960351"
+    ]
+  }
+}

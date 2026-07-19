@@ -1,0 +1,7 @@
+.git
+.env
+.claude
+**/__pycache__
+**/*.pyc
+research/assets/covers
+research/assets/code_pilot

@@ -1,0 +1,54 @@
+{
+  "generated_at": "2026-07-18T18:14:09.960999",
+  "source_item": {
+    "title": "Spacetech unicorn Skyroot launches Vikram-1, marks India's first private orbital rocket mission",
+    "source": "Economic Times - Tech",
+    "link": "https://economictimes.indiatimes.com/tech/startups/spacetech-unicorn-skyroot-launches-vikram-1-marks-indias-first-private-orbital-rocket-mission/articleshow/132475445.cms",
+    "category": "funding",
+    "score": 8.0
+  },
+  "slides": {
+    "slide1_hook": {
+      "label": "India's First Private Rocket Just Reached Orbit",
+      "subhead": "A startup just did what only ISRO could before.",
+      "cover_image": "assets/covers/skyroot.png"
+    },
+    "slide2_backstory": {
+      "label": "THE BACKSTORY",
+      "headline": "For Decades, Only ISRO Could Launch Rockets",
+      "body": "India only let ISRO launch rockets until 2020, when the sector opened up to private firms. Ex-ISRO engineers Pawan Kumar Chandana and Naga Bharath Daka founded Skyroot in 2018 and reached space in 2022 on a test flight."
+    },
+    "slide3_news": {
+      "label": "THE UPDATE",
+      "headline": "Vikram-1 Lifts Off, All Four Stages Succeed",
+      "body": "Skyroot's Vikram-1 rocket lifted off on July 18, 2026, from Sriharikota and completed all four stages in 17 minutes. It put satellites into orbit 450 km up, making Skyroot the first Indian private company to reach orbit."
+    },
+    "slide4_why": {
+      "label": "WHY IT MATTERS",
+      "headline": "India's Commercial Space Race Just Sped Up",
+      "bullets": [
+        "Skyroot plans 4 to 6 launches this year",
+        "India's space economy could hit $44 billion by 2033",
+        "Govt subsidy of 30% makes Skyroot cheaper than rivals"
+      ]
+    },
+    "slide5_engage": {
+      "label": "YOUR TAKE",
+      "headline": "Skyroot just did what only ISRO could do before. Should ISRO feel threatened, or proud?",
+      "cta": "Follow for daily business stories that matter to India \ud83d\ude80"
+    },
+    "sources_used": [
+      "https://economictimes.indiatimes.com/tech/startups/spacetech-unicorn-skyroot-launches-vikram-1-marks-indias-first-private-orbital-rocket-mission/articleshow/132475445.cms",
+      "https://www.space.com/space-exploration/launches-spacecraft/skyroot-aerospace-india-first-private-orbital-launch-vikram-1",
+      "https://spacenews.com/skyroot-prepares-for-first-orbital-launch-attempt/",
+      "https://www.business-standard.com/amp/technology/tech-news/skyroot-vikram-1-mission-aagaman-private-orbital-launch-india-126071700363_1.html",
+      "https://www.techlusive.in/news/skyroot-vikram-1-launch-mission-aagaman-india-first-private-orbital-rocket-1669201/",
+      "https://en.wikipedia.org/wiki/Skyroot_Aerospace",
+      "https://www.dealstreetasia.com/stories/skyroot-fundraise-481532",
+      "https://www.newsbytesapp.com/news/business/skyroot-becomes-india-s-1st-space-tech-unicorn-with-60m-funding/story",
+      "https://www.indiandefensenews.in/2026/05/skyroot-aerospace-becomes-indias-first_01649859035.html",
+      "https://techcrunch.com/2026/05/07/indias-first-space-tech-unicorn-emerges-as-skyroot-gears-up-for-orbital-launch/",
+      "https://www.satellitetoday.com/finance/2026/05/07/skyroot-secures-60m-in-funding-becoming-indias-first-space-unicorn/"
+    ]
+  }
+}
