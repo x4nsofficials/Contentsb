@@ -675,7 +675,11 @@ def story_beat_slide(kind, label, headline, bg_src, body=None, bullets=None,
             f'<div class="e-num">{i:02d}</div><p class="e-text">{b}</p></div>'
             for i, b in enumerate(bullets, start=1)
         )
-        content_extra_css = ".beat-text .e-item { padding: 30px 0; } .beat-text .e-text { font-size: calc(var(--scale) * 39px); }"
+        content_extra_css = (
+            ".beat-text .e-item { padding: 30px 0; } "
+            ".beat-text .e-text { font-size: calc(var(--scale) * 39px); "
+            "color: rgba(255,255,255,0.92); font-weight:600; line-height:1.42; }"
+        )
     else:
         content_html = f'<p class="body">{body or ""}</p>'
         content_extra_css = ""
