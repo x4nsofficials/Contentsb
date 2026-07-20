@@ -12,6 +12,7 @@ generated stories (preview.html, content/, digests/, assets/covers, assets/code_
 live on a mounted persistent disk at DATA_DIR, so new stories survive redeploys/restarts
 -- see new_post.py's DATA_DIR comment. PORT is injected by the platform.
 """
+import json
 import os
 import shutil
 import threading
@@ -142,6 +143,45 @@ def admin_restore():
                 return jsonify({"ok": False, "error": f"unsafe path in bundle: {member}"}), 400
         zf.extractall(DATA_DIR)
     return jsonify({"ok": True})
+
+
+@app.route("/admin/rerender", methods=["POST"])
+def admin_rerender():
+    """Re-run rendering for one already-generated story using the CURRENT deployed
+    carousel_render.py, reusing its existing content JSON and raw per-slide background
+    photos already on DATA_DIR -- no new Anthropic/OpenAI calls, so a design tweak
+    (e.g. removing a ghost-numeral watermark, bumping a font size) can be applied to a
+    story generated before that fix shipped, without burning API credit or shuttling
+    large image files back and forth. Same token gate as /admin/restore."""
+    if not ADMIN_TOKEN:
+        abort(404)
+    if request.headers.get("X-Admin-Token") != ADMIN_TOKEN:
+        return jsonify({"ok": False, "error": "bad token"}), 401
+    body = request.get_json(force=True, silent=True) or {}
+    slug = body.get("slug")
+    if not slug:
+        return jsonify({"ok": False, "error": "missing slug"}), 400
+    try:
+        matches = list(new_post.CONTENT_DIR.glob(f"content_*_{slug}.json"))
+        if not matches:
+            return jsonify({"ok": False, "error": f"no content json found for slug '{slug}'"}), 404
+        data = json.loads(matches[0].read_text())
+        specs = new_post.slide_specs(data["slides"])
+        image_paths = {}
+        missing = []
+        for _, name, _, _ in specs:
+            p = new_post.COVERS_DIR / f"{slug}-{name}.png"
+            if not p.exists():
+                missing.append(name)
+            image_paths[name] = p
+        if missing:
+            return jsonify({"ok": False, "error": f"missing raw background image(s): {missing}"}), 404
+        log_lines = []
+        new_post.render_slides(data, slug, image_paths, log_lines.append)
+        return jsonify({"ok": True, "log": log_lines})
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify({"ok": False, "error": str(e)}), 500
 
 
 @app.route("/prepare_publish", methods=["POST"])
