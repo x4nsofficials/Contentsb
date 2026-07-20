@@ -376,9 +376,13 @@ def _img_src(src):
     return _data_uri(s)
 
 
-def render_to_png(inner_html, extra_css, out_path, autofit=None):
-    """autofit: list of dicts {"selector": "#stack", "min": 0.55, "max": 1.0, "step": 0.05}
-    Shrinks the element's --scale custom property until scrollHeight <= clientHeight."""
+def _render_page_to_png(page, inner_html, extra_css, out_path, autofit=None):
+    """Shared render body: paints one slide onto an already-open Playwright page and
+    screenshots it. Split out of render_to_png so render_batch_to_png can reuse a single
+    browser (and hand it a fresh page per slide) across a whole carousel instead of
+    launching/closing a full Chromium process per slide -- launch overhead was one of
+    the meaningful chunks of "generate new post" taking too long once a story could run
+    to 7-8 slides instead of a fixed 5."""
     doc = f"""<!DOCTYPE html><html><head><meta charset="utf-8">{FONTS_LINK}
 <style>{BASE_CSS}
 {extra_css}</style></head><body>
@@ -386,28 +390,55 @@ def render_to_png(inner_html, extra_css, out_path, autofit=None):
 </body></html>"""
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
+    page.set_content(doc, wait_until="networkidle")
+    if autofit:
+        for rule in autofit:
+            sel = rule["selector"]
+            scale = rule.get("max", 1.0)
+            min_scale = rule.get("min", 0.55)
+            step = rule.get("step", 0.05)
+            if page.query_selector(sel) is None:
+                continue
+            while scale > min_scale:
+                page.eval_on_selector(sel, "(el, s) => el.style.setProperty('--scale', s)", scale)
+                overflow = page.eval_on_selector(sel, "el => el.scrollHeight > el.clientHeight + 2")
+                if not overflow:
+                    break
+                scale = round(scale - step, 3)
+    _detone_overpowering_accents(page)
+    page.screenshot(path=str(out_path))
+    return out_path
+
+
+def render_to_png(inner_html, extra_css, out_path, autofit=None):
+    """autofit: list of dicts {"selector": "#stack", "min": 0.55, "max": 1.0, "step": 0.05}
+    Shrinks the element's --scale custom property until scrollHeight <= clientHeight.
+    Launches its own single-use browser -- fine for one-off renders, but see
+    render_batch_to_png for rendering a whole carousel's worth of slides at once."""
     with sync_playwright() as p:
         browser = p.chromium.launch()
         page = browser.new_page(viewport={"width": CANVAS_W, "height": CANVAS_H})
-        page.set_content(doc, wait_until="networkidle")
-        if autofit:
-            for rule in autofit:
-                sel = rule["selector"]
-                scale = rule.get("max", 1.0)
-                min_scale = rule.get("min", 0.55)
-                step = rule.get("step", 0.05)
-                if page.query_selector(sel) is None:
-                    continue
-                while scale > min_scale:
-                    page.eval_on_selector(sel, "(el, s) => el.style.setProperty('--scale', s)", scale)
-                    overflow = page.eval_on_selector(sel, "el => el.scrollHeight > el.clientHeight + 2")
-                    if not overflow:
-                        break
-                    scale = round(scale - step, 3)
-        _detone_overpowering_accents(page)
-        page.screenshot(path=str(out_path))
+        result = _render_page_to_png(page, inner_html, extra_css, out_path, autofit=autofit)
         browser.close()
-    return out_path
+    return result
+
+
+def render_batch_to_png(jobs, log=None):
+    """Render multiple slides under ONE shared browser instance (a fresh page per slide,
+    not a fresh browser process per slide). jobs: list of (inner_html, extra_css,
+    out_path, autofit). Returns the list of out_paths in the same order."""
+    log = log or (lambda msg: None)
+    results = []
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        for inner_html, extra_css, out_path, autofit in jobs:
+            page = browser.new_page(viewport={"width": CANVAS_W, "height": CANVAS_H})
+            result = _render_page_to_png(page, inner_html, extra_css, out_path, autofit=autofit)
+            page.close()
+            results.append(result)
+            log(f"rendered {Path(out_path).name}")
+        browser.close()
+    return results
 
 
 # ---------------------------------------------------------------------------

@@ -1,0 +1,108 @@
+{
+  "generated_at": "2026-07-20T15:14:40.671301",
+  "source_item": {
+    "title": "From a Class 10 Dropout to Making Parts for Rolls-Royce, Boeing and Fighter Jets",
+    "source": "YourStory",
+    "link": "https://yourstory.com/2026/07/rakesh-chopdar-azad-engineering-aerospace-success-story",
+    "category": "founder_narrative",
+    "score": 8.0
+  },
+  "slides": {
+    "hook": {
+      "label": "India's **Dropout** Is Making Parts for Rolls-Royce",
+      "subhead": "From a Hyderabad shed to a $1.8B company.",
+      "image_scene": "A lone CNC machine running inside a small, dimly lit corrugated-iron shed in an industrial area, metal shavings scattered on the concrete floor, single fluorescent tube overhead"
+    },
+    "beats": [
+      {
+        "kind": "origin",
+        "label": "THE BACKSTORY",
+        "headline": "**Failed** Class 10. Called a Failure.",
+        "body": "Rakesh Chopdar couldn't pass his 10th-grade exams. Family and friends labeled him \"incapable.\" So he went to work in his father's nut-and-bolt factory in Hyderabad instead.",
+        "image_scene": "A worn school report card lying on a workbench next to a spanner and a grease rag, shot close up under harsh workshop light"
+      },
+      {
+        "kind": "turning-point",
+        "label": "THE MOMENT EVERYTHING CHANGED",
+        "headline": "One Customer. One Part. **One Chance.**",
+        "body": "A man walked into the factory carrying an aerofoil \u2014 a blade used inside jet engines and turbines. He'd traveled the world looking for a good supplier. Rakesh asked for a few months to try making one himself. He delivered. The customer was amazed.",
+        "image_scene": "A gleaming titanium aerofoil blade held up by two hands against a blurred workshop background, light catching its curved edge"
+      },
+      {
+        "kind": "the-build",
+        "label": "FROM SHED TO GLOBAL SUPPLIER",
+        "headline": "Started With **One Machine** in 200 Sq Ft",
+        "body": "In 2008, Rakesh started AZAD Engineering in a 200-square-meter shed in Balanagar, Hyderabad, with one second-hand CNC machine and revenue of just \u20b92 crore.",
+        "image_scene": "An aerial view of a modern multi-building manufacturing campus in Hyderabad at dusk, lights on in every factory block, expansion plots visible next to it",
+        "timeline": [
+          {
+            "year": "2008",
+            "text": "Started in a 200 sq m shed. Revenue: \u20b92 crore.",
+            "accent": false
+          },
+          {
+            "year": "2024",
+            "text": "IPO lists at 37% premium. Market cap crosses $1B.",
+            "accent": false
+          },
+          {
+            "year": "FY25",
+            "text": "Revenue hits \u20b9452 crore. 33% growth year-on-year.",
+            "accent": true
+          }
+        ],
+        "chart": null,
+        "stat": null
+      },
+      {
+        "kind": "the-clients",
+        "label": "WHO TRUSTS AZAD TODAY",
+        "headline": "The World's **Biggest Names** in Aerospace",
+        "bullets": [
+          "Rolls-Royce: 7-year defence engine contract",
+          "Boeing, GE Aviation, Pratt & Whitney",
+          "Fighter jet parts with DRDO",
+          "92% of revenue comes from exports"
+        ],
+        "image_scene": "A close-up of a precision-machined turbine component with a Rolls-Royce inspection tag attached, sitting on a quality-control inspection table under bright white light",
+        "timeline": null,
+        "chart": null,
+        "stat": null
+      },
+      {
+        "kind": "perspective",
+        "label": "THE REAL STORY HERE",
+        "headline": "The West **Didn't Believe** India Could Do This",
+        "body": "These aren't cheap commodity parts. They must meet a zero-defects standard. For decades, global aerospace primes sourced this kind of work only from US, European, and Japanese factories. A self-taught guy from Hyderabad just proved them wrong. And the order book now sits above \u20b96,500 crore.",
+        "image_scene": "A quality inspector in a white coat and gloves measuring a precision aerospace component with a coordinate measuring machine, focus on the instrument's digital readout showing microscopic tolerances",
+        "timeline": null,
+        "chart": null,
+        "stat": null
+      }
+    ],
+    "engage": {
+      "label": "YOUR TAKE",
+      "headline": "If India can hit **zero defects** for Rolls-Royce, why do we still assume the West owns deep manufacturing?",
+      "cta": "Drop your thoughts below. Follow for more stories like this.",
+      "image_scene": "Rakesh Chopdar-style moment: a man in a factory uniform standing with arms crossed in front of a row of humming CNC machines, looking directly at the camera, confident expression, Hyderabad factory floor setting"
+    },
+    "sources_used": [
+      "https://azad.in/founder-message/",
+      "https://www.theceomagazine.com/executive-interviews/manufacturing/rakesh-chopdar/",
+      "https://www.india.com/business/meet-man-rakesh-chopdar-who-faced-many-rejections-failed-in-class-10-then-built-his-own-company-worth-rs-5499-crore-also-backed-by-sachin-tendulkar-his-business-is-azad-engineering-7488864/",
+      "https://zeenews.india.com/photos/business/from-school-dropout-to-global-leader-meet-self-taught-engineer-who-built-billion-dollar-company-backed-by-a-legendary-cricketer-partnered-with-rolls-royce-and-drdo-his-business-is-2839436",
+      "https://tradebrains.in/azad-engineerings-partnership-with-rolls-royce-and-its-position-in-aerospace-explained/",
+      "https://www.bajajbroking.in/blog/azad-engineering-signs-long-term-deal-with-rolls-royce-for-aircraft-parts",
+      "https://defensemirror.com/news/35960/India_s_Azad_Engineering_to_Manufacture_Complex_Aero_Engine_Components_for_Rolls_Royce",
+      "https://www.businesstoday.in/markets/company-stock/story/azad-engineering-shares-rise-rolls-royce-contract-415334-2024-01-30",
+      "https://smtfinmedia.com/components-for-rolls-royce-in-the-defence-sector/",
+      "https://azad.in/wp-content/uploads/2025/09/Annual-Report.pdf",
+      "https://scanx.trade/stock-news/azad-engineering-ltd",
+      "https://www.whalesbook.com/news/English/industrial-goodsservices/Azad-Engineering-Hits-Record-as-New-Plant-Baker-Hughes-Deal-Boost-Stock/69eb0d1abca97ee106adefe8",
+      "https://tradebrains.in/6000-cr-orderbook-defence-stock-with-30-revenue-guidance-to-add-to-your-watchlist/",
+      "https://www.screener.in/company/AZAD/consolidated/",
+      "https://www.alphaspread.com/security/nse/azad/investor-relations/earnings-call/q1-2026",
+      "https://yourstory.com/2026/07/rakesh-chopdar-azad-engineering-aerospace-success-story"
+    ]
+  }
+}

@@ -29,7 +29,9 @@ load_dotenv(HERE.parent / ".env", override=True)
 
 sys.path.insert(0, str(HERE))
 from generate_content import call_claude, extract_json, slugify  # noqa: E402
-from carousel_render import cover_slide, story_beat_slide, engage_slide, render_to_png  # noqa: E402
+from carousel_render import (  # noqa: E402
+    cover_slide, story_beat_slide, engage_slide, render_batch_to_png,
+)
 
 DATA_DIR = Path(os.environ.get("DATA_DIR", str(HERE)))
 CONTENT_DIR = DATA_DIR / "content"
@@ -173,27 +175,43 @@ def generate_images(data, slug, log):
     """One distinct AI image per slide (hook, every beat, engage) instead of reusing 1-2
     photos across the whole carousel -- each call gets that slide's own `image_scene`
     plus an explicit "must be visually distinct from the others in this sequence"
-    instruction, since gpt-image-1 doesn't see the other prompts in the same story."""
+    instruction, since gpt-image-1 doesn't see the other prompts in the same story.
+    Fired concurrently (bounded pool) rather than one at a time -- with up to 7-8 images
+    per story now instead of a fixed 2, sequential generation was the single biggest
+    contributor to "generate new post" taking too long; each call is an independent
+    network request, so there's no reason to wait for one to finish before starting the
+    next."""
+    from concurrent.futures import ThreadPoolExecutor, as_completed
     from openai import OpenAI
     client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
     s = data["slides"]
     specs = slide_specs(s)
-    paths = {}
-    for pos, name, role, spec in specs:
+
+    def build_prompt(role, spec):
         scene = spec.get("image_scene", "")
         role_desc = {
             "hook": "the cover / opening shot of a multi-image carousel telling one story",
             "beat": f"an inside shot of the same carousel story (beat: {spec.get('label', '')})",
             "engage": "the closing shot of the same carousel story",
         }[role]
-        prompt = (
+        return (
             f"{IMAGE_STYLE} This is {role_desc}. It must be visually distinct from every "
             f"other image in this same story sequence, a different subject, setting, or "
             f"moment, not a near-repeat. Scene: {scene}"
         )
-        out_path = COVERS_DIR / f"{slug}-{name}.png"
-        paths[name] = generate_image(client, prompt, out_path, log)
+
+    paths = {}
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        future_to_name = {
+            executor.submit(
+                generate_image, client, build_prompt(role, spec), COVERS_DIR / f"{slug}-{name}.png", log,
+            ): name
+            for pos, name, role, spec in specs
+        }
+        for future in as_completed(future_to_name):
+            name = future_to_name[future]
+            paths[name] = future.result()
     return paths
 
 
@@ -228,9 +246,9 @@ def render_slides(data, slug, image_paths, log):
             )
         jobs.append((inner, css, out_dir / f"{slug}-{name}.png", autofit))
 
-    for inner, css, out_path, autofit in jobs:
-        render_to_png(inner, css, out_path, autofit=autofit)
-        log(f"rendered {out_path.relative_to(DATA_DIR)}")
+    # One shared browser instance for the whole batch instead of launching/closing
+    # Chromium per slide -- render_batch_to_png logs each slide as it completes.
+    render_batch_to_png(jobs, log=lambda msg: log(msg))
 
     return out_dir
 

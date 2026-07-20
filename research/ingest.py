@@ -4,6 +4,7 @@ import html
 import json
 import os
 import sys
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from time import mktime
@@ -79,8 +80,14 @@ def main():
     feed_report = []
     seen_links = set()
 
-    for feed in sources["rss_feeds"]:
-        result = fetch_feed(feed)
+    # Feeds are independent network requests -- fetching them one at a time meant a
+    # single slow/hanging source (each has its own 15s timeout) held up every feed
+    # behind it. Concurrent fetch keeps executor.map's output in the same order as
+    # sources.json, so nothing else about the pipeline changes.
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        results = list(executor.map(fetch_feed, sources["rss_feeds"]))
+
+    for result in results:
         feed_report.append({
             "name": result["name"],
             "http_status": result["http_status"],

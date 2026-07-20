@@ -14,6 +14,8 @@ load_dotenv(HERE.parent / ".env", override=True)
 
 DATA_DIR = Path(os.environ.get("DATA_DIR", str(HERE)))
 DIGESTS_DIR = DATA_DIR / "digests"
+CONTENT_DIR = DATA_DIR / "content"
+MAX_PUBLISHED_TITLES = 150
 API_URL = os.environ.get("ANTHROPIC_BASE_URL", "https://api.anthropic.com") + "/v1/messages"
 API_KEY = os.environ["ANTHROPIC_API_KEY"]
 MODEL = "claude-sonnet-4-6"
@@ -67,11 +69,27 @@ pivot investors are debating, or a figure that changes the sector's balance of p
 batch only really differ by which percentage moved, treat them as a cluster the same way you treat duplicates — \
 keep your best 0-10 score on the single most exceptional one and score the rest no higher than 4.
 
-IMPORTANT — duplicate detection: many items are the same underlying story covered by multiple outlets (e.g. the \
-same IPO filing or earnings report reported by 3-4 different sources). Identify these clusters yourself across \
-the ENTIRE list given. Within each duplicate cluster, give your normal 0-10 score to ONLY the single best-written \
-version (most complete/most authoritative source), and give every other item in that same cluster a score of 0 \
-with reason "duplicate of item N" (referencing the item number you kept).
+IMPORTANT — duplicate detection, TWO kinds, both matter equally:
+1. Within this batch: many items are the same underlying story covered by multiple outlets (e.g. the same IPO \
+filing or earnings report reported by 3-4 different sources). Identify these clusters yourself across the ENTIRE \
+list given. Within each duplicate cluster, give your normal 0-10 score to ONLY the single best-written version \
+(most complete/most authoritative source), and give every other item in that same cluster a score of 0 with \
+reason "duplicate of item N" (referencing the item number you kept).
+2. Against ALREADY PUBLISHED stories: you will also be given a list of titles this page has already turned into \
+a carousel. Be CONSERVATIVE here, meaning quick to call something a duplicate, not slow to. If a candidate is \
+about the same company, product, launch, deal, or event as one of those published titles, treat it as already \
+covered and score it 0 — even if it's:
+- a differently-worded headline about the same launch/result/deal
+- a "weekly rundown" that recaps something already covered
+- a second outlet's take on the same filing
+- a founder interview, retrospective, or "the story behind X" piece about a milestone you already ran a carousel \
+on — a new quote or a different narrator (the founder talking instead of a reporter) is still the SAME milestone, \
+not new information, unless it reports a genuinely separate development (a new funding round, a new product, a \
+new number) that the published story didn't cover
+When genuinely uncertain whether it's the same underlying story or a truly separate development, default to \
+treating it as a duplicate — the cost of skipping a borderline-new angle is much lower than the cost of running \
+the same company/story twice. Score it 0 with reason "already published: <the matching published title, \
+shortened>".
 
 For each item given (numbered), respond with ONE line per item in this exact format:
 N|score|one-line reason
@@ -82,8 +100,31 @@ N|score|one-line reason
 Only output these lines, nothing else. One line per item, in the same order given."""
 
 
-def build_batch_prompt(items, start_idx):
+def already_published_titles():
+    """Titles this page has already turned into a carousel, for the scorer's second
+    duplicate-detection pass (see SYSTEM_PROMPT). Capped and most-recent-first since an
+    older, long-tail story reappearing under a new headline is far less likely than a
+    recent one still circulating in RSS feeds' lookback windows."""
+    files = sorted(CONTENT_DIR.glob("content_*.json"), key=lambda p: p.stat().st_mtime, reverse=True)
+    titles = []
+    for p in files[:MAX_PUBLISHED_TITLES]:
+        try:
+            data = json.loads(p.read_text())
+        except (json.JSONDecodeError, OSError):
+            continue
+        title = data.get("source_item", {}).get("title")
+        if title:
+            titles.append(title)
+    return titles
+
+
+def build_batch_prompt(items, start_idx, published_titles=None):
     lines = []
+    if published_titles:
+        lines.append("ALREADY PUBLISHED (do not re-cover these underlying stories):")
+        lines.extend(f"- {t}" for t in published_titles)
+        lines.append("")
+        lines.append("CANDIDATES TO SCORE:")
     for i, item in enumerate(items, start=start_idx):
         lines.append(f"{i}. [{item['source']}] {item['title']} — {item['summary'][:200]}")
     return "\n".join(lines)
@@ -139,12 +180,14 @@ def main():
 
     digest = json.loads(digest_path.read_text())
     items = digest["items"]
-    print(f"Scoring {len(items)} items in batches of {BATCH_SIZE}...")
+    published_titles = already_published_titles()
+    print(f"Scoring {len(items)} items in batches of {BATCH_SIZE} "
+          f"(checking against {len(published_titles)} already-published titles)...")
 
     all_scored = []
     for start in range(0, len(items), BATCH_SIZE):
         batch = items[start:start + BATCH_SIZE]
-        prompt = build_batch_prompt(batch, start + 1)
+        prompt = build_batch_prompt(batch, start + 1, published_titles=published_titles)
         text = call_claude(prompt)
         scored = parse_scores(text, batch, start + 1)
         all_scored.extend(scored)
