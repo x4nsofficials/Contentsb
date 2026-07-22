@@ -109,6 +109,39 @@ should use NONE of these — do not force one in.
 - "chart": a genuine two/three-value comparison — [{"value": 7.0, "display": "$7B", "accent": true/false}, ...].
 - "stat": one striking standalone number, not a comparison — {"value": "$7B", "caption": "short label"}.
 
+DISTRIBUTION — write a separate, platform-native caption for Instagram, Facebook, LinkedIn, and X (Twitter), not \
+one caption copy-pasted four times. Each platform's algorithm rewards different things, so the SAME caption \
+performs differently on each one:
+- **Instagram**: only the first ~125 characters show before "more," so open with the sharpest line, not throat-\
+clearing. Can run longer overall (2-3 short paragraphs is fine) since Instagram increasingly functions as a \
+search engine — use real, specific words a person would actually search, not vague hype. End on the engagement \
+question. Hashtags: 3-6, specific and relevant (a mix of niche + broader terms) — never a wall of 20 generic \
+tags, which reads as spam and is not how reach actually works on this platform now.
+- **Facebook**: shorter and more conversational than Instagram, written to spark an actual reply/conversation \
+(comments outrank reactions in Facebook's ranking) rather than just stating the news. Ask a real, specific \
+question people would actually answer, not a generic "thoughts?". Hashtags barely affect reach on Facebook: 0-2 \
+at most, or none.
+- **LinkedIn**: LinkedIn truncates aggressively behind "see more," so the first 2 lines must work as a complete, \
+standalone hook — a specific, slightly contestable claim or observation, not a generic corporate opener. Write \
+it in a human, first-person-adjacent analyst voice (LinkedIn's algorithm and audience both favor a real \
+perspective over a broadcast-y announcement), and close with something that invites a substantive reply, not a \
+low-effort "agree?" (LinkedIn's ranking recognizes and downweights obvious engagement bait). Hashtags: 3-5, topic-\
+relevant.
+- **X (Twitter)**: a single tweet. The tightest, punchiest version of the hook, built around one curiosity gap. \
+Hashtags: 1-2 maximum — more than that reads as spam and actively hurts on this platform, unlike Instagram.
+
+For every platform: put hashtags ONLY in that platform's "hashtags" array, never written inline inside the \
+"caption" text itself — the caption and the hashtags get joined together automatically afterward, so writing \
+them in both places would duplicate them. For X (Twitter) specifically, the caption text PLUS its hashtags \
+together (with a blank line between them, the way they'll actually be joined) must stay under 280 characters \
+total — leave room for the hashtags when writing the caption, don't fill all 280 with caption text alone.
+
+None of these four captions should be identical to each other or to the slide copy above — each is written fresh \
+for how that platform's audience actually reads and that platform's algorithm actually ranks. Same style rules as \
+everywhere else in this brief apply here too: no em dashes or en dashes, simple words, no stiff transition \
+openers — these captions are exactly the kind of visible, share-triggering text where an em dash reads as the \
+most obviously AI-written giveaway, so double-check each one before finalizing.
+
 BRAND HEADLINE MARKUP — the carousel renderer implements a "two-typeface headline": every headline/label \
 renders in bold sans by default, and wrapping a short phrase in double asterisks (**like this**) switches just \
 that phrase to italic orange serif for a single emphatic beat. In every "label"/"headline" field below (hook \
@@ -146,7 +179,13 @@ Then write the carousel as JSON with exactly this shape:
     "cta": "one short follow/engagement prompt line",
     "image_scene": "specific visual scene for the closing photo -- can revisit the hook's subject from a different angle/moment for a 'full circle' feel, but must still be visually distinct from the hook's own image_scene"
   },
-  "sources_used": ["list of URLs or source names you actually drew on, including the original source and anything found via web search"]
+  "sources_used": ["list of URLs or source names you actually drew on, including the original source and anything found via web search"],
+  "distribution": {
+    "instagram": {"caption": "platform-native caption per the DISTRIBUTION rules above", "hashtags": ["3-6 tags, no # prefix"]},
+    "facebook": {"caption": "platform-native caption per the DISTRIBUTION rules above", "hashtags": ["0-2 tags, no # prefix"]},
+    "linkedin": {"caption": "platform-native caption per the DISTRIBUTION rules above", "hashtags": ["3-5 tags, no # prefix"]},
+    "twitter": {"caption": "no inline hashtags -- leaves room so caption+hashtags together stay under 280 chars, per the DISTRIBUTION rules above", "hashtags": ["1-2 tags, no # prefix"]}
+  }
 }
 
 Output ONLY the JSON object, nothing else — no markdown fences, no commentary. Before outputting, re-read your \
@@ -179,7 +218,7 @@ def call_claude(item):
         },
         json={
             "model": MODEL,
-            "max_tokens": 7000,
+            "max_tokens": 8000,
             "system": SYSTEM_PROMPT,
             "tools": [{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
             "messages": [{"role": "user", "content": prompt}],

@@ -204,11 +204,11 @@ def publish_log(msg):
         PUBLISH_STATE["log"].append(msg)
 
 
-def run_publish(slug, base_url, targets, caption):
+def run_publish(slug, base_url, targets, captions):
     with PUBLISH_LOCK:
         PUBLISH_STATE.update({"running": True, "done": False, "error": None, "log": [], "result": None})
     try:
-        result = publish_post.publish(slug, base_url, targets, caption, log=publish_log)
+        result = publish_post.publish(slug, base_url, targets, captions, log=publish_log)
         with PUBLISH_LOCK:
             PUBLISH_STATE["result"] = result
     except Exception as e:
@@ -228,13 +228,13 @@ def publish_route():
     slug = body.get("slug")
     base_url = body.get("base_url")
     targets = body.get("targets") or []
-    caption = body.get("caption") or ""
+    captions = body.get("captions") or {}
     if not slug or not base_url or not targets:
         return jsonify({"ok": False, "error": "missing slug, base_url, or targets"}), 400
     with PUBLISH_LOCK:
         if PUBLISH_STATE["running"]:
             return jsonify({"ok": False, "error": "a publish is already running"}), 409
-    threading.Thread(target=run_publish, args=(slug, base_url, targets, caption), daemon=True).start()
+    threading.Thread(target=run_publish, args=(slug, base_url, targets, captions), daemon=True).start()
     return jsonify({"ok": True})
 
 

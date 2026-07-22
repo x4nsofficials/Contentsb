@@ -159,6 +159,13 @@
   .pub-panel { display: none; margin-top: 16px; padding: 18px 20px; background: rgba(255,255,255,0.03);
     border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; }
   .pub-panel.open { display: block; }
+  .pub-platform-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .pub-platform-tab { appearance: none; border: 1px solid rgba(255,255,255,0.16); background: transparent;
+    color: rgba(255,255,255,0.6); border-radius: 999px; padding: 7px 15px; font-size: 12px; font-weight: 700;
+    font-family: var(--font-sans); cursor: pointer; }
+  .pub-platform-tab:hover { border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.85); }
+  .pub-platform-tab.active { background: rgba(233,72,15,0.16); border-color: rgba(233,72,15,0.6); color: var(--orange-400); }
+  .pub-hashtag-note { font-size: 11.5px; color: rgba(255,255,255,0.4); margin: -6px 0 10px; }
   .pub-panel textarea { width: 100%; min-height: 110px; background: rgba(0,0,0,0.3);
     border: 1px solid rgba(255,255,255,0.14); border-radius: 8px; padding: 10px 12px;
     font-size: 12.5px; line-height: 1.5; color: #fff; font-family: var(--font-sans); resize: vertical; }
@@ -299,11 +306,28 @@ document.addEventListener('DOMContentLoaded', function () {
     return m ? m[1] : null;
   }
 
+  // Platforms this app can generate a ready-to-post caption+hashtags for. Instagram
+  // and Facebook also support one-click automated publishing (Meta Graph API);
+  // LinkedIn and X don't have an API integration here, so their "export" flow is
+  // copy-the-right-caption + open-the-right-compose-page instead of full automation.
+  var PLATFORM_META = {
+    instagram: { label: 'Instagram', openUrl: 'https://www.instagram.com/' },
+    facebook: { label: 'Facebook', openUrl: 'https://www.facebook.com/' },
+    linkedin: { label: 'LinkedIn', openUrl: 'https://www.linkedin.com/feed/?shareActive=true' },
+    twitter: { label: 'X (Twitter)', openUrl: 'https://twitter.com/compose/tweet' },
+  };
+  var PLATFORM_ORDER = ['instagram', 'facebook', 'linkedin', 'twitter'];
+
   function buildPanel(slug) {
     var panel = document.createElement('div');
     panel.className = 'pub-panel';
+    var tabsHtml = PLATFORM_ORDER.map(function (p) {
+      return '<button type="button" class="pub-platform-tab" data-platform="' + p + '">' + PLATFORM_META[p].label + '</button>';
+    }).join('');
     panel.innerHTML =
+      '<div class="pub-platform-tabs">' + tabsHtml + '</div>' +
       '<textarea class="pub-caption"></textarea>' +
+      '<p class="pub-hashtag-note">Caption and hashtags are written separately per platform (Instagram/LinkedIn get several relevant hashtags, X gets 1-2, Facebook usually none) since each algorithm rewards them differently.</p>' +
       '<div class="pub-targets">' +
       '<label><input type="checkbox" class="pub-target-ig" checked> Instagram</label>' +
       '<label><input type="checkbox" class="pub-target-fb" checked> Facebook</label>' +
@@ -332,7 +356,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var exportBtn = document.createElement('button');
     exportBtn.className = 'pub-export';
     exportBtn.type = 'button';
-    exportBtn.textContent = 'Export & open Instagram';
+    exportBtn.textContent = 'Export & open Instagram'; // updated per-platform once tabs exist, see setActiveTab
 
     var exportStatusEl = document.createElement('span');
     exportStatusEl.className = 'pub-export-status';
@@ -354,6 +378,7 @@ document.addEventListener('DOMContentLoaded', function () {
     metaBlock.parentNode.insertBefore(panel, actions.nextSibling);
 
     var captionEl = panel.querySelector('.pub-caption');
+    var tabEls = panel.querySelectorAll('.pub-platform-tab');
     var igCheck = panel.querySelector('.pub-target-ig');
     var fbCheck = panel.querySelector('.pub-target-fb');
     var confirmBtn = panel.querySelector('.pub-confirm');
@@ -362,6 +387,32 @@ document.addEventListener('DOMContentLoaded', function () {
     var logEl = panel.querySelector('.pub-log');
     var errorEl = panel.querySelector('.pub-error');
 
+    var currentPlatform = 'instagram';
+    var captionsByPlatform = null;
+
+    function setActiveTab(platform) {
+      currentPlatform = platform;
+      tabEls.forEach(function (btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-platform') === platform);
+      });
+      if (captionsByPlatform) captionEl.value = captionsByPlatform[platform] || '';
+      exportBtn.textContent = 'Export & open ' + PLATFORM_META[platform].label;
+    }
+
+    // Edits made while a given platform's tab is showing should stick to that
+    // platform, not vanish when switching tabs or get applied to the wrong one.
+    function syncCurrentCaptionEdits() {
+      if (captionsByPlatform) captionsByPlatform[currentPlatform] = captionEl.value;
+    }
+
+    tabEls.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        syncCurrentCaptionEdits();
+        setActiveTab(btn.getAttribute('data-platform'));
+      });
+    });
+    setActiveTab(currentPlatform);
+
     function renderLog(lines) {
       if (!lines || !lines.length) { logEl.style.display = 'none'; return; }
       logEl.style.display = 'block';
@@ -369,10 +420,10 @@ document.addEventListener('DOMContentLoaded', function () {
       logEl.scrollTop = logEl.scrollHeight;
     }
 
-    // Fetches the caption + rendered slide list + credential status once, then
-    // caches the promise so re-opening the panel or clicking export again doesn't
-    // re-hit the server. Shared by the "Post to Instagram & Facebook" panel and the
-    // "Export & open Instagram" button below.
+    // Fetches all four platforms' captions + rendered slide list + credential status
+    // once, then caches the promise so re-opening the panel or clicking export again
+    // doesn't re-hit the server. Shared by the "Post to Instagram & Facebook" panel
+    // and the "Export & open <platform>" button below.
     function ensureLoaded() {
       if (preparedPromise) return preparedPromise;
       preparedPromise = fetch('/prepare_publish', {
@@ -382,7 +433,8 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(function (res) {
           if (!res.ok) { throw new Error(res.body.error || 'failed to prepare'); }
           loaded = true;
-          captionEl.value = res.body.caption;
+          captionsByPlatform = res.body.captions;
+          captionEl.value = captionsByPlatform[currentPlatform] || '';
           igCheck.checked = !!res.body.credentials.instagram;
           fbCheck.checked = !!res.body.credentials.facebook;
           if (!res.body.credentials.instagram) {
@@ -417,15 +469,21 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-    // "Export & open Instagram": for anyone who hasn't set up the Meta API tokens
-    // yet (or just prefers it), this downloads the rendered slides straight to the
-    // Downloads folder, copies the caption to the clipboard, and opens Instagram in
-    // a new tab already logged in (using the browser's existing session) so the
-    // slides can be picked from the file dialog and the caption pasted in.
+    // "Export & open <platform>": for the currently-selected platform tab, downloads
+    // the rendered slides straight to the Downloads folder and either (a) for X/
+    // Twitter, opens the compose window with the caption already prefilled via
+    // Twitter's own web-intent URL, a real platform feature -- no clipboard step
+    // needed there -- or (b) for Instagram/Facebook/LinkedIn, which have no such
+    // prefill mechanism, copies that platform's caption to the clipboard and opens
+    // the platform logged in (using the browser's existing session) so the slides
+    // can be picked from the file dialog and the caption pasted in.
     exportBtn.addEventListener('click', function () {
+      syncCurrentCaptionEdits();
+      var platform = currentPlatform;
+      var meta = PLATFORM_META[platform];
       // Open the tab synchronously, before any awaited network call, so the browser
       // doesn't treat it as a blocked popup once we navigate it below.
-      var igWindow = window.open('about:blank', '_blank');
+      var targetWindow = window.open('about:blank', '_blank');
       exportBtn.disabled = true;
       var originalLabel = exportBtn.textContent;
       exportBtn.textContent = 'Preparing...';
@@ -444,21 +502,31 @@ document.addEventListener('DOMContentLoaded', function () {
           }, i * 300);
         });
 
+        var caption = captionsByPlatform ? captionsByPlatform[platform] : '';
+
+        if (platform === 'twitter') {
+          // Twitter's web intent genuinely supports prefilling tweet text via URL --
+          // no clipboard step needed, and no manual paste to get wrong.
+          if (targetWindow) targetWindow.location.href = meta.openUrl + '?text=' + encodeURIComponent(caption);
+          exportStatusEl.textContent = body.images.length + ' slides downloading. Tweet text is pre-filled, just attach the images.';
+          return Promise.resolve();
+        }
+
         var clipPromise = (navigator.clipboard && navigator.clipboard.writeText)
-          ? navigator.clipboard.writeText(body.caption)
+          ? navigator.clipboard.writeText(caption)
           : Promise.reject(new Error('clipboard API unavailable'));
 
         return clipPromise.then(function () {
-          if (igWindow) igWindow.location.href = 'https://www.instagram.com/';
-          exportStatusEl.textContent = 'Caption copied, ' + body.images.length + ' slides downloading. Paste the caption once Instagram opens.';
+          if (targetWindow) targetWindow.location.href = meta.openUrl;
+          exportStatusEl.textContent = 'Caption copied, ' + body.images.length + ' slides downloading. Paste the caption once ' + meta.label + ' opens.';
         }).catch(function () {
-          if (igWindow) igWindow.location.href = 'https://www.instagram.com/';
+          if (targetWindow) targetWindow.location.href = meta.openUrl;
           panel.classList.add('open');
           statusEl.textContent = body.images.length + ' slides downloading. Clipboard copy was blocked, copy the caption above instead.';
           exportStatusEl.textContent = 'Slides downloading. Copy the caption from the panel above (clipboard access was blocked).';
         });
       }).catch(function (e) {
-        if (igWindow) igWindow.close();
+        if (targetWindow) targetWindow.close();
         exportStatusEl.style.color = '#F2836B';
         exportStatusEl.textContent = e.message || String(e);
       }).then(function () {
@@ -489,9 +557,10 @@ document.addEventListener('DOMContentLoaded', function () {
       errorEl.style.display = 'none';
       confirmBtn.disabled = true;
       statusEl.textContent = 'Publishing...';
+      syncCurrentCaptionEdits();
       fetch('/publish', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ slug: slug, base_url: baseUrl, targets: targets, caption: captionEl.value }),
+        body: JSON.stringify({ slug: slug, base_url: baseUrl, targets: targets, captions: captionsByPlatform || {} }),
       }).then(function (r) {
         if (!r.ok) { return r.json().then(function (b) { throw new Error(b.error || 'failed to start publish'); }); }
         poller = setInterval(poll, 1500);

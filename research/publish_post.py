@@ -79,6 +79,9 @@ def find_content_json(slug, title=None):
 
 
 def build_caption(data):
+    """Generic single caption, used as the fallback for stories generated before the
+    per-platform DISTRIBUTION fields existed (see generate_content.py). Every new story
+    gets four real, platform-native captions instead -- see build_platform_captions."""
     s = data["slides"]
     # New schema (variable beat count): {"hook":..., "beats":[...], "engage":...}.
     # Old schema (fixed 5 slides, still present in already-generated stories):
@@ -95,6 +98,40 @@ def build_caption(data):
     lines.append("Follow for daily business stories that matter to India.")
     lines.append("#India #Business #StartupNews #Markets")
     return "\n".join(lines)
+
+
+PLATFORMS = ("instagram", "facebook", "linkedin", "twitter")
+
+
+def _combine_caption_and_hashtags(caption, hashtags):
+    caption = (caption or "").strip()
+    tags = " ".join(f"#{h.lstrip('#')}" for h in (hashtags or []) if h and h.strip())
+    if not tags:
+        return caption
+    return f"{caption}\n\n{tags}"
+
+
+def build_platform_captions(data):
+    """One ready-to-paste caption+hashtags string per platform. Uses the story's own
+    DISTRIBUTION field (written per-platform by generate_content.py, applying real
+    algorithm/psychology differences between Instagram, Facebook, LinkedIn, and X --
+    see the social-media-growth-manager skill) when present. Older stories generated
+    before that field existed fall back to the one generic caption for all four --
+    not ideal, but strictly better than an error, and every new story gets the real
+    per-platform treatment."""
+    s = data["slides"]
+    distribution = s.get("distribution")
+    if distribution:
+        out = {}
+        for platform in PLATFORMS:
+            entry = distribution.get(platform) or {}
+            out[platform] = _combine_caption_and_hashtags(
+                strip_markup(entry.get("caption", "")), entry.get("hashtags"),
+            )
+        if all(out.values()):
+            return out
+    fallback = build_caption(data)
+    return {platform: fallback for platform in PLATFORMS}
 
 
 def image_files(slug):
@@ -129,7 +166,7 @@ def prepare(slug, title=None):
     if not imgs:
         raise FileNotFoundError(f"no rendered slide PNGs found for slug '{slug}'")
     return {
-        "caption": build_caption(data),
+        "captions": build_platform_captions(data),
         "images": [web_path(f) for f in imgs],
         "credentials": credentials_status(),
     }
@@ -205,12 +242,17 @@ def post_to_facebook(slug, base_url, caption, log):
     return {"id": published.get("id")}
 
 
-def publish(slug, base_url, targets, caption, log=print):
+def publish(slug, base_url, targets, captions, log=print):
+    """`captions`: dict of platform -> caption text (see build_platform_captions) --
+    Instagram and Facebook each post with their OWN platform-native caption, not one
+    shared string, since the two perform differently written the same way (see the
+    social-media-growth-manager skill: Facebook ranks on reply-generating questions and
+    barely uses hashtags, Instagram leans on searchable text and 3-6 focused hashtags)."""
     results = {}
     if "instagram" in targets:
-        results["instagram"] = post_to_instagram(slug, base_url, caption, log)
+        results["instagram"] = post_to_instagram(slug, base_url, captions.get("instagram", ""), log)
         log("Instagram: published")
     if "facebook" in targets:
-        results["facebook"] = post_to_facebook(slug, base_url, caption, log)
+        results["facebook"] = post_to_facebook(slug, base_url, captions.get("facebook", ""), log)
         log("Facebook: published")
     return results
